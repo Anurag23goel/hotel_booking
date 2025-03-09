@@ -16,8 +16,8 @@ export default function PopularAttractions() {
       <CarouselContent className="-ml-1">
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/4">
-            <div className="p-2">
-              <div className="w-full max-w-[300px] bg-white rounded-xl overflow-hidden shadow-lg">
+            <div className="p-2 flex justify-center">
+              <div className="w-full max-w-screen bg-white rounded-xl overflow-hidden shadow-lg">
                 <div className="relative">
                   <img
                     src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&q=80&w=600"

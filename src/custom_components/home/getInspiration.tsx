@@ -1,7 +1,7 @@
 export default function GetInspiration() {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-3">
-      <div className="col-span-2 relative group cursor-pointer overflow-hidden rounded-xl">
+    <div className="w-full flex flex-col md:grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div className="col-span-1 md:col-span-2 relative group cursor-pointer overflow-hidden rounded-xl">
         <img
           src="https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&q=80&w=600"
           alt="New Year's Eve in New York"

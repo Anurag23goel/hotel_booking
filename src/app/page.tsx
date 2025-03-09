@@ -96,7 +96,7 @@ export default function Home() {
       </div>
 
       {/* HOTEL DEALS */}
-      <div className="flex gap-3 flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+      <div className="flex gap-3 flex-col max-w-5xl mx-auto mt-10 px-3 lg:px-0">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">Deals for the weekend</h1>
           <p className=" text-gray-600">
