@@ -51,7 +51,7 @@ export default function Home() {
       </div>
 
       {/* BROWSE PROPERTY BY PROPERTY SECTION */}
-      <div className="flex flex-col  max-w-5xl mx-auto mt-10  px-3 lg:px-0">
+      <div className="flex flex-col gap-2  max-w-5xl mx-auto mt-10  px-3 lg:px-0">
         <h1 className="text-2xl font-bold">Browse by property type</h1>
         <div className="w-full">
           <PropertyCarousel />
@@ -70,31 +70,39 @@ export default function Home() {
       </div>
 
       {/* UNIQUE PROPERTIES */}
-      <div className="flex flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
-        <h1 className="text-2xl font-bold">
-          Stay at our top unique properties
-        </h1>
-        <p className=" text-gray-600">
-          From castles and villas to boats and igloos, we've got it all
-        </p>
+      <div className="flex flex-col gap-3 max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">
+            Stay at our top unique properties
+          </h1>
+          <p className=" text-gray-600">
+            From castles and villas to boats and igloos, we've got it all
+          </p>
+        </div>
         <UniqueProperties />
       </div>
 
       {/* POPULAR ATTRACTIONS */}
-      <div className="flex flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
-        <h1 className="text-2xl font-bold">
-          Popular attractions in Mahabaleshwar
-        </h1>
-        <p className=" text-gray-600">
-          Experience everything this city has to offer
-        </p>
+      <div className="flex gap-3 flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">
+            Popular attractions in Mahabaleshwar
+          </h1>
+          <p className=" text-gray-600">
+            Experience everything this city has to offer
+          </p>
+        </div>
         <PopularAttractions />
       </div>
 
       {/* HOTEL DEALS */}
-      <div className="flex flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
-        <h1 className="text-2xl font-bold">Deals for the weekend</h1>
-        <p className=" text-gray-600">Save on stays for 14 March - 16 March</p>
+      <div className="flex gap-3 flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">Deals for the weekend</h1>
+          <p className=" text-gray-600">
+            Save on stays for 14 March - 16 March
+          </p>
+        </div>
         <HotelDeals />
       </div>
 
