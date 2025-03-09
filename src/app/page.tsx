@@ -1,0 +1,119 @@
+import GetInspiration from "@/custom_components/home/getInspiration";
+import HomesForGuests from "@/custom_components/home/homesForGuests";
+import HotelDeals from "@/custom_components/home/hotelDeals";
+import Navbar from "@/custom_components/home/navbar";
+import Offers from "@/custom_components/home/offers";
+import PopularAttractions from "@/custom_components/home/popularAttractions";
+import PropertyCarousel from "@/custom_components/home/propertyCarousel";
+import Searchbar from "@/custom_components/home/searchbar";
+import TrendingHotels from "@/custom_components/home/trendingHotels";
+import UniqueProperties from "@/custom_components/home/uniqueProperties";
+
+// #057d23
+
+export default function Home() {
+  return (
+    <div className="w-full overflow-hidden">
+      {/* NAVBAR AND TOP-MOST DIV */}
+      <div className="bg-[#057d23] lg:min-h-[45vh] min-h-[25vh] ">
+        <div className="flex flex-col gap-4 lg:gap-14 container max-w-5xl mx-auto px-4">
+          <Navbar />
+
+          <div className="flex flex-col gap-2">
+            <h1 className="text-white lg:text-5xl text-2xl font-bold">
+              Find Your Next Stay With Us
+            </h1>
+            <p className="text-white lg:text-2xl">
+              Search low prices on hotels....
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* SEARCH BAR SECTION */}
+      <div className="lg:max-w-5xl w-[80%] mx-auto transform -translate-y-1/2">
+        <Searchbar />
+      </div>
+
+      {/* OFFERS SECTION */}
+      <div className=" max-w-5xl mx-auto mt-6 px-3 lg:px-0">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl font-bold">Offers</h1>
+            <p className="text-sm lg:text-base text-gray-600">
+              Promotions, deals and special offers for you...
+            </p>
+          </div>
+          <div className="h-fit">
+            <Offers />
+          </div>
+        </div>
+      </div>
+
+      {/* BROWSE PROPERTY BY PROPERTY SECTION */}
+      <div className="flex flex-col  max-w-5xl mx-auto mt-10  px-3 lg:px-0">
+        <h1 className="text-2xl font-bold">Browse by property type</h1>
+        <div className="w-full">
+          <PropertyCarousel />
+        </div>
+      </div>
+
+      {/* TRENDING HOTELS */}
+      <div className="flex flex-col  gap-3 max-w-5xl mx-auto mt-10  px-3 lg:px-0">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">Trending Hotels</h1>
+          <p className=" text-gray-600">
+            Most popular choices for travellers from India
+          </p>
+        </div>
+        <TrendingHotels />
+      </div>
+
+      {/* UNIQUE PROPERTIES */}
+      <div className="flex flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <h1 className="text-2xl font-bold">
+          Stay at our top unique properties
+        </h1>
+        <p className=" text-gray-600">
+          From castles and villas to boats and igloos, we've got it all
+        </p>
+        <UniqueProperties />
+      </div>
+
+      {/* POPULAR ATTRACTIONS */}
+      <div className="flex flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <h1 className="text-2xl font-bold">
+          Popular attractions in Mahabaleshwar
+        </h1>
+        <p className=" text-gray-600">
+          Experience everything this city has to offer
+        </p>
+        <PopularAttractions />
+      </div>
+
+      {/* HOTEL DEALS */}
+      <div className="flex flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <h1 className="text-2xl font-bold">Deals for the weekend</h1>
+        <p className=" text-gray-600">Save on stays for 14 March - 16 March</p>
+        <HotelDeals />
+      </div>
+
+      {/* GET INSPIRATION */}
+      <div className="flex flex-col gap-4  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <h1 className="text-2xl font-bold">
+          Get inspiration for your next trip
+        </h1>
+        <GetInspiration />
+      </div>
+
+      {/* HOME GUESTS LOVE */}
+      <div className="flex flex-col gap-2  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+        <h1 className="text-2xl font-bold">Homes guests love</h1>
+        <HomesForGuests />
+      </div>
+
+      {/* FOOTER */}
+      <div></div>
+    </div>
+  );
+}

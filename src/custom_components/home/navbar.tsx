@@ -1,0 +1,100 @@
+"use client"; // Ensure it's interactive in Next.js
+
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X, CircleHelp } from "lucide-react"; // Icons
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="flex w-full items-center justify-between lg:py-4 py-2 relative">
+      {/* Logo */}
+      <h1 className="font-semibold text-white lg:text-4xl text-xl">
+        Booking.com
+      </h1>
+
+      {/* Desktop Menu */}
+      <ul className="lg:flex gap-4 items-center hidden">
+        <li>
+          <Tooltip title="Contact Customer Service" arrow>
+            <IconButton>
+              <CircleHelp color="white" />
+            </IconButton>
+          </Tooltip>
+        </li>
+        <li>
+          <Link
+            href="/list-property"
+            className="text-white font-semibold text-xl"
+          >
+            List Your Property
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/register"
+            className="text-[#057d23] p-3 py-2 font-semibold text-xl rounded-sm bg-white"
+          >
+            Register
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/sign-in"
+            className="text-[#057d23] p-3 py-2 font-semibold text-xl rounded-sm bg-white"
+          >
+            Sign In
+          </Link>
+        </li>
+      </ul>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="lg:hidden text-white focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <ul
+          className="absolute top-full left-0 w-full bg-[#057d23] flex flex-col items-center py-4 space-y-4 lg:hidden z-50 shadow-lg"
+          tabIndex={0}
+          onBlur={() => setIsOpen(false)} // Close menu when clicking outside
+        >
+          <li>
+            <Link
+              href="/list-property"
+              className="text-white font-semibold text-lg"
+              onClick={() => setIsOpen(false)}
+            >
+              List Your Property
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/register"
+              className="text-[#057d23] px-4 py-2 font-semibold text-md rounded-md bg-white shadow-md"
+              onClick={() => setIsOpen(false)}
+            >
+              Register
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/sign-in"
+              className="text-[#057d23] px-4 py-2 font-semibold text-md rounded-md bg-white shadow-md"
+              onClick={() => setIsOpen(false)}
+            >
+              Sign In
+            </Link>
+          </li>
+        </ul>
+      )}
+    </nav>
+  );
+}
