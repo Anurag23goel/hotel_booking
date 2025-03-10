@@ -8,6 +8,7 @@ import PropertyCarousel from "@/custom_components/home/propertyCarousel";
 import Searchbar from "@/custom_components/home/searchbar";
 import TrendingHotels from "@/custom_components/home/trendingHotels";
 import UniqueProperties from "@/custom_components/home/uniqueProperties";
+import { ArrowRight } from "lucide-react";
 
 // #057d23
 
@@ -24,19 +25,21 @@ export default function Home() {
         {/* IMAGE AND TEXT DIV */}
         <div
           className="flex items-center bg-cover bg-center relative h-[250px] md:h-[400px]"
-          style={{
-            backgroundImage: "url('/assets/banner.jpg')",
-          }}
+          style={{ backgroundImage: "url('/assets/banner.jpg')" }}
         >
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-50"></div>
+
           {/* Aligned content wrapper */}
-          <div className="absolute inset-0 flex items-center justify-start md:left-[15px] lg:left-[225px]">
-            <div className="max-w-5xl px-4 flex flex-col gap-2  ">
+          <div className="absolute inset-0 flex items-center">
+            <div className="max-w-5xl w-full mx-auto px-4 flex flex-col gap-2">
               <h1 className="text-white md:text-5xl text-2xl font-bold">
                 Find Your Next Stay With Us
               </h1>
               <p className="text-white md:text-2xl">
                 Search low prices on hotels...
               </p>
+              <button className="bg-[#057d23] flex items-center gap-2 text-white px-6 py-3 rounded-sm w-fit">Book Now <ArrowRight size={20}/></button>
             </div>
           </div>
         </div>
