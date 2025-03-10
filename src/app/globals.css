@@ -116,6 +116,18 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* Hide default calendar icon in Chrome, Safari, Edge */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Hide default calendar icon in Firefox */
+input[type="date"] {
+  position: relative;
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
