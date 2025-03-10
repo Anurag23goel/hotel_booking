@@ -39,7 +39,7 @@ export default function Home() {
               <p className="text-white md:text-2xl">
                 Search low prices on hotels...
               </p>
-              <button className="bg-[#057d23] flex items-center gap-2 text-white px-6 py-3 rounded-sm w-fit">Book Now <ArrowRight size={20}/></button>
+              <button className="bg-[#057d23] flex items-center font-semibold gap-2 text-white px-6 py-3 rounded-sm w-fit">Find Yours</button>
             </div>
           </div>
         </div>
