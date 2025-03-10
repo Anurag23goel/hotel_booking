@@ -15,32 +15,44 @@ export default function Home() {
   return (
     <div className="w-full overflow-hidden">
       {/* NAVBAR AND TOP-MOST DIV */}
-      <div className="bg-[#057d23] lg:min-h-[45vh] min-h-[25vh] ">
-        <div className="flex flex-col gap-4 lg:gap-14 container max-w-5xl mx-auto px-4">
+      <div className="bg-[#057d23] md:min-h-[45vh] min-h-[25vh] w-full">
+        {/* NAVBAR DIV */}
+        <div className="max-w-5xl mx-auto px-4 lg:px-0">
           <Navbar />
+        </div>
 
-          <div className="flex flex-col gap-2">
-            <h1 className="text-white lg:text-5xl text-2xl font-bold">
-              Find Your Next Stay With Us
-            </h1>
-            <p className="text-white lg:text-2xl">
-              Search low prices on hotels....
-            </p>
+        {/* IMAGE AND TEXT DIV */}
+        <div
+          className="flex items-center bg-cover bg-center relative h-[250px] md:h-[400px]"
+          style={{
+            backgroundImage: "url('/assets/banner.jpg')",
+          }}
+        >
+          {/* Aligned content wrapper */}
+          <div className="absolute inset-0 flex items-center justify-start md:left-[15px] lg:left-[225px]">
+            <div className="max-w-5xl px-4 flex flex-col gap-2  ">
+              <h1 className="text-white md:text-5xl text-2xl font-bold">
+                Find Your Next Stay With Us
+              </h1>
+              <p className="text-white md:text-2xl">
+                Search low prices on hotels...
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* SEARCH BAR SECTION */}
-      <div className="lg:max-w-5xl w-[80%] mx-auto transform -translate-y-1/2">
+      <div className="md:max-w-5xl w-[80%] mx-auto transform -translate-y-1/2">
         <Searchbar />
       </div>
 
       {/* OFFERS SECTION */}
-      <div className=" max-w-5xl mx-auto mt-6 px-3 lg:px-0">
+      <div className=" max-w-5xl mx-auto mt-6 px-3 md:px-0">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">Offers</h1>
-            <p className="text-sm lg:text-base text-gray-600">
+            <p className="text-sm md:text-base text-gray-600">
               Promotions, deals and special offers for you...
             </p>
           </div>
@@ -51,7 +63,7 @@ export default function Home() {
       </div>
 
       {/* BROWSE PROPERTY BY PROPERTY SECTION */}
-      <div className="flex flex-col gap-2  max-w-5xl mx-auto mt-10  px-3 lg:px-0">
+      <div className="flex flex-col gap-2  max-w-5xl mx-auto mt-10  px-3 md:px-0">
         <h1 className="text-2xl font-bold">Browse by property type</h1>
         <div className="w-full">
           <PropertyCarousel />
@@ -59,7 +71,7 @@ export default function Home() {
       </div>
 
       {/* TRENDING HOTELS */}
-      <div className="flex flex-col  gap-3 max-w-5xl mx-auto mt-10  px-3 lg:px-0">
+      <div className="flex flex-col  gap-3 max-w-5xl mx-auto mt-10  px-3 md:px-0">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">Trending Hotels</h1>
           <p className=" text-gray-600">
@@ -70,7 +82,7 @@ export default function Home() {
       </div>
 
       {/* UNIQUE PROPERTIES */}
-      <div className="flex flex-col gap-3 max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+      <div className="flex flex-col gap-3 max-w-5xl mx-auto mt-10 px-3 md:px-0">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">
             Stay at our top unique properties
@@ -83,7 +95,7 @@ export default function Home() {
       </div>
 
       {/* POPULAR ATTRACTIONS */}
-      <div className="flex gap-3 flex-col  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+      <div className="flex gap-3 flex-col  max-w-5xl mx-auto mt-10 px-3 md:px-0">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">
             Popular attractions in Mahabaleshwar
@@ -96,7 +108,7 @@ export default function Home() {
       </div>
 
       {/* HOTEL DEALS */}
-      <div className="flex gap-3 flex-col max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+      <div className="flex gap-3 flex-col max-w-5xl mx-auto mt-10 px-3 md:px-0">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">Deals for the weekend</h1>
           <p className=" text-gray-600">
@@ -107,7 +119,7 @@ export default function Home() {
       </div>
 
       {/* GET INSPIRATION */}
-      <div className="flex flex-col gap-4  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+      <div className="flex flex-col gap-4  max-w-5xl mx-auto mt-10 px-3 md:px-0">
         <h1 className="text-2xl font-bold">
           Get inspiration for your next trip
         </h1>
@@ -115,7 +127,7 @@ export default function Home() {
       </div>
 
       {/* HOME GUESTS LOVE */}
-      <div className="flex flex-col gap-2  max-w-5xl mx-auto mt-10 px-3 lg:px-0">
+      <div className="flex flex-col gap-2  max-w-5xl mx-auto mt-10 px-3 md:px-0">
         <h1 className="text-2xl font-bold">Homes guests love</h1>
         <HomesForGuests />
       </div>
