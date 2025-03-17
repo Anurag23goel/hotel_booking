@@ -1,4 +1,4 @@
-"use client"; // Ensure it's interactive in Next.js
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export default function Navbar() {
         </li>
         <li>
           <Link
-            href="/sign-in"
+            href="/login"
             className="text-[#057d23] px-3 py-2 font-semibold text-lg rounded-sm bg-white"
           >
             Sign In
