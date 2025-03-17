@@ -29,7 +29,7 @@ function page() {
             <button className="w-full flex items-center justify-center gap-2 border rounded-full py-3 hover:bg-gray-50 transition-colors">
               <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
                    alt="Google" className="h-5 object-contain" />
-              Log in with Google 
+              Log in with Google Amazon Github and what not
             </button>
           </div>
 
