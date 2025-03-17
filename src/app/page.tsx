@@ -46,7 +46,7 @@ export default function Home() {
       </div>
 
       {/* SEARCH BAR SECTION */}
-      <div className="md:max-w-5xl w-[80%] mx-auto transform -translate-y-1/2">
+      <div className="md:max-w-5xl w-[80%] mx-auto md:transform md:-translate-y-1/2">
         <Searchbar />
       </div>
 

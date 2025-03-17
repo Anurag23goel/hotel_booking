@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, ChevronDown, Search, User } from "lucide-react";
+import { Calendar, ChevronDown, SearchIcon, User } from "lucide-react";
 import { useRef, useState } from "react";
 
 export default function Searchbar() {
@@ -10,9 +10,10 @@ export default function Searchbar() {
   const checkOutRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="flex items-center justify-between bg-white border-4 border-yellow-500 rounded-md p-3 w-full shadow-md">
+    <div className="flex flex-col md:flex-row items-center justify-between bg-white border-4 border-yellow-500 rounded-md py-3 px-4 w-full shadow-md gap-3 md:gap-0">
+      
       {/* Check-in Date Picker */}
-      <div className="flex items-center flex-1 border-r border-gray-300 px-3 py-2">
+      <div className="flex items-center w-full md:flex-1 border border-gray-300 rounded-md px-4 py-2 md:border-l-0 md:border-t-0 md:border-b-0 md:border-r-2 md:border-gray-300 md:rounded-none">
         <span
           className="text-gray-500 text-lg cursor-pointer"
           onClick={() => checkInRef.current?.showPicker()} // Open calendar
@@ -24,13 +25,13 @@ export default function Searchbar() {
           ref={checkInRef}
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full ml-2 outline-none bg-transparent text-md text-black hidden md:block"
+          className="w-full ml-3 outline-none bg-transparent text-sm md:text-base text-black block"
           style={{ appearance: "none" }} // Hides default icon
         />
       </div>
 
       {/* Check-out Date Picker */}
-      <div className="flex items-center flex-1 border-r border-gray-300 px-3 py-2">
+      <div className="flex items-center w-full md:flex-1 border border-gray-300 rounded-md px-4 py-2 md:border-l-0 md:border-t-0 md:border-b-0 md:border-r-2 md:border-gray-300 md:rounded-none">
         <span
           className="text-gray-500 text-lg cursor-pointer"
           onClick={() => checkOutRef.current?.showPicker()} // Open calendar
@@ -42,20 +43,20 @@ export default function Searchbar() {
           ref={checkOutRef}
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full ml-2 outline-none bg-transparent text-md text-black hidden md:block"
+          className="w-full ml-3 outline-none bg-transparent text-sm md:text-base text-black block"
           style={{ appearance: "none" }} // Hides default icon
         />
       </div>
 
       {/* Guest Selection */}
-      <div className="flex items-center flex-1 border-r border-gray-300 px-3 py-2">
+      <div className="flex items-center w-full md:flex-1 border border-gray-300 rounded-md px-4 py-2 md:border-l-0 md:border-t-0 md:border-b-0 md:border-r-2 md:border-gray-300 md:rounded-none">
         <span className="text-gray-500 text-lg">
           <User color="black" />
         </span>
         <input
           type="text"
           placeholder="2 Adults · 0 Children · 1 Room"
-          className="w-full ml-2 outline-none bg-transparent text-md text-black"
+          className="w-full ml-3 outline-none bg-transparent text-sm md:text-base text-black truncate"
         />
         <span className="text-gray-500">
           <ChevronDown color="black" size={20} />
@@ -63,13 +64,9 @@ export default function Searchbar() {
       </div>
 
       {/* Search Button */}
-      <button className="bg-[#057d23] text-white lg:mx-2 px-6 py-2 rounded-md hover:bg-green-700 transition-all hidden lg:block">
-        Search
-      </button>
-
-      {/* Mobile Search Button */}
-      <button className=" mx-2 py-2 rounded-md transition-all block lg:hidden">
-        <Search />
+      <button className="w-full md:w-auto bg-[#057d23] text-white px-5 flex items-center justify-center gap-2 py-2 ml-3 rounded-md hover:bg-green-700 transition-all">
+        <SearchIcon size={20} />
+        <span className="text-sm md:text-md">Search</span>
       </button>
     </div>
   );

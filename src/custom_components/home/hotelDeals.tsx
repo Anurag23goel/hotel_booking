@@ -6,6 +6,7 @@ import {
   CarouselPrevious,
 } from "@/shadcn_components/ui/carousel";
 import { MapPin, Star } from "lucide-react";
+import Image from "next/image";
 
 export default function HotelDeals() {
   return (
@@ -22,9 +23,11 @@ export default function HotelDeals() {
             <div className="p-2 flex justify-center">
               <div className="w-full max-w-screen bg-white rounded-xl overflow-hidden shadow-lg">
                 <div className="relative">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=600"
                     alt="Hotel Room"
+                    width={100}
+                    height={100}
                     className="w-full h-[150px] object-cover transition-transform duration-300 hover:scale-105"
                   />
                   <div className="absolute top-2 left-2 bg-[#057d23] text-white px-2 py-0.5 text-sm font-medium rounded">
