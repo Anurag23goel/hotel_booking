@@ -25,7 +25,7 @@ export default function HotelDeals() {
                   <img
                     src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=600"
                     alt="Hotel Room"
-                    className="w-full h-[200px] object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-[150px] object-cover transition-transform duration-300 hover:scale-105"
                   />
                   <div className="absolute top-2 left-2 bg-[#057d23] text-white px-2 py-0.5 text-sm font-medium rounded">
                     Genius

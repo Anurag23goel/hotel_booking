@@ -36,7 +36,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/register"
-            className="text-[#057d23] px-3 py-2 font-semibold text-xl rounded-sm bg-white"
+            className="text-[#057d23] px-3 py-2 font-semibold text-lg rounded-sm bg-white"
           >
             Register
           </Link>
@@ -44,7 +44,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/sign-in"
-            className="text-[#057d23] px-3 py-2 font-semibold text-xl rounded-sm bg-white"
+            className="text-[#057d23] px-3 py-2 font-semibold text-lg rounded-sm bg-white"
           >
             Sign In
           </Link>
@@ -78,16 +78,16 @@ export default function Navbar() {
           <li>
             <Link
               href="/register"
-              className="text-[#057d23] px-4 py-2  text-md rounded-md bg-white shadow-md"
+              className="text-[#057d23] px-4 py-2 text-sm rounded-md bg-white"
               onClick={() => setIsOpen(false)}
             >
-              Register
+              Anurag
             </Link>
           </li>
           <li>
             <Link
               href="/sign-in"
-              className="text-[#057d23] px-4 py-2  text-md rounded-md bg-white shadow-md"
+              className="text-[#057d23] px-4 py-2 text-sm rounded-md bg-white"
               onClick={() => setIsOpen(false)}
             >
               Sign In
