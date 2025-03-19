@@ -127,7 +127,6 @@ input[type="date"] {
   position: relative;
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
