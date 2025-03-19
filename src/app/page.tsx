@@ -8,7 +8,6 @@ import PropertyCarousel from "@/custom_components/home/propertyCarousel";
 import Searchbar from "@/custom_components/home/searchbar";
 import TrendingHotels from "@/custom_components/home/trendingHotels";
 import UniqueProperties from "@/custom_components/home/uniqueProperties";
-import { ArrowRight } from "lucide-react";
 
 // #057d23
 
