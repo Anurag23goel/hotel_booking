@@ -8,7 +8,6 @@ import PropertyCarousel from "@/custom_components/home/propertyCarousel";
 import Searchbar from "@/custom_components/home/searchbar";
 import TrendingHotels from "@/custom_components/home/trendingHotels";
 import UniqueProperties from "@/custom_components/home/uniqueProperties";
-
 // #057d23
 
 export default function Home() {
@@ -45,7 +44,7 @@ export default function Home() {
       </div>
 
       {/* SEARCH BAR SECTION */}
-      <div className="md:max-w-5xl w-[80%] mx-auto md:transform md:-translate-y-1/2">
+      <div className="md:max-w-5xl w-[80%] mx-auto transform -translate-y-1/2">
         <Searchbar />
       </div>
 
@@ -90,7 +89,7 @@ export default function Home() {
             Stay at our top unique properties
           </h1>
           <p className=" text-gray-600">
-            From castles and villas to boats and igloos, we've got it all
+            From castles and villas to boats and igloos, weve got it all
           </p>
         </div>
         <UniqueProperties />
