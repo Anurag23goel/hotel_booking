@@ -2,6 +2,10 @@ import React from 'react'
 import Navbar from '@/custom_components/listProperty/navbar'
 import { PropertyCard } from './PropertyCard'
 
+// import Image from 'next/image'
+// import image from '../../../../../public/assets/india-flag.png'
+
+
 const Page = () => {
 
   const properties = [
@@ -45,6 +49,11 @@ const Page = () => {
             To get started, select the type of property you want to list on Booking.com
           </p>
         </div>
+
+        {/* <div className='relative'>
+          <Image className='w-1/2 absolute top-0 left-0 z-50' src={image} alt="image" />
+          <p className='absolute top-0 left-0'>hdahdahdahdahdadjoiadnaiodnaoid</p>
+        </div> */}
 
 
 
