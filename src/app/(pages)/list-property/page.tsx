@@ -8,9 +8,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-[#003580] text-white p-4">
+      <header className="bg-[#1e9609] text-white p-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold">Booking.com</div>
+          <Link href="/home" className="text-2xl font-bold" >
+          Booking.com
+          </Link>
+         
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Image
@@ -51,7 +54,7 @@ export default function Home() {
       </section>
 
       {/* Register Card */}
-      <section className="max-w-7xl mx-auto px-4 -mt-32">
+      <section className="max-w-7xl mx-auto px-4 -mt-108">
         <div className="bg-white rounded-lg shadow-xl p-8 max-w-md ml-auto">
           <h3 className="text-2xl font-bold mb-6">Register for free</h3>
           <div className="space-y-4">
@@ -176,45 +179,43 @@ export default function Home() {
         </div>
       </section>
 
+    
       {/* Global Reach Section */}
-      <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-16">Reach a unique global customer base</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <div className="mb-12">
-                <div className="text-5xl font-bold mb-2">2/3</div>
-                <p>of holiday rental guests return to book with us again</p>
-              </div>
-              <div>
-                <div className="text-5xl font-bold mb-2">33%</div>
-                <p>of holiday rental customers are at Genius Level 2 or 3. These travellers tend to spend more and book directly on our platform.</p>
-              </div>
-              <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-8">
-                Grow your customer base
-              </button>
-            </div>
-            <div>
-              <div className="mb-12">
-                <div className="text-5xl font-bold mb-2">48%</div>
-                <p>of nights booked by travellers at the end of 2023 were for international stays.</p>
-              </div>
-              <div>
-                <div className="text-5xl font-bold mb-2">30%</div>
-                <p>of all nights booked on our platform were at a holiday rental. More and more travellers flex book both hotels and alternative accommodation.</p>
-              </div>
-            </div>
-          </div>
+<section 
+  className="py-3 relative bg-cover bg-center bg-no-repeat" 
+
+>
+  <div className="max-w-7xl mx-auto px-4 bg-white/80 backdrop-blur-md p-12 rounded-lg"
+  style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}>
+    <h2 className="text-4xl font-bold mb-16">Reach a unique global customer base</h2>
+    <div className="grid md:grid-cols-2 gap-12">
+      <div>
+        <div className="mb-12">
+          <div className="text-5xl font-bold mb-2">2/3</div>
+          <p>of holiday rental guests return to book with us again</p>
         </div>
-        <div className="absolute inset-0 -z-10 opacity-10">
-          <Image
-            src="https://images.unsplash.com/photo-1589596619062-068730a17443?auto=format&fit=crop&w=2000"
-            alt="World Map"
-            fill
-            className="object-contain"
-          />
+        <div>
+          <div className="text-5xl font-bold mb-2">33%</div>
+          <p>of holiday rental customers are at Genius Level 2 or 3. These travellers tend to spend more and book directly on our platform.</p>
         </div>
-      </section>
+        <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-8">
+          Grow your customer base
+        </button>
+      </div>
+      <div>
+        <div className="mb-12">
+          <div className="text-5xl font-bold mb-2">48%</div>
+          <p>of nights booked by travellers at the end of 2023 were for international stays.</p>
+        </div>
+        <div>
+          <div className="text-5xl font-bold mb-2">30%</div>
+          <p>of all nights booked on our platform were at a holiday rental. More and more travellers flex book both hotels and alternative accommodation.</p>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</section>
 
       {/* Testimonials Section */}
       <section className="bg-[#f5f5f5] py-24">
