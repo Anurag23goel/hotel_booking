@@ -2,7 +2,7 @@
 
 import { Building2, CheckCircle, Globe2, Heart, Puzzle, Search } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link"; 
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
               <span>Already a partner?</span>
             </div>
           
-            <Link href="/login" className="bg-white text-[#003580] px-4 py-2 rounded font-medium">
+            <Link href="/hotelOwnerSignIn"   className="bg-white text-[#003580] px-4 py-2 rounded font-medium">
               Sign in
             </Link>
             <button className="border border-white px-4 py-2 rounded">
@@ -76,7 +76,7 @@ export default function Home() {
           </button>
           <div className="mt-6 text-center">
             <p className="font-medium">Already started a registration?</p>
-            <Link href="#" className="text-[#0071c2] hover:underline">
+            <Link href="/hotelOwnerSignIn" className="text-[#0071c2] hover:underline">
               Continue your registration
             </Link>
           </div>
