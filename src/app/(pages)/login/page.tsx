@@ -14,6 +14,11 @@ function Page() {
 
   const emailValue = watch("email");
 
+  // API NEEDS TO BE CALLED HERE
+  async function handleLoginSubmit() {  
+    alert("login form submitted");
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="bg-[#1e9609] w-full py-3">
@@ -29,7 +34,8 @@ function Page() {
             You can sign in using your Booking.com account to access our services.
           </p>
 
-          <form className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit(handleLoginSubmit)} className="mt-6 space-y-4">
+
             <div>
               <label className="block text-md font-medium text-black mb-1">
                 Email Address
