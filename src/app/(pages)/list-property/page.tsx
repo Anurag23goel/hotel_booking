@@ -265,5 +265,25 @@ const testimonials = [
     name: "Michel and Asja",
     title: "Owners of La Maison de Souhey",
     image: "https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?auto=format&fit=crop&w=100"
+  },
+  {
+    quote: "Travellers come to Charming Lofts from all over the world. Booking.com really helps with that. Unlike some other platforms, it's multinational and caters to a much larger audience. For me, that was a real game-changer.",
+    name: "Louis Gonzalez",
+    title: "Charming Lofts, Los Angeles",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100~"
+    
+  },
+  {
+    quote: "After joining Booking.com and setting up the listing, my occupancy went up significantly and bookings were coming in five to six months in advance.",
+    name: "Zoey Berghoff",
+    title: "US-based host",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100"
+  },
+  {
+    quote: "Getting started with Booking.com was super simple and took no time at all.",
+    name: "Shawn Ritzenthaler",
+    title: "Owner of The Hollywood Hills Mansion",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100"
   }
+
 ];
