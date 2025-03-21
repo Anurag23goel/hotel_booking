@@ -38,7 +38,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="bg-[#003580] text-white pb-16">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-15">
           <div className="py-8">
             <button className="bg-[#008009] text-white px-6 py-3 rounded-md mb-8">
               Join 29,279,209 other listings already on Booking.com
@@ -84,8 +84,8 @@ export default function Home() {
       </section>
 
       {/* Peace of Mind Section */}
-      <section className="max-w-7xl mx-auto px-4 py-24">
-        <h2 className="text-4xl font-bold mb-12">List with peace of mind</h2>
+      <section className="max-w-7xl mx-auto px-17 py-24">
+        <h2 className="text-5xl font-bold mb-12">List with peace of mind</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-12">
             <div className="flex gap-4">
