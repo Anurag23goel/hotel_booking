@@ -38,7 +38,7 @@ export default function LoginForm({ onRegisterClick }: LoginFormProps) {
 
         <button
           type="submit"
-          className="w-full mt-5 bg-green-600 text-white rounded-[5px] py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+          className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
         >
           Next
         </button>
@@ -52,14 +52,12 @@ export default function LoginForm({ onRegisterClick }: LoginFormProps) {
             <div className='w-full border-t border-gray-500'></div>
           </div>
         </div>
-        <div className='text-center mt-11 text-sm'>
-          <p>Questions about your property or the Extranet? Check out Partner Help or ask another partner in the Partner Community.</p>
-        </div>
+        
 
         <button
           type="button"
           onClick={onRegisterClick}
-          className="w-full mt-5 bg-green-600 text-white rounded-[5px] py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+          className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
         >
           Create Your Partner Account
         </button>

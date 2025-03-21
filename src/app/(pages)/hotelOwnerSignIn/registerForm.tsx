@@ -28,7 +28,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
                 type="email"
                 {...register("email",{required : "email is neccessary"})}
                 className="border border-gray-300 w-full p-2 rounded-[5px] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
-                placeholder="Enter your email address"
+                placeholder="Enter your username or email address"
                 ></input>
                 {emailValue && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-600 rounded-full p-1">
@@ -43,7 +43,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
 
             <button
             type="submit"
-            className="w-full mt-5 bg-green-600 text-white rounded-[5px] py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-5  bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
             >
               Continue
             </button>
@@ -59,14 +59,12 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
                 <div className='w-full border-t border-gray-500'></div>
               </div>
             </div>
-            <div className='text-center mt-11 text-sm'>
-              <p>Questions about your property or the Extranet? Check out Partner Help or ask another partner in the Partner Community. </p>
-            </div>
+            
 
             <button
             type="submit"
             onClick={onLoginClick}
-            className="w-full mt-5 bg-green-600 text-white rounded-[5px] py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
             >
               Sign in
             </button>

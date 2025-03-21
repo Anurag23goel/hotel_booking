@@ -3,19 +3,29 @@
 import { Building2, CheckCircle, Globe2, Heart, Puzzle, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link"; 
+import LoginForm from "../hotelOwnerSignIn/loginForm";
+import { useState } from "react";
+import RegisterForm from "../hotelOwnerSignIn/registerForm";
 
 export default function Home() {
+
+  const [showLogin, setShowLogin] = useState(true);
+
+  const toggleForm = () => {
+    setShowLogin(!showLogin);
+  };
+
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-[#1e9609] text-white p-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <header className="bg-[#06104d] text-white p-4">
+        <div className=" max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/home" className="text-2xl font-bold" >
           Booking.com
           </Link>
          
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
+            <div className=" flex items-center gap-2">
               <Image
                 src="https://t-cf.bstatic.com/design-assets/assets/v3.85.0/images-flags/En-us@3x.png"
                 alt="English"
@@ -37,8 +47,12 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-[#003580] text-white pb-16">
-        <div className="max-w-7xl mx-auto px-4">
+      {/* i want to put background image in the section */}
+      <section className="border-4 border-black  bg-[#1f9704] text-white pb-16 "
+        style={{ backgroundImage: "url('/assets/dark.jpg')" , backgroundSize: 'cover', backgroundPosition: 'center' }}>
+
+
+        <div className=" max-w-7xl mx-auto px-4">
           <div className="py-8">
             <button className="bg-[#008009] text-white px-6 py-3 rounded-md mb-8">
               Join 29,279,209 other listings already on Booking.com
@@ -55,31 +69,16 @@ export default function Home() {
 
       {/* Register Card */}
       <section className="max-w-7xl mx-auto px-4 -mt-108">
-        <div className="bg-white rounded-lg shadow-xl p-8 max-w-md ml-auto">
-          <h3 className="text-2xl font-bold mb-6">Register for free</h3>
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-[#008009] mt-1" />
-              <p>45% of hosts get their first booking within a week</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-[#008009] mt-1" />
-              <p>Choose between instant bookings and booking requests</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-[#008009] mt-1" />
-              <p>We'll facilitate payments for you</p>
-            </div>
-          </div>
-          <button className="w-full bg-[#0071c2] text-white py-3 rounded-md mt-6 font-medium">
-            Get started now →
-          </button>
-          <div className="mt-6 text-center">
-            <p className="font-medium">Already started a registration?</p>
-            <Link href="/hotelOwnerSignIn" className="text-[#0071c2] hover:underline">
-              Continue your registration
-            </Link>
-          </div>
+        <div className="border-4 border-black   bg-white rounded-lg shadow-xl p-8 max-w-md ml-auto">
+        {showLogin ? (
+              <div>
+                <LoginForm onRegisterClick={toggleForm} />
+              </div>
+            ) : (
+              <div>
+                <RegisterForm onLoginClick={toggleForm} />
+              </div>
+            )}
         </div>
       </section>
 
