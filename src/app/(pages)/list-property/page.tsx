@@ -48,15 +48,13 @@ export default function Home() {
 
       {/* Hero Section */}
       {/* i want to put background image in the section */}
-      <section className="border-4 border-black  bg-[#1f9704] text-white pb-16 "
+      <section className=" bg-[#1f9704] text-white pb-16 "
         style={{ backgroundImage: "url('/assets/dark.jpg')" , backgroundSize: 'cover', backgroundPosition: 'center' }}>
 
 
-        <div className=" max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-12">
           <div className="py-8">
-            <button className="bg-[#008009] text-white px-6 py-3 rounded-md mb-8">
-              Join 29,279,209 other listings already on Booking.com
-            </button>
+            
             <h1 className="text-6xl font-bold mb-4">List</h1>
             <h2 className="text-6xl text-[#00b4ff] font-bold mb-4">anything</h2>
             <h2 className="text-6xl font-bold mb-8">on Booking.com</h2>
@@ -68,8 +66,8 @@ export default function Home() {
       </section>
 
       {/* Register Card */}
-      <section className="border-4 border-black  max-w-7xl mx-auto px-4 lg:-mt-108 mt-8">
-        <div className="border-4 border-black bg-white rounded-lg shadow-xl p-8 max-w-md lg:mr-20 mx-auto"
+      <section className="max-w-7xl mx-auto px-2 lg:-mt-108 mt-8">
+        <div className=" bg-white rounded-lg shadow-xl p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto"
         
         >
         {showLogin ? (
@@ -85,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* Peace of Mind Section */}
-      <section className="max-w-7xl mx-auto px-4 py-24">
+      <section className="max-w-7xl mx-auto px-12 py-24">
         <h2 className="text-4xl font-bold mb-12">List with peace of mind</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-12">
@@ -149,7 +147,7 @@ export default function Home() {
 
       {/* Stand Out Section */}
       <section className="bg-[#f5f5f5] py-24">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-12">
           <h2 className="text-4xl font-bold mb-16">Stand out from the start</h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
