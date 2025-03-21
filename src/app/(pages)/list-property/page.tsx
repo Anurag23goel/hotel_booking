@@ -68,8 +68,10 @@ export default function Home() {
       </section>
 
       {/* Register Card */}
-      <section className="max-w-7xl mx-auto px-4 -mt-108">
-        <div className="border-4 border-black   bg-white rounded-lg shadow-xl p-8 max-w-md ml-auto">
+      <section className="border-4 border-black  max-w-7xl mx-auto px-4 lg:-mt-108 mt-8">
+        <div className="border-4 border-black bg-white rounded-lg shadow-xl p-8 max-w-md lg:mr-20 mx-auto"
+        
+        >
         {showLogin ? (
               <div>
                 <LoginForm onRegisterClick={toggleForm} />
