@@ -20,19 +20,12 @@ export default function Home() {
       {/* Header */}
       <header className="bg-[#06104d] text-white p-4">
         <div className=" max-w-7xl mx-auto flex justify-between items-center">
-          <Link href="/home" className="text-2xl font-bold" >
-          Booking.com
+          <Link href="/home" className="text-2xl font-PlayfairDisplay-Bold  " >
+          Bharat Trips
           </Link>
          
           <div className="flex items-center gap-4">
             <div className=" flex items-center gap-2">
-              <Image
-                src="https://t-cf.bstatic.com/design-assets/assets/v3.85.0/images-flags/En-us@3x.png"
-                alt="English"
-                width={24}
-                height={24}
-                className="rounded"
-              />
               <span>Already a partner?</span>
             </div>
           
@@ -55,7 +48,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-12">
           <div className="py-8">
             
-            <h1 className="text-6xl font-bold mb-4">List</h1>
+            <h1 className="text-6xl font-bold mb-4 ">List</h1>
             <h2 className="text-6xl text-[#00b4ff] font-bold mb-4">anything</h2>
             <h2 className="text-6xl font-bold mb-8">on Booking.com</h2>
             <p className="text-2xl max-w-2xl">
@@ -67,7 +60,7 @@ export default function Home() {
 
       {/* Register Card */}
       <section className="max-w-7xl mx-auto px-2 lg:-mt-108 mt-8">
-        <div className=" bg-white rounded-lg shadow-xl p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto"
+        <div className="bg-white rounded-lg shadow-xl p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto"
         
         >
         {showLogin ? (
