@@ -67,14 +67,15 @@ const NewPasswordForm = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => router.push("/")}
-          type="submit"
-          className="w-full bg-black text-white rounded-md py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
-        >
-          Next
-        </button>
-      </form>
+            <button
+              onClick={() => router.push('/')}
+              type="submit"
+              className="w-full bg-[#06104d] p-4 mt-7 text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2"
+            >
+              Next
+            </button>
+
+          </form>
     </div>
   );
 };

@@ -12,9 +12,9 @@ import UniqueProperties from "@/custom_components/home/uniqueProperties";
 
 export default function Home() {
   return (
-    <div className="w-full bg-[#d9dae8bd] overflow-hidden">
+    <div className="w-full overflow-hidden">
       {/* NAVBAR AND TOP-MOST DIV */}
-      <div className="bg-[#24328e] md:min-h-[45vh] min-h-[25vh] w-full">
+      <div className="bg-[#057d23] md:min-h-[45vh] min-h-[25vh] w-full">
         {/* NAVBAR DIV */}
         <div className="max-w-5xl mx-auto px-4 lg:px-0">
           <Navbar />
@@ -22,16 +22,16 @@ export default function Home() {
 
         {/* IMAGE AND TEXT DIV */}
         <div
-          className="mx-auto flex items-center bg-cover bg-center relative h-[250px] md:h-[400px]"
-          style={{ backgroundImage: "url('/assets/pool.jpg')" }}
+          className="flex items-center bg-cover bg-center relative h-[250px] md:h-[400px]"
+          style={{ backgroundImage: "url('/assets/banner.jpg')" }}
         >
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 "></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-50"></div>
 
           {/* Aligned content wrapper */}
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-5xl w-full mx-auto px-4 flex flex-col gap-2">
-              <h1 className="text-[#ffffff] md:text-6xl text-3xl font-PlayfairDisplay-Bold">
+              <h1 className="text-white md:text-5xl text-2xl font-bold">
                 Find Your Next Stay With Us
               </h1>
               <p className="text-white md:text-2xl">
@@ -49,12 +49,11 @@ export default function Home() {
       </div>
 
       {/* OFFERS SECTION */}
-      <div className=" max-w-5xl mx-auto mt-5 px-3  md:px-0"
-      >
-        <div className=" flex flex-col gap-3">
+      <div className=" max-w-5xl mx-auto mt-6 px-3 md:px-0">
+        <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold text-black">Offers</h1>
-            <p className="text-sm md:text-base text-black">
+            <h1 className="text-2xl font-bold">Offers</h1>
+            <p className="text-sm md:text-base text-gray-600">
               Promotions, deals and special offers for you...
             </p>
           </div>

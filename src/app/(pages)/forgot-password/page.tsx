@@ -27,7 +27,7 @@ const Page = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-[#1e9609] w-full py-3">
+      <div className="bg-[#06104d] w-full py-3">
         <div className="max-w-5xl mx-auto px-4 lg:px-0">
           <Navbar />
         </div>
@@ -37,7 +37,7 @@ const Page = () => {
         <div className="border-4 border-black w-full max-w-md bg-white p-6 ">
           {renderForm()}
 
-          <div className="border-t my-6"></div>
+          <div className="border-t mt-7 my-6"></div>
 
           <div className="text-center text-sm text-gray-600">
             <p>
