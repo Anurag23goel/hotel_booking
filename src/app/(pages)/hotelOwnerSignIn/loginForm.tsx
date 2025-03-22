@@ -14,11 +14,13 @@ export default function LoginForm({ onRegisterClick }: LoginFormProps) {
 
   const emailValue = watch("email");
 
+ 
+
   return (
     <div className="">
       <h2 className="text-2xl font-PlayfairDisplay-Bold mb-2">Sign in to manage your property</h2>
       
-      <form>
+      <form >
         <div className="mt-8">
           <label className="block text-md font-medium text-black mb-1">UserName</label>
           <div className="relative">
