@@ -18,7 +18,7 @@ export default function LoginForm({ onRegisterClick }: LoginFormProps) {
 
   return (
     <div className="">
-      <h2 className="text-2xl font-bold mb-2">Sign in to manage your property</h2>
+      <h2 className="text-2xl font-PlayfairDisplay-Bold mb-2">Sign in to manage your property</h2>
       
       <form >
         <div className="mt-8">

@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+
+@font-face {
+  font-family: 'Boldonse-Regular';
+  src: url('/fonts/Boldonse-Font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-Boldonse-Regular {
+  font-family: 'Boldonse-Regular', sans-serif;
+}
+
+
+@font-face {
+  font-family: 'PlayfairDisplay-Bold';
+  src: url('/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} 
+
+.font-PlayfairDisplay-Bold {
+  font-family: 'PlayfairDisplay-Bold', sans-serif;
+}
+
+
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
