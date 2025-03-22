@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 import dbConnection from "@/utils/dabatabase/dbConnection";
 import { ApiError, ApiSuccess } from "@/services/apiResponse";
 import jwt from "jsonwebtoken";
+import USER from "@/utils/models/user.model";
+
 
 export async function POST(req: NextRequest) {
     const { emailUsername, password } = await req.json();
