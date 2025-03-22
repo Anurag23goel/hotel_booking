@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import dbConnection from "@/utils/dbConnection";
+import dbConnection from "@/utils/dabatabase/dbConnection";
 import { ApiError, ApiSuccess } from "@/services/apiResponse";
 import jwt from "jsonwebtoken";
 
