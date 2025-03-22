@@ -71,8 +71,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-      {/* Hero Section */}
-      {/* i want to put background image in the section */}
+    
       <section
         className="bg-transparent text-white pb-16 h-[500px] md:h-[600px] lg:h-[500px] flex items-center"
         style={{
@@ -99,6 +98,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+
       {/* Register Card */}
       <section className="max-w-7xl mx-auto px-2 lg:-mt-120 mt-8">
         <div className="bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto h-[400px] w-full">
@@ -246,9 +247,10 @@ export default function Home() {
       {/* Global Reach Section */}
       <section className="py-3 relative bg-cover bg-center bg-no-repeat">
         <div
-          className="max-w-7xl mx-auto px-12 bg-white/80 backdrop-blur-md p-12 rounded-lg"
+          className="mx-auto px-12 bg-white/80 backdrop-blur-md p-12 rounded-lg"
           style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
         >
+          <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-16">
             Reach a unique global customer base
           </h2>
@@ -287,6 +289,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>
