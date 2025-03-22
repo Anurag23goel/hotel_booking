@@ -2,9 +2,9 @@
 import { CheckCircle, Heart, Puzzle, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "../hotelOwnerSignIn/loginForm";
+import LoginForm from "../partner-signin/loginForm";
 import { useState } from "react";
-import RegisterForm from "../hotelOwnerSignIn/registerForm";
+import RegisterForm from "../partner-signin/registerForm";
 
 export default function Home() {
   const [modalState, setModalState] = useState("login");
@@ -23,7 +23,7 @@ export default function Home() {
         );
       case "register":
         return (
-          <div className="h-[460px] flex flex-col justify-between">
+          <div className="h-fit flex flex-col justify-between">
             <RegisterForm onLoginClick={() => toggleState("login")} />
           </div>
         );
@@ -31,12 +31,6 @@ export default function Home() {
         return (
           <div className="h-[460px] flex flex-col justify-between">
             <h1>Login Form Password</h1>
-          </div>
-        );
-      case "forgotPassword":
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <h1>Forgot Password</h1>
           </div>
         );
       default:
@@ -52,60 +46,65 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-[#06104d] text-white p-4">
-  <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-    <Link href="/home" className="text-xl md:text-2xl font-bold mb-4 md:mb-0">
-      Booking.com
-    </Link>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+          <Link
+            href="/home"
+            className="text-xl md:text-2xl font-bold mb-4 md:mb-0"
+          >
+            Booking.com
+          </Link>
 
-    <div className="flex flex-wrap items-center gap-2 md:gap-4">
-      <div className="text-sm md:text-base flex items-center">
-        <span>Already a partner?</span>
-      </div>
+          <div className="flex flex-wrap items-center gap-2 md:gap-4">
+            <div className="text-sm md:text-base flex items-center">
+              <span>Already a partner?</span>
+            </div>
 
-      <Link
-        href="/hotelOwnerSignIn"
-        className="text-sm md:text-base bg-white text-[#003580] px-2 py-1 md:px-4 md:py-2 rounded font-medium"
-      >
-        Sign in
-      </Link>
-      <button className="text-sm md:text-base border border-white px-2 py-1 md:px-4 md:py-2 rounded">
-        Help
-      </button>
-    </div>
-  </div>
-</header>
+            <Link
+              href="/hotelOwnerSignIn"
+              className="text-sm md:text-base bg-white text-[#003580] px-2 py-1 md:px-4 md:py-2 rounded font-medium"
+            >
+              Sign in
+            </Link>
+            <button className="text-sm md:text-base border border-white px-2 py-1 md:px-4 md:py-2 rounded">
+              Help
+            </button>
+          </div>
+        </div>
+      </header>
       {/* Hero Section */}
       {/* i want to put background image in the section */}
       <section
-  className="bg-transparent text-white pb-16 h-[500px] md:h-[600px] lg:h-[500px] flex items-center"
-  style={{
-    backgroundImage: "url('/assets/dark.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  <div>
-    
-
-  </div>
-  <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full">
-    <div className="py-8 pl-0 md:pl-4 lg:pl-12 max-w-3xl">
-      <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4">List</h1>
-      <h2 className="text-3xl md:text-4xl lg:text-6xl text-[#00b4ff] font-bold mb-4">anything</h2>
-      <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-8">on Booking.com</h2>
-      <p className="text-lg md:text-xl lg:text-2xl max-w-xl">
-        Whether hosting is your sideline passion or full-time job, list
-        your home today and quickly start earning more income.
-      </p>
-    </div>
-  </div>
-</section>
-    {/* Register Card */}
-<section className="max-w-7xl mx-auto px-2 lg:-mt-118 mt-8">
-  <div className="bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto h-[400px] w-full">
-    {renderComponent()}
-  </div>
-</section>
+        className="bg-transparent text-white pb-16 h-[500px] md:h-[600px] lg:h-[500px] flex items-center"
+        style={{
+          backgroundImage: "url('/assets/dark.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full">
+          <div className="py-8 pl-0 md:pl-4 lg:pl-12 max-w-3xl">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4">
+              List
+            </h1>
+            <h2 className="text-3xl md:text-4xl lg:text-6xl text-[#00b4ff] font-bold mb-4">
+              anything
+            </h2>
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-8">
+              on Booking.com
+            </h2>
+            <p className="text-lg md:text-xl lg:text-2xl max-w-xl">
+              Whether hosting is your sideline passion or full-time job, list
+              your home today and quickly start earning more income.
+            </p>
+          </div>
+        </div>
+      </section>
+      {/* Register Card */}
+      <section className="max-w-7xl mx-auto px-2 lg:-mt-120 mt-8">
+        <div className="bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto h-[400px] w-full">
+          {renderComponent()}
+        </div>
+      </section>
 
       {/* Peace of Mind Section */}
       <section className="max-w-7xl mx-auto px-12 py-24">
@@ -208,8 +207,8 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-4">Import your reviews</h3>
               <p>
                 We import your review score from other platforms and display it
-                on your Booking.com property page, so you don't start at zero
-                reviews.
+                on your Booking.com property page, so you don&apos;t start at
+                zero reviews.
               </p>
               <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-6">
                 Import your listing
@@ -236,8 +235,8 @@ export default function Home() {
                 Stand out in the market
               </h3>
               <p>
-                The 'New to Booking.com' label helps you stand out in our search
-                results.
+                The <span className="font-semibold">New to Booking.com</span>{" "}
+                label helps you stand out in our search results.
               </p>
             </div>
           </div>
@@ -298,8 +297,11 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-16">What hosts like you say</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 flex flex-col justify-center  rounded-lg shadow-sm">
-                <p className="mb-6">"{testimonial.quote}"</p>
+              <div
+                key={index}
+                className="bg-white p-6 flex flex-col justify-center  rounded-lg shadow-sm"
+              >
+                <p className="mb-6">&quot;{testimonial.quote}&quot;</p>
                 <div className="flex items-center gap-4">
                   <Image
                     src={testimonial.image}
