@@ -16,15 +16,35 @@ export default function Home() {
   const renderComponent = () => {
     switch (modalState) {
       case "login":
-        return <LoginForm onRegisterClick={() => toggleState("register")} />;
+        return (
+          <div className="h-[460px] flex flex-col justify-between">
+            <LoginForm onRegisterClick={() => toggleState("register")} />
+          </div>
+        );
       case "register":
-        return <RegisterForm onLoginClick={() => toggleState("login")} />;
+        return (
+          <div className="h-[460px] flex flex-col justify-between">
+            <RegisterForm onLoginClick={() => toggleState("login")} />
+          </div>
+        );
       case "loginFormPassword":
-        return <h1>Login Form Password</h1>;
+        return (
+          <div className="h-[460px] flex flex-col justify-between">
+            <h1>Login Form Password</h1>
+          </div>
+        );
       case "forgotPassword":
-        return <h1>Forgot Password</h1>;
+        return (
+          <div className="h-[460px] flex flex-col justify-between">
+            <h1>Forgot Password</h1>
+          </div>
+        );
       default:
-        return <LoginForm onRegisterClick={() => toggleState("register")} />;
+        return (
+          <div className="h-[460px] flex flex-col justify-between">
+            <LoginForm onRegisterClick={() => toggleState("register")} />
+          </div>
+        );
     }
   };
 
@@ -64,6 +84,10 @@ export default function Home() {
     backgroundPosition: "center",
   }}
 >
+  <div>
+    
+
+  </div>
   <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full">
     <div className="py-8 pl-0 md:pl-4 lg:pl-12 max-w-3xl">
       <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4">List</h1>
@@ -76,12 +100,12 @@ export default function Home() {
     </div>
   </div>
 </section>
-      {/* Register Card */}
-      <section className="max-w-7xl mx-auto px-2 lg:-mt-108 mt-8">
-        <div className=" bg-white  rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto">
-          {renderComponent()}
-        </div>
-      </section>
+    {/* Register Card */}
+<section className="max-w-7xl mx-auto px-2 lg:-mt-118 mt-8">
+  <div className="bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto h-[400px] w-full">
+    {renderComponent()}
+  </div>
+</section>
 
       {/* Peace of Mind Section */}
       <section className="max-w-7xl mx-auto px-12 py-24">
@@ -270,11 +294,11 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="bg-[#f5f5f5] py-24">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-12">
           <h2 className="text-4xl font-bold mb-16">What hosts like you say</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+              <div key={index} className="bg-white p-6 flex flex-col justify-center  rounded-lg shadow-sm">
                 <p className="mb-6">"{testimonial.quote}"</p>
                 <div className="flex items-center gap-4">
                   <Image
@@ -282,9 +306,9 @@ export default function Home() {
                     alt={testimonial.name}
                     width={48}
                     height={48}
-                    className="rounded-full"
+                    className="rounded-full w-[4rem] h-[4rem] mt-3  "
                   />
-                  <div>
+                  <div className="text-center">
                     <p className="font-bold">{testimonial.name}</p>
                     <p className="text-sm text-gray-600">{testimonial.title}</p>
                   </div>
