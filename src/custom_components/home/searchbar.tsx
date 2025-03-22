@@ -10,7 +10,7 @@ export default function Searchbar() {
   const checkOutRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between bg-white border-4 border-yellow-500 rounded-md py-3 px-4 w-full shadow-md gap-3 md:gap-0">
+    <div className="flex h-[100px] flex-col md:flex-row items-center justify-between bg-white opacity-90 border-2 border-[#060f58bd] rounded-md py-3 px-4 w-full shadow-md gap-3 md:gap-0">
       
       {/* Check-in Date Picker */}
       <div className="flex items-center w-full md:flex-1 border border-gray-300 rounded-md px-4 py-2 md:border-l-0 md:border-t-0 md:border-b-0 md:border-r-2 md:border-gray-300 md:rounded-none">

@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <nav className="flex w-full items-center justify-between lg:py-4 py-2 relative">
       {/* Logo */}
-      <h1 className="font-semibold text-white lg:text-4xl text-xl">
+      <h1 className="font-PlayfairDisplay-Bold text-white lg:text-3xl text-xl">
         Booking.com
       </h1>
   
@@ -28,7 +28,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/list-property"
-            className="text-white font-semibold text-xl"
+            className="text-white font-PlayfairDisplay-Bold text-xl"
           >
             List Your Property
           </Link>
@@ -36,7 +36,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/register"
-            className="text-[#057d23] px-3 py-2 font-semibold text-lg rounded-sm bg-white"
+            className="text-[#0a120c] px-3 py-2 font-PlayfairDisplay-Bold text-lg rounded-sm bg-white"
           >
             Register
           </Link>
@@ -44,7 +44,7 @@ export default function Navbar() {
         <li>
           <Link
             href="/login"
-            className="text-[#057d23] px-3 py-2 font-semibold text-lg rounded-sm bg-white"
+            className="text-[#0f2314] px-3 py-2 font-PlayfairDisplay-Bold text-lg rounded-sm bg-white"
           >
             Sign In
           </Link>

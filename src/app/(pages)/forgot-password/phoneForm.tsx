@@ -13,8 +13,8 @@ const PhoneForm = ({setCurrentForm}:{setCurrentForm: (form: string) => void}) =>
 
   return (
     <div>
-      <h2 className="text-2xl font-bold ">Forgot your password ? </h2>
-      <p className="text-gray-600 mt-2">
+      <h2 className="text-2xl font-PlayfairDisplay-Bold  ">Forgot your password ? </h2>
+      <p className="text-black opacity-55 font-bold  mt-2">
             Enter number associated with your account.
           </p>
 
@@ -42,14 +42,14 @@ const PhoneForm = ({setCurrentForm}:{setCurrentForm: (form: string) => void}) =>
             <button
               onClick={() => setCurrentForm('otp')}
               type="submit"
-              className="w-full bg-black text-white rounded-md py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[#06104d] text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2"
             >
               Next
             </button>
 
           </form>
 
-          <div className="relative my-7 mb-10">
+          <div className="relative my-7 mb-[50px]">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
@@ -60,7 +60,7 @@ const PhoneForm = ({setCurrentForm}:{setCurrentForm: (form: string) => void}) =>
 
             <button 
             onClick={() => setCurrentForm('email')}
-            className='bg-black p-4 text-white rounded-full opacity-75 py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2 text-1xl font-bold mt-5'>
+            className='bg-[#06104d] opacity-50 p-4 mt-7 text-white rounded-full  py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2 text-1xl font-bold '>
               send via email
             </button>
     </div>

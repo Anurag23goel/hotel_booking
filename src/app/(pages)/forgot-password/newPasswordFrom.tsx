@@ -15,15 +15,15 @@ const NewPasswordForm = () => {
   const confirmNewPasswordValue = watch("confirmNewPassword");
   return (
     <div>
-      <h2 className="text-2xl font-bold ">Update Password 🙈 </h2>
-      <p className="text-gray-600 mt-2">
+      <h2 className="text-2xl font-PlayfairDisplay-Bold ">Update Password ->-> </h2>
+      <p className="text-black opacity-55 font-bold mt-2">
             Enter new password.
           </p>
 
           <form className="mt-6 space-y-4">
 
             <div>
-              <label className="block text-md font-medium text-black mb-1">
+              <label className="block text-md font-bold text-black mb-1">
                 New Password
               </label>
               <div className="relative">
@@ -63,7 +63,7 @@ const NewPasswordForm = () => {
             <button
               onClick={() => router.push('/')}
               type="submit"
-              className="w-full bg-black text-white rounded-md py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[#06104d] p-4 mt-7 text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2"
             >
               Next
             </button>

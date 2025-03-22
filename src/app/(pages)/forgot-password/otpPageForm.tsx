@@ -13,8 +13,8 @@ const OtpPageForm = ({setCurrentForm}:{setCurrentForm: (form: string) => void}) 
 
   return (
     <div>
-      <h2 className="text-2xl font-bold ">Enter OTP</h2>
-      <p className="text-gray-600 mt-2">
+      <h2 className="text-2xl font-PlayfairDisplay-Bold ">Enter OTP</h2>
+      <p className="text-black opacity-55 font-bold mt-2">
             Enter the OTP sent to your email or phone number.
           </p>
 
@@ -25,7 +25,7 @@ const OtpPageForm = ({setCurrentForm}:{setCurrentForm: (form: string) => void}) 
                 OTP
               </label>
               <div className="flex">
-                <input className="border border-black w-2 h-10 p-7 text-center" type="text"/>
+                <input className=" border-black border-b h-10 text-1xl text-black text-center" type="text"/>
                 
               </div>
             </div>
@@ -33,7 +33,7 @@ const OtpPageForm = ({setCurrentForm}:{setCurrentForm: (form: string) => void}) 
             <button
               onClick={() => setCurrentForm('newPassword')}
               type="submit"
-              className="w-full bg-black text-white rounded-md py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[#06104d] p-4 mt-7 text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2"
             >
               Next
             </button>
