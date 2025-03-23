@@ -29,7 +29,7 @@ function Page() {
   const handleLoginSubmit = async (data: loginData) => {
     try {
 
-      const response = await axios.post("/api/login",data);
+      const response = await axios.post("/api/login", data);
 
       if (response.data.success) {
         toast.success("Login successful");
