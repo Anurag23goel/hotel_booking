@@ -40,10 +40,10 @@ const LoginForm = ({ setCurrentForm }: LoginFormProps) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold">
+        <h1 className="text-2xl text-black font-semibold">
           Sign in to manage your property
         </h1>
-        <p className="font-semibold text-md">
+        <p className="font-semibold text-black text-md">
           Welcome back! Please enter your details.
         </p>
       </div>
@@ -63,7 +63,7 @@ const LoginForm = ({ setCurrentForm }: LoginFormProps) => {
                   message: "Please enter a valid email address",
                 },
               })}
-              className="w-full p-3 bg-transparent rounded-md focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500 outline-none"
+              className="w-full text-black p-3 bg-transparent rounded-md focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500 outline-none"
               placeholder="Enter your email address"
             />
             {emailValue && (
