@@ -7,7 +7,6 @@ import { useState } from "react";
 import RegisterForm from "./forms/registerForm";
 import OtpForm from "./forms/otpForm";
 
-// Fixed the image URL for the last testimonial by removing the tilde (~) at the end
 const testimonials = [
   {
     quote:
@@ -39,7 +38,7 @@ const testimonials = [
     name: "Louis Gonzalez",
     title: "Charming Lofts, Los Angeles",
     image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100~",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100",
   },
   {
     quote:
@@ -60,7 +59,7 @@ const testimonials = [
 ];
 
 export default function Home() {
-  const [currentForm, setCurrentForm] = useState<string>("login");
+  const [currentForm, setCurrentForm] = useState("login");
 
   const renderForm = () => {
     switch (currentForm) {
@@ -76,7 +75,7 @@ export default function Home() {
   };
 
   return (
-    <div className=" bg-white">
+    <div className="bg-white">
       {/* Header */}
       <header className="bg-[#06104d] text-white p-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -86,19 +85,15 @@ export default function Home() {
           >
             Bharat Trips
           </Link>
-
           <div className="flex flex-wrap items-center gap-2 md:gap-4">
-            <div className="text-sm md:text-base flex items-center">
-              <span>Already a partner?</span>
-            </div>
-
+            <span className="text-sm md:text-base">Already a partner?</span>
             <Link
               href="/login"
-              className="text-sm md:text-base bg-white text-[#003580] px-2 py-1 md:px-4 md:py-2 rounded font-medium"
+              className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
             >
               Sign in
             </Link>
-            <button className="text-sm md:text-base border border-white px-2 py-1 md:px-4 md:py-2 rounded">
+            <button className="text-sm md:text-base border border-white px-4 py-2 rounded">
               Help
             </button>
           </div>
@@ -108,18 +103,16 @@ export default function Home() {
       {/* Hero Section with Register Card Combined */}
       <div
         className="relative h-screen bg-cover bg-center bg-no-repeat text-white flex items-center"
-        style={{
-          backgroundImage: "url('/assets/dark.jpg')",
-        }}
+        style={{ backgroundImage: "url('/assets/dark.jpg')" }}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full flex flex-col lg:flex-row justify-between items-center relative">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full flex flex-col lg:flex-row justify-between items-center">
           {/* LEFT: Register Form (Large screens only) */}
           <div className="hidden lg:block bg-white rounded-lg shadow-2xl p-10 max-w-md z-10">
             {renderForm()}
           </div>
 
           {/* RIGHT: Hero Text */}
-          <div className="py-8 pl-0 md:pl-4 lg:pl-12 max-w-3xl text-left">
+          <div className="py-8 lg:pl-12 max-w-3xl text-left">
             <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4">
               List
             </h1>
@@ -145,7 +138,7 @@ export default function Home() {
       </div>
 
       {/* Peace of Mind Section */}
-      <section className="max-w-7xl mx-auto p-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-16">
         <h2 className="text-4xl font-bold mb-12">List with peace of mind</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-12">
@@ -231,12 +224,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Stand Out Section */}
-      <section className="bg-[#f5f5f5] py-12">
-        <div className="max-w-7xl mx-auto px-12">
-          <h2 className="text-4xl font-bold mb-10">Stand out from the start</h2>
+      <div className="bg-[#f5f5f5] py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <h2 className="text-4xl font-bold mb-12">Stand out from the start</h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
               <div className="flex justify-center mb-6">
@@ -245,8 +238,8 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-4">Import your reviews</h3>
               <p>
                 We import your review score from other platforms and display it
-                on your Booking.com property page, so you don&apos;t start at
-                zero reviews.
+                on your Booking.com property page, so you don&apso;t start at zero
+                reviews.
               </p>
               <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-6">
                 Import your listing
@@ -279,67 +272,65 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Global Reach Section */}
-      <section className="py-3 relative bg-cover bg-center bg-no-repeat">
-        <div
-          className="mx-auto px-12 bg-white/80 backdrop-blur-md p-12 rounded-lg"
-          style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
-        >
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold mb-10">
-              Reach a unique global customer base
-            </h2>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <div className="mb-12">
-                  <div className="text-5xl font-bold mb-2">2/3</div>
-                  <p>of holiday rental guests return to book with us again</p>
-                </div>
-                <div>
-                  <div className="text-5xl font-bold mb-2">33%</div>
-                  <p>
-                    of holiday rental customers are at Genius Level 2 or 3.
-                    These travellers tend to spend more and book directly on our
-                    platform.
-                  </p>
-                </div>
-                <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-8">
-                  Grow your customer base
-                </button>
+      <div
+        className="py-16 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 bg-white/80 backdrop-blur-md p-12 rounded-lg">
+          <h2 className="text-4xl font-bold mb-12">
+            Reach a unique global customer base
+          </h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <div className="mb-12">
+                <div className="text-5xl font-bold mb-2">2/3</div>
+                <p>of holiday rental guests return to book with us again</p>
               </div>
               <div>
-                <div className="mb-12">
-                  <div className="text-5xl font-bold mb-2">48%</div>
-                  <p>
-                    of nights booked by travellers at the end of 2023 were for
-                    international stays.
-                  </p>
-                </div>
-                <div>
-                  <div className="text-5xl font-bold mb-2">30%</div>
-                  <p>
-                    of all nights booked on our platform were at a holiday
-                    rental. More and more travellers flex book both hotels and
-                    alternative accommodation.
-                  </p>
-                </div>
+                <div className="text-5xl font-bold mb-2">33%</div>
+                <p>
+                  of holiday rental customers are at Genius Level 2 or 3. These
+                  travellers tend to spend more and book directly on our
+                  platform.
+                </p>
+              </div>
+              <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-8">
+                Grow your customer base
+              </button>
+            </div>
+            <div>
+              <div className="mb-12">
+                <div className="text-5xl font-bold mb-2">48%</div>
+                <p>
+                  of nights booked by travellers at the end of 2023 were for
+                  international stays.
+                </p>
+              </div>
+              <div>
+                <div className="text-5xl font-bold mb-2">30%</div>
+                <p>
+                  of all nights booked on our platform were at a holiday rental.
+                  More and more travellers flex book both hotels and alternative
+                  accommodation.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Testimonials Section */}
-      <section className="bg-[#f5f5f5] py-12">
-        <div className="max-w-7xl mx-auto px-12">
-          <h2 className="text-4xl font-bold mb-10">What hosts like you say</h2>
+      <div className="bg-[#f5f5f5] py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <h2 className="text-4xl font-bold mb-12">What hosts like you say</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-6 flex flex-col justify-center  rounded-lg shadow-sm"
+                className="bg-white p-6 flex flex-col justify-center rounded-lg shadow-sm"
               >
                 <p className="mb-6">&quot;{testimonial.quote}&quot;</p>
                 <div className="flex items-center gap-4">
@@ -359,7 +350,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
