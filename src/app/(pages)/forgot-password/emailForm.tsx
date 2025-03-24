@@ -14,7 +14,7 @@ const EmailForm = ({
 }: {
   setCurrentForm: (form: string) => void;
 }) => {
-  const { register, watch, handleSubmit } = useForm<dataInput>();
+  const { register, watch, handleSubmit  } = useForm<dataInput>();
 
   const emailValue = watch("email");
 
@@ -22,15 +22,14 @@ const EmailForm = ({
     console.log(data);
     try {
       const response = await axios.post("/api/forgot-password", data);
-      
 
-      console.log("this is response->",response.data);
+      console.log("this is response->", response.data);
 
       if (response.data.success) {
         toast.success("Email verified ! OTP Sent !");
         setCurrentForm("otp");
       }
-    } catch (err:any) {
+    } catch (err: any) {
       console.log(err.message);
     }
   };
@@ -43,16 +42,13 @@ const EmailForm = ({
         Enter email address associated with your account.
       </p>
 
-      <form onSubmit={handleSubmit(emailHandler)} className="mt-6 space-y-4">
-        <div>
-          <label className="block text-md font-semibold text-black mb-1">
-            Email Address
-          </label>
-          <div className="relative">
+      <form onSubmit={handleSubmit(emailHandler)} className="mt-11 space-y-4">
+        <div className="relative">
+          <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
             <input
-              type="text"
+              type="email"
               {...register("email", { required: "Email is necessary" })}
-              className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+              className="w-full p-3 bg-transparent rounded-md outline-none"
               placeholder="Enter your email address"
             />
             {emailValue && (
@@ -60,12 +56,15 @@ const EmailForm = ({
                 <ChevronRight className="h-4 w-4 text-white" />
               </div>
             )}
+            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+              Email Address
+            </label>
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-[#06104d] text-white rounded-md py-3 hover:bg-black  transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-[#06104d] text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2"
         >
           Next
         </button>

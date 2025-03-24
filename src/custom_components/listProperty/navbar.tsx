@@ -3,11 +3,14 @@
 import Image from "next/image";
 import { Tooltip } from "@mui/material";
 import { CircleHelp, CircleUserRound } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export default function Navbar() {
+  export default function Navbar() {
+  const router = useRouter();
   return (
     <nav className="flex justify-between items-center px-4 md:px-6 w-full bg-transparent">
-      <h1 className="text-white font-PlayfairDisplay-Bold text-xl md:text-2xl">
+      <h1 className="text-white font-PlayfairDisplay-Bold text-xl md:text-2xl cursor-pointer"
+      onClick={() => router.push("/")}>
         Bharat Trips
       </h1>
 

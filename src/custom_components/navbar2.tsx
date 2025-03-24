@@ -5,14 +5,17 @@ import Link from "next/link";
 import { Menu, X, CircleHelp } from "lucide-react"; // Icons
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import { useRouter } from "next/navigation";
 
 export default function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const router = useRouter();
   return (
     <nav className="flex w-full items-center justify-between lg:py-1 py-2 relative">
       {/* Logo */}
-      <h1 className="font-PlayfairDisplay-Bold text-white lg:text-2xl text-xl">
+      <h1 className="font-PlayfairDisplay-Bold text-white lg:text-2xl text-xl
+      cursor-pointer "
+      onClick={() => router.push("/")}>
         Bharat Trips
       </h1>
   

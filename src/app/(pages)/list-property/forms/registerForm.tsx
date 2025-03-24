@@ -3,51 +3,55 @@ import { useForm } from "react-hook-form";
 import { ChevronRight } from "lucide-react";
 
 interface RegisterFormProps {
-  onLoginClick: () => void;
+  setCurrentForm: (form: string) => void;
 }
 
-export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
-  const { register, watch } = useForm();
+interface RegisterFormData {
+  email: string;
+}
+
+const RegisterForm = ({ setCurrentForm }: RegisterFormProps) => {
+  const { register, watch, handleSubmit } = useForm<RegisterFormData>();
 
   const emailValue = watch("email");
 
+  const emailHandler = (data: RegisterFormData) => {
+    // Handle registration logic here
+    setCurrentForm("login");
+  };
+
   return (
     <div className="w-full h-full flex flex-col space-y-6">
-      
-      
       <div className="space-y-1">
-        <h2 className=" text-2xl  font-bold">
-          Create Your Partner Account
-        </h2>
-        <p className="text-sm text-gray-500 ">
+        <h2 className="text-2xl font-bold">Create Your Partner Account</h2>
+        <p className="text-sm text-gray-500">
           Create an account to list and manage your property.
         </p>
       </div>
 
-      <form>
-        {/* email */}
-        <div className="">
-          <label className="block text-md font-medium text-black mb-1">
-            Email Address
-          </label>
-          <div className="relative">
+      <form onSubmit={handleSubmit(emailHandler)}>
+        <div className="relative">
+          <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
             <input
               type="email"
               {...register("email", { required: "email is neccessary" })}
-              className="border border-gray-300 w-full p-2 rounded-[5px] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+              className="w-full p-3 bg-transparent outline-none"
               placeholder="Enter your username or email address"
-            ></input>
+            />
             {emailValue && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-600 rounded-full p-1">
                 <ChevronRight className="h-4 w-4 text-white" />
               </div>
             )}
+            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-[#0091EA]">
+              Email Address
+            </label>
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full mt-5  bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
+          className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
         >
           Continue
         </button>
@@ -63,8 +67,8 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         </div>
 
         <button
-          type="submit"
-          onClick={onLoginClick}
+          type="button"
+          onClick={() => setCurrentForm("login")}
           className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
         >
           Sign in
@@ -72,4 +76,6 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
       </form>
     </div>
   );
-}
+};
+
+export default RegisterForm;

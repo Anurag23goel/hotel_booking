@@ -22,7 +22,6 @@ const NewPasswordForm = () => {
 
   const newPasswordValue = watch("newPassword");
 
-
   // State to toggle password visibility
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -66,15 +65,12 @@ const NewPasswordForm = () => {
       <p className="text-black/60 font-medium mt-2">Enter your new password.</p>
 
       <form
-        className="mt-6 space-y-4"
+        className="mt-11 space-y-4"
         onSubmit={handleSubmit(newPasswordSubmit)}
       >
         {/* New Password Input */}
-        <div>
-          <label className="block text-md font-medium text-black mb-1">
-            New Password
-          </label>
-          <div className="relative">
+        <div className="relative">
+          <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
             <input
               type={showNewPassword ? "text" : "password"}
               {...register("newPassword", {
@@ -84,7 +80,7 @@ const NewPasswordForm = () => {
                   message: "Password must be at least 6 characters long",
                 },
               })}
-              className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+              className="w-full p-3 bg-transparent outline-none"
               placeholder="Enter your new password"
             />
             <button
@@ -92,20 +88,26 @@ const NewPasswordForm = () => {
               onClick={toggleNewPasswordVisibility}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
             >
-              {showNewPassword ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
+              {showNewPassword ? (
+                <Eye className="h-5 w-5" />
+              ) : (
+                <EyeOff className="h-5 w-5" />
+              )}
             </button>
+            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+              New Password
+            </label>
           </div>
           {errors.newPassword && (
-            <p className="text-red-500 text-sm mt-1">{errors.newPassword.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.newPassword.message}
+            </p>
           )}
         </div>
 
         {/* Confirm New Password Input */}
-        <div>
-          <label className="block text-md font-medium text-black mb-1">
-            Confirm New Password
-          </label>
-          <div className="relative">
+        <div className="relative">
+          <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
             <input
               type={showConfirmPassword ? "text" : "password"}
               {...register("confirmNewPassword", {
@@ -113,7 +115,7 @@ const NewPasswordForm = () => {
                 validate: (value) =>
                   value === newPasswordValue || "Passwords do not match",
               })}
-              className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+              className="w-full p-3 bg-transparent outline-none"
               placeholder="Confirm your new password"
             />
             <button
@@ -121,11 +123,20 @@ const NewPasswordForm = () => {
               onClick={toggleConfirmPasswordVisibility}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
             >
-              {showConfirmPassword ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
+              {showConfirmPassword ? (
+                <Eye className="h-5 w-5" />
+              ) : (
+                <EyeOff className="h-5 w-5" />
+              )}
             </button>
+            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+              Confirm New Password
+            </label>
           </div>
           {errors.confirmNewPassword && (
-            <p className="text-red-500 text-sm mt-1">{errors.confirmNewPassword.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.confirmNewPassword.message}
+            </p>
           )}
         </div>
 

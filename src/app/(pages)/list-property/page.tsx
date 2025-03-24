@@ -2,43 +2,24 @@
 import { CheckCircle, Heart, Puzzle, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "../partner-signin/loginForm";
+import LoginForm from "./forms/loginForm";
 import { useState } from "react";
-import RegisterForm from "../partner-signin/registerForm";
+import RegisterForm from "./forms/registerForm";
+import OtpForm from "./forms/otpForm";
 
 export default function Home() {
-  const [modalState, setModalState] = useState("login");
+  const [currentForm, setCurrentForm] = useState<string>("login");
 
-  const toggleState = (modalState: string) => {
-    setModalState(modalState);
-  };
-
-  const renderComponent = () => {
-    switch (modalState) {
+  const renderForm = () => {
+    switch (currentForm) {
       case "login":
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <LoginForm onRegisterClick={() => toggleState("register")} />
-          </div>
-        );
+        return <LoginForm setCurrentForm={setCurrentForm} />;
       case "register":
-        return (
-          <div className="h-fit flex flex-col justify-between">
-            <RegisterForm onLoginClick={() => toggleState("login")} />
-          </div>
-        );
-      case "loginFormPassword":
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <h1>Login Form Password</h1>
-          </div>
-        );
+        return <RegisterForm setCurrentForm={setCurrentForm} />;
+      case "otp":
+        return <OtpForm setCurrentForm={setCurrentForm}/>;
       default:
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <LoginForm onRegisterClick={() => toggleState("register")} />
-          </div>
-        );
+        return <LoginForm setCurrentForm={setCurrentForm} />;
     }
   };
 
@@ -48,7 +29,7 @@ export default function Home() {
       <header className="bg-[#06104d] text-white p-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <Link
-            href="/home"
+            href="/"
             className="text-xl md:text-2xl font-PlayfairDisplay-Bold mb-4 md:mb-0"
           >
             Bharat Trips
@@ -60,7 +41,7 @@ export default function Home() {
             </div>
 
             <Link
-              href="/hotelOwnerSignIn"
+              href="/login"
               className="text-sm md:text-base bg-white text-[#003580] px-2 py-1 md:px-4 md:py-2 rounded font-medium"
             >
               Sign in
@@ -71,7 +52,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-    
+
       <section
         className="bg-transparent text-white pb-16 h-[500px] md:h-[600px] lg:h-[500px] flex items-center"
         style={{
@@ -99,16 +80,15 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Register Card */}
-      <section className="max-w-7xl mx-auto px-2 lg:-mt-120 mt-8">
-        <div className="bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto h-[400px] w-full">
-          {renderComponent()}
+      <section className=" max-w-7xl mx-auto px-2 lg:-mt-120 mt-8">
+        <div className=" bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto w-full mb-15">
+          {renderForm()}
         </div>
       </section>
 
       {/* Peace of Mind Section */}
-      <section className="max-w-7xl mx-auto px-12 py-24">
+      <section className="max-w-7xl mx-auto px-12 mt-21 py-24">
         <h2 className="text-4xl font-bold mb-12">List with peace of mind</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-12">
@@ -251,45 +231,45 @@ export default function Home() {
           style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
         >
           <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-16">
-            Reach a unique global customer base
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <div className="mb-12">
-                <div className="text-5xl font-bold mb-2">2/3</div>
-                <p>of holiday rental guests return to book with us again</p>
+            <h2 className="text-4xl font-bold mb-16">
+              Reach a unique global customer base
+            </h2>
+            <div className="grid md:grid-cols-2 gap-12">
+              <div>
+                <div className="mb-12">
+                  <div className="text-5xl font-bold mb-2">2/3</div>
+                  <p>of holiday rental guests return to book with us again</p>
+                </div>
+                <div>
+                  <div className="text-5xl font-bold mb-2">33%</div>
+                  <p>
+                    of holiday rental customers are at Genius Level 2 or 3.
+                    These travellers tend to spend more and book directly on our
+                    platform.
+                  </p>
+                </div>
+                <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-8">
+                  Grow your customer base
+                </button>
               </div>
               <div>
-                <div className="text-5xl font-bold mb-2">33%</div>
-                <p>
-                  of holiday rental customers are at Genius Level 2 or 3. These
-                  travellers tend to spend more and book directly on our
-                  platform.
-                </p>
-              </div>
-              <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-8">
-                Grow your customer base
-              </button>
-            </div>
-            <div>
-              <div className="mb-12">
-                <div className="text-5xl font-bold mb-2">48%</div>
-                <p>
-                  of nights booked by travellers at the end of 2023 were for
-                  international stays.
-                </p>
-              </div>
-              <div>
-                <div className="text-5xl font-bold mb-2">30%</div>
-                <p>
-                  of all nights booked on our platform were at a holiday rental.
-                  More and more travellers flex book both hotels and alternative
-                  accommodation.
-                </p>
+                <div className="mb-12">
+                  <div className="text-5xl font-bold mb-2">48%</div>
+                  <p>
+                    of nights booked by travellers at the end of 2023 were for
+                    international stays.
+                  </p>
+                </div>
+                <div>
+                  <div className="text-5xl font-bold mb-2">30%</div>
+                  <p>
+                    of all nights booked on our platform were at a holiday
+                    rental. More and more travellers flex book both hotels and
+                    alternative accommodation.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </section>

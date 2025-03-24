@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
     const { otp } = await req.json();
     const resetPasswordToken = req.cookies.get("reset-password-token")?.value;
 
+    
     if (!resetPasswordToken) {
       return ApiError("Reset password token not found", 400);
     }
