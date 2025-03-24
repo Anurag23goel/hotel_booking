@@ -25,5 +25,5 @@ export function middleware(req: NextRequest) {
 
 // Apply middleware to all routes
 export const config = {
-  matcher: ["/dashboard", "/login", "/register", "/protected"], // Define the routes middleware applies to
+  matcher: ["/dashboard", "/login", "/register", "/protected", ], // Define the routes middleware applies to
 };

@@ -76,6 +76,7 @@ export default function Home() {
 
   return (
     <div className="bg-white">
+      
       {/* Header */}
       <header className="bg-[#06104d] text-white p-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -138,7 +139,7 @@ export default function Home() {
       </div>
 
       {/* Peace of Mind Section */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 lg:py-16">
         <h2 className="text-4xl font-bold mb-12">List with peace of mind</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-12">
@@ -279,7 +280,7 @@ export default function Home() {
         className="py-16 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 bg-white/80 backdrop-blur-md p-12 rounded-lg">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12  p-12 rounded-lg">
           <h2 className="text-4xl font-bold mb-12">
             Reach a unique global customer base
           </h2>
