@@ -1,3 +1,5 @@
+//page is of no use but we have to keep it for now for check 
+
 "use client"
 import React, { useState } from 'react'
 import Navbar from '@/custom_components/listProperty/navbar'
@@ -24,6 +26,7 @@ const Page = () => {
           <div className="transition-all duration-300 transform">
             {showLogin ? (
               <div>
+                {/* this page is of no use but we have to keep it for now for check  */}
                 <LoginForm onRegisterClick={toggleForm} />
               </div>
             ) : (

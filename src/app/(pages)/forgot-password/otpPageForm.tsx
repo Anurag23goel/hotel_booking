@@ -17,7 +17,7 @@ const OtpPageForm = ({
   const [otp, setOtp] = useState("");
   const {
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm<OtpFormData>();
 
   const onSubmit = async () => {
@@ -27,14 +27,16 @@ const OtpPageForm = ({
     }
 
     try {
-      const response = await axios.post("/api/verify-otp",{ otp },
+      const response = await axios.post(
+        "/api/verify-otp",
+        { otp },
         {
           withCredentials: true,
         }
       );
 
-      console.log("this is response of the otp page ->",response.data);
-      
+      console.log("this is response of the otp page ->", response.data);
+
       if (response.data.success) {
         toast.success("OTP verified successfully");
         setCurrentForm("newPasswordForm");
@@ -53,28 +55,30 @@ const OtpPageForm = ({
         Enter the OTP sent to your email or phone number.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-        <div>
-          <label className="block text-md font-medium text-black mb-1">
-            OTP
-          </label>
-          <OtpInput
-            value={otp}
-            onChange={setOtp}
-            numInputs={6}
-            renderInput={(props) => <input {...props} type="text" />}
-            shouldAutoFocus
-            inputStyle={{
-              width: "40px",
-              height: "50px",
-              margin: "5px",
-              fontSize: "20px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-              textAlign: "center",
-            }}
-            containerStyle={{ justifyContent: "center" }}
-          />
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-11 space-y-4">
+        <div className="relative">
+          <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500 p-4">
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              numInputs={6}
+              renderInput={(props) => <input {...props} type="text" />}
+              shouldAutoFocus
+              inputStyle={{
+                width: "40px",
+                height: "50px",
+                margin: "5px",
+                fontSize: "20px",
+                borderRadius: "5px",
+                border: "1px solid #ccc",
+                textAlign: "center",
+              }}
+              containerStyle={{ justifyContent: "center" }}
+            />
+            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+              OTP Code
+            </label>
+          </div>
         </div>
 
         <button

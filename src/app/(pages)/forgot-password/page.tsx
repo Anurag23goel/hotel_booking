@@ -19,7 +19,7 @@ const Page = () => {
       case "otp":
         return <OtpPageForm setCurrentForm={setCurrentForm} />;
       case "newPasswordForm":
-        return <NewPasswordForm />;
+        return <NewPasswordForm  />;
       default:
         return <EmailForm setCurrentForm={setCurrentForm} />;
     }

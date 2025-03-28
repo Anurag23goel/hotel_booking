@@ -7,13 +7,15 @@ import {
 } from "@/shadcn_components/ui/carousel";
 import Image from "next/image";
 
-
 export default function PopularAttractions() {
   return (
-    <Carousel className="w-full" opts={{
-      align: "start",
-      loop: true,
-    }}>
+    <Carousel
+      className="w-full"
+      opts={{
+        align: "start",
+        loop: true,
+      }}
+    >
       <CarouselContent className="-ml-1">
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/4">

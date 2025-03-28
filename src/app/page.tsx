@@ -1,17 +1,34 @@
+"use client"
 import GetInspiration from "@/custom_components/home/getInspiration";
 import HomesForGuests from "@/custom_components/home/homesForGuests";
 import HotelDeals from "@/custom_components/home/hotelDeals";
-import Navbar from "@/custom_components/home/navbar";
+import Navbar from "@/custom_components/HomeNavbar/navbar";
 import Offers from "@/custom_components/home/offers";
 import PopularAttractions from "@/custom_components/home/popularAttractions";
 import PropertyCarousel from "@/custom_components/home/propertyCarousel";
 import Searchbar from "@/custom_components/home/searchbar";
 import TrendingHotels from "@/custom_components/home/trendingHotels";
 import UniqueProperties from "@/custom_components/home/uniqueProperties";
+import { useEffect } from "react";
+import { fetchUserData } from "./loginState/features/authSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // #057d23
 
+
 export default function Home() {
+  const dispatch = useDispatch();
+  const { isLoggedIn,userData, loading } = useSelector(
+    (state: any) => state.auth
+  );
+  useEffect(()=>{
+    dispatch(fetchUserData());
+  },[dispatch])
+
+    console.log("userData on the home page is  -> ",userData);
+
   return (
+
     <div className="w-full bg-[#d9dae8bd] overflow-hidden">
       <div className="bg-[#040928] md:min-h-[45vh] min-h-[25vh] w-full relative">
         <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-0">

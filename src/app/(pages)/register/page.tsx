@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import Navbar2 from "@/custom_components/navbar2";
+import Navbar2 from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
@@ -68,13 +68,10 @@ function Page() {
 
           <form
             onSubmit={handleSubmit(handleRegisterSubmit)}
-            className="mt-6 space-y-4"
+            className="mt-10 space-y-4"
           >
-            <div>
-              <label className="block text-md font-medium text-black mb-1">
-                Full Name
-              </label>
-              <div className="relative">
+            <div className="relative">
+              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
                 <input
                   type="text"
                   {...register("name", {
@@ -84,7 +81,7 @@ function Page() {
                       message: "Name must be at least 2 characters",
                     },
                   })}
-                  className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+                  className="w-full p-3 bg-transparent rounded-md outline-none"
                   placeholder="Enter your full name"
                 />
                 {nameValue && (
@@ -92,6 +89,9 @@ function Page() {
                     <ChevronRight className="h-4 w-4 text-white" />
                   </div>
                 )}
+                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+                  Full Name
+                </label>
               </div>
               {errors.name && (
                 <p className="mt-1 text-red-600 text-sm">
@@ -100,11 +100,8 @@ function Page() {
               )}
             </div>
 
-            <div>
-              <label className="block text-md font-medium text-black mb-1">
-                Email Address
-              </label>
-              <div className="relative">
+            <div className="relative">
+              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
                 <input
                   type="email"
                   {...register("email", {
@@ -114,7 +111,7 @@ function Page() {
                       message: "Invalid email address",
                     },
                   })}
-                  className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+                  className="w-full p-3 bg-transparent rounded-md outline-none"
                   placeholder="Enter your email address"
                 />
                 {emailValue && (
@@ -122,6 +119,9 @@ function Page() {
                     <ChevronRight className="h-4 w-4 text-white" />
                   </div>
                 )}
+                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+                  Email Address
+                </label>
               </div>
               {errors.email && (
                 <p className="mt-1 text-red-600 text-sm">
@@ -130,11 +130,8 @@ function Page() {
               )}
             </div>
 
-            <div>
-              <label className="block text-md font-medium text-black mb-1">
-                Password
-              </label>
-              <div className="relative">
+            <div className="relative">
+              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password", {
@@ -144,7 +141,7 @@ function Page() {
                       message: "Password must be at least 6 characters",
                     },
                   })}
-                  className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+                  className="w-full p-3 bg-transparent outline-none"
                   placeholder="Create a password"
                 />
                 <button
@@ -158,6 +155,9 @@ function Page() {
                     <EyeOff className="h-5 w-5" />
                   )}
                 </button>
+                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+                  Password
+                </label>
               </div>
               {errors.password && (
                 <p className="mt-1 text-red-600 text-sm">
@@ -166,17 +166,20 @@ function Page() {
               )}
             </div>
 
-            <div>
-              <label className="block text-md font-medium text-black mb-1">
-                Phone Number (Optional)
-              </label>
-              <div className="relative">
+            <div className="relative">
+              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                  +91
+                </span>
                 <input
                   type="tel"
                   {...register("phoneNumber")}
-                  className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+                  className="w-full p-3 pl-12 bg-transparent outline-none"
                   placeholder="Enter your phone number"
                 />
+                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+                  Phone Number (Optional)
+                </label>
               </div>
             </div>
 

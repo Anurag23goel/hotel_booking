@@ -1,12 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
-import { ChevronRight, Eye, EyeOff } from "lucide-react";
+import { ChevronRight, Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
-import Navbar2 from "@/custom_components/navbar2";
+import Navbar from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
+
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "@/app/loginState/features/authSlice";
+import { Button } from "@/shadcn_components/ui/button";
 
 interface loginData {
   email: string;
@@ -15,43 +19,55 @@ interface loginData {
 
 function Page() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isValid, setIsValid] = useState(false);
 
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<loginData>();
 
   const emailValue = watch("email");
 
   const handleLoginSubmit = async (data: loginData) => {
     try {
-
-      const response = await axios.post("/api/login", data);
+      const response = await axios.post("/api/login", data, {
+        withCredentials: true, // Important for handling cookies
+      });
 
       if (response.data.success) {
+        dispatch(setLoggedIn(true));
         toast.success("Login successful");
-        router.push("/");
+        router.push("/Assigment");
       }
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(
-          error.response?.data?.message ||
-            "Login failed. Please check your credentials."
-        );
-      } else {
-        toast.error("An unexpected error occurred");
-      }
+      console.log("Login failed");
     }
+  };
+
+  const formatPhoneNumber = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `${digits.slice(0, 3)}${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}${digits.slice(3, 6)}${digits.slice(6, 10)}`;
+  };
+
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const formattedNumber = formatPhoneNumber(e.target.value);
+    setPhoneNumber(formattedNumber);
+    const digitsOnly = formattedNumber.replace(/\D/g, "");
+    setIsValid(digitsOnly.length === 10);
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <div className="bg-[#040928] w-full py-3">
         <div className="max-w-5xl mx-auto px-4 lg:px-0">
-          <Navbar2 />
+          <Navbar />
         </div>
       </div>
 
@@ -67,13 +83,10 @@ function Page() {
 
           <form
             onSubmit={handleSubmit(handleLoginSubmit)}
-            className="mt-6 space-y-4"
+            className="mt-10 space-y-4"
           >
-            <div>
-              <label className="block text-md font-medium text-black mb-1">
-                Email Address
-              </label>
-              <div className="relative">
+            <div className="relative ">
+              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
                 <input
                   type="email"
                   {...register("email", {
@@ -83,7 +96,7 @@ function Page() {
                       message: "Invalid email address",
                     },
                   })}
-                  className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+                  className="w-full p-3 bg-transparent rounded-md outline-none"
                   placeholder="Enter your email address"
                 />
                 {emailValue && (
@@ -91,6 +104,9 @@ function Page() {
                     <ChevronRight className="h-4 w-4 text-white" />
                   </div>
                 )}
+                <label className="absolute -top-3 left-3 bg-white  px-1 text-sm font-medium text-black">
+                  Email Address
+                </label>
               </div>
               {errors.email && (
                 <p className="mt-1 text-red-600 text-sm">
@@ -99,11 +115,8 @@ function Page() {
               )}
             </div>
 
-            <div>
-              <label className="block text-md font-medium text-black mb-1">
-                Password
-              </label>
-              <div className="relative">
+            <div className="relative">
+              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password", {
@@ -113,7 +126,7 @@ function Page() {
                       message: "Password must be at least 5 characters",
                     },
                   })}
-                  className="border border-gray-300 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-[#f8faf7]"
+                  className="w-full p-3 bg-transparent outline-none"
                   placeholder="Enter your password"
                 />
                 <button
@@ -127,6 +140,9 @@ function Page() {
                     <EyeOff className="h-5 w-5" />
                   )}
                 </button>
+                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+                  Password
+                </label>
               </div>
               {errors.password && (
                 <p className="mt-1 text-red-600 text-sm">
@@ -153,28 +169,20 @@ function Page() {
             </button>
           </form>
 
-          <div className="relative my-7">
+          <div className="relative my-5">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-white px-4 text-sm text-black">
-                or use one of these options
-              </span>
+              <span className="bg-white px-4 text-sm text-black">or</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 justify-center">
-            <button className="border border-gray-200 py-3 rounded-md hover:outline hover:outline-blue-500 focus:ring-0">
-              Google
-            </button>
-            <button className="border border-gray-200 py-3 rounded-md hover:outline hover:outline-blue-500 focus:ring-0">
-              Apple
-            </button>
-            <button className="border border-gray-200 py-3 rounded-md hover:outline hover:outline-blue-500 focus:ring-0">
-              Facebook
-            </button>
-          </div>
+          <div className="flex justify-start">
+          <Button variant="secondary" >
+            <Link href="/phoneLogin">Sign In Using Phone Number</Link>
+          </Button> 
+            </div>
 
           <div className="border-t my-6"></div>
 

@@ -1,87 +1,97 @@
 "use client";
 import { CheckCircle, Heart, Puzzle, Search } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import LoginForm from "../partner-signin/loginForm";
+import LoginForm from "./forms/loginForm";
 import { useState } from "react";
-import RegisterForm from "../partner-signin/registerForm";
+import RegisterForm from "./forms/registerForm";
+import OtpForm from "./forms/otpForm";
+import Navbar from "@/custom_components/listProperty/navbar";
+const testimonials = [
+  {
+    quote:
+      "I was able to list within 15 minutes, and no more than two hours later, I had my first booking!",
+    name: "Parley Rose",
+    title: "UK-based host",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100",
+  },
+  {
+    quote:
+      "Booking.com is the most straightforward [OTA] to work with. Everything is clear. It's easy. And it frees us up to focus on the aspects that we can really add value to, like the guest experience.",
+    name: "Martin Fieldman",
+    title: "Managing Director, Abodebed",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100",
+  },
+  {
+    quote:
+      "Booking.com accounts for our largest share of guests and has helped get us where we are today.",
+    name: "Michel and Asja",
+    title: "Owners of La Maison de Souhey",
+    image:
+      "https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?auto=format&fit=crop&w=100",
+  },
+  {
+    quote:
+      "Travellers come to Charming Lofts from all over the world. Booking.com really helps with that. Unlike some other platforms, it's multinational and caters to a much larger audience. For me, that was a real game-changer.",
+    name: "Louis Gonzalez",
+    title: "Charming Lofts, Los Angeles",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100",
+  },
+  {
+    quote:
+      "After joining Booking.com and setting up the listing, my occupancy went up significantly and bookings were coming in five to six months in advance.",
+    name: "Zoey Berghoff",
+    title: "US-based host",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100",
+  },
+  {
+    quote:
+      "Getting started with Booking.com was super simple and took no time at all.",
+    name: "Shawn Ritzenthaler",
+    title: "Owner of The Hollywood Hills Mansion",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100",
+  },
+];
 
 export default function Home() {
-  const [modalState, setModalState] = useState("login");
+  const [currentForm, setCurrentForm] = useState("login");
 
-  const toggleState = (modalState: string) => {
-    setModalState(modalState);
-  };
-
-  const renderComponent = () => {
-    switch (modalState) {
+  const renderForm = () => {
+    switch (currentForm) {
       case "login":
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <LoginForm onRegisterClick={() => toggleState("register")} />
-          </div>
-        );
+        return <LoginForm setCurrentForm={setCurrentForm} />;
       case "register":
-        return (
-          <div className="h-fit flex flex-col justify-between">
-            <RegisterForm onLoginClick={() => toggleState("login")} />
-          </div>
-        );
-      case "loginFormPassword":
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <h1>Login Form Password</h1>
-          </div>
-        );
+        return <RegisterForm setCurrentForm={setCurrentForm} />;
+      case "otp":
+        return <OtpForm setCurrentForm={setCurrentForm} />;
       default:
-        return (
-          <div className="h-[460px] flex flex-col justify-between">
-            <LoginForm onRegisterClick={() => toggleState("register")} />
-          </div>
-        );
+        return <LoginForm setCurrentForm={setCurrentForm} />;
     }
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="bg-white">
+      
       {/* Header */}
-      <header className="bg-[#06104d] text-white p-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <Link
-            href="/home"
-            className="text-xl md:text-2xl font-PlayfairDisplay-Bold mb-4 md:mb-0"
-          >
-            Bharat Trips
-          </Link>
+      <Navbar />
 
-          <div className="flex flex-wrap items-center gap-2 md:gap-4">
-            <div className="text-sm md:text-base flex items-center">
-              <span>Already a partner?</span>
-            </div>
-
-            <Link
-              href="/hotelOwnerSignIn"
-              className="text-sm md:text-base bg-white text-[#003580] px-2 py-1 md:px-4 md:py-2 rounded font-medium"
-            >
-              Sign in
-            </Link>
-            <button className="text-sm md:text-base border border-white px-2 py-1 md:px-4 md:py-2 rounded">
-              Help
-            </button>
-          </div>
-        </div>
-      </header>
-    
-      <section
-        className="bg-transparent text-white pb-16 h-[500px] md:h-[600px] lg:h-[500px] flex items-center"
-        style={{
-          backgroundImage: "url('/assets/dark.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+      {/* Hero Section with Register Card Combined */}
+      <div
+        className="relative h-screen bg-cover bg-center bg-no-repeat text-white flex items-center"
+        style={{ backgroundImage: "url('/assets/dark.jpg')" }}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full">
-          <div className="py-8 pl-0 md:pl-4 lg:pl-12 max-w-3xl">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full flex flex-col lg:flex-row justify-between items-center">
+          {/* LEFT: Register Form (Large screens only) */}
+          <div className="hidden lg:block bg-white rounded-lg shadow-2xl p-10 max-w-md z-10">
+            {renderForm()}
+          </div>
+
+          {/* RIGHT: Hero Text */}
+          <div className="py-8 lg:pl-12 max-w-3xl text-left">
             <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4">
               List
             </h1>
@@ -97,18 +107,17 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
-
-      {/* Register Card */}
-      <section className="max-w-7xl mx-auto px-2 lg:-mt-120 mt-8">
-        <div className="bg-white rounded-lg shadow-2xl lg:shadow-none p-8 max-w-md lg:mt-6 lg:mr-20 mx-auto h-[400px] w-full">
-          {renderComponent()}
+      {/* FORM ON SMALL & MEDIUM SCREENS */}
+      <div className="block lg:hidden px-4 py-8">
+        <div className="max-w-md mx-auto bg-white border border-gray-300 shadow-md rounded-lg p-6">
+          {renderForm()}
         </div>
-      </section>
+      </div>
 
       {/* Peace of Mind Section */}
-      <section className="max-w-7xl mx-auto px-12 py-24">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 lg:py-16">
         <h2 className="text-4xl font-bold mb-12">List with peace of mind</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-12">
@@ -194,12 +203,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Stand Out Section */}
-      <section className="bg-[#f5f5f5] py-24">
-        <div className="max-w-7xl mx-auto px-12">
-          <h2 className="text-4xl font-bold mb-16">Stand out from the start</h2>
+      <div className="bg-[#f5f5f5] py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <h2 className="text-4xl font-bold mb-12">Stand out from the start</h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
               <div className="flex justify-center mb-6">
@@ -208,8 +217,8 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-4">Import your reviews</h3>
               <p>
                 We import your review score from other platforms and display it
-                on your Booking.com property page, so you don&apos;t start at
-                zero reviews.
+                on your Booking.com property page, so you don&apso;t start at zero
+                reviews.
               </p>
               <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-6">
                 Import your listing
@@ -242,16 +251,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Global Reach Section */}
-      <section className="py-3 relative bg-cover bg-center bg-no-repeat">
-        <div
-          className="mx-auto px-12 bg-white/80 backdrop-blur-md p-12 rounded-lg"
-          style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
-        >
-          <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-16">
+      <div
+        className="py-16 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/assets/WorldMap.jpg')" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12  p-12 rounded-lg">
+          <h2 className="text-4xl font-bold mb-12">
             Reach a unique global customer base
           </h2>
           <div className="grid md:grid-cols-2 gap-12">
@@ -290,19 +298,18 @@ export default function Home() {
               </div>
             </div>
           </div>
-          </div>
         </div>
-      </section>
+      </div>
 
       {/* Testimonials Section */}
-      <section className="bg-[#f5f5f5] py-24">
-        <div className="max-w-7xl mx-auto px-12">
-          <h2 className="text-4xl font-bold mb-16">What hosts like you say</h2>
+      <div className="bg-[#f5f5f5] py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <h2 className="text-4xl font-bold mb-12">What hosts like you say</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-6 flex flex-col justify-center  rounded-lg shadow-sm"
+                className="bg-white p-6 flex flex-col justify-center rounded-lg shadow-sm"
               >
                 <p className="mb-6">&quot;{testimonial.quote}&quot;</p>
                 <div className="flex items-center gap-4">
@@ -322,59 +329,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }
-
-// Fixed the image URL for the last testimonial by removing the tilde (~) at the end
-const testimonials = [
-  {
-    quote:
-      "I was able to list within 15 minutes, and no more than two hours later, I had my first booking!",
-    name: "Parley Rose",
-    title: "UK-based host",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100",
-  },
-  {
-    quote:
-      "Booking.com is the most straightforward [OTA] to work with. Everything is clear. It's easy. And it frees us up to focus on the aspects that we can really add value to, like the guest experience.",
-    name: "Martin Fieldman",
-    title: "Managing Director, Abodebed",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100",
-  },
-  {
-    quote:
-      "Booking.com accounts for our largest share of guests and has helped get us where we are today.",
-    name: "Michel and Asja",
-    title: "Owners of La Maison de Souhey",
-    image:
-      "https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?auto=format&fit=crop&w=100",
-  },
-  {
-    quote:
-      "Travellers come to Charming Lofts from all over the world. Booking.com really helps with that. Unlike some other platforms, it's multinational and caters to a much larger audience. For me, that was a real game-changer.",
-    name: "Louis Gonzalez",
-    title: "Charming Lofts, Los Angeles",
-    image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100~",
-  },
-  {
-    quote:
-      "After joining Booking.com and setting up the listing, my occupancy went up significantly and bookings were coming in five to six months in advance.",
-    name: "Zoey Berghoff",
-    title: "US-based host",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100",
-  },
-  {
-    quote:
-      "Getting started with Booking.com was super simple and took no time at all.",
-    name: "Shawn Ritzenthaler",
-    title: "Owner of The Hollywood Hills Mansion",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100",
-  },
-];
