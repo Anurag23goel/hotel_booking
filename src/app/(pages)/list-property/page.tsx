@@ -1,12 +1,11 @@
 "use client";
 import { CheckCircle, Heart, Puzzle, Search } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import LoginForm from "./forms/loginForm";
 import { useState } from "react";
 import RegisterForm from "./forms/registerForm";
 import OtpForm from "./forms/otpForm";
-
+import Navbar from "@/custom_components/listProperty/navbar";
 const testimonials = [
   {
     quote:
@@ -78,28 +77,7 @@ export default function Home() {
     <div className="bg-white">
       
       {/* Header */}
-      <header className="bg-[#06104d] text-white p-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <Link
-            href="/"
-            className="text-xl md:text-2xl font-PlayfairDisplay-Bold mb-4 md:mb-0"
-          >
-            Bharat Trips
-          </Link>
-          <div className="flex flex-wrap items-center gap-2 md:gap-4">
-            <span className="text-sm md:text-base">Already a partner?</span>
-            <Link
-              href="/login"
-              className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
-            >
-              Sign in
-            </Link>
-            <button className="text-sm md:text-base border border-white px-4 py-2 rounded">
-              Help
-            </button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section with Register Card Combined */}
       <div

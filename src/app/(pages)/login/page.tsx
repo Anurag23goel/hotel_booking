@@ -3,10 +3,14 @@ import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { ChevronRight, Eye, EyeOff, Check, X } from "lucide-react";
 import Link from "next/link";
-import Navbar2 from "@/custom_components/navbar2";
+import Navbar from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
+
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "@/app/loginState/features/authSlice";
+import { Button } from "@/shadcn_components/ui/button";
 
 interface loginData {
   email: string;
@@ -15,6 +19,7 @@ interface loginData {
 
 function Page() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -30,21 +35,17 @@ function Page() {
 
   const handleLoginSubmit = async (data: loginData) => {
     try {
-      const response = await axios.post("/api/login", data);
+      const response = await axios.post("/api/login", data, {
+        withCredentials: true, // Important for handling cookies
+      });
 
       if (response.data.success) {
+        dispatch(setLoggedIn(true));
         toast.success("Login successful");
-        router.push("/");
+        router.push("/Assigment");
       }
     } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(
-          error.response?.data?.message ||
-            "Login failed. Please check your credentials."
-        );
-      } else {
-        toast.error("An unexpected error occurred");
-      }
+      console.log("Login failed");
     }
   };
 
@@ -66,7 +67,7 @@ function Page() {
     <div className="min-h-screen flex flex-col">
       <div className="bg-[#040928] w-full py-3">
         <div className="max-w-5xl mx-auto px-4 lg:px-0">
-          <Navbar2 />
+          <Navbar />
         </div>
       </div>
 
@@ -177,38 +178,11 @@ function Page() {
             </div>
           </div>
 
-          {/*through phone number login */}
-          <div className="justify-center">
-            <div className="relative">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                  +91
-                </span>
-                <input
-                  type="tel"
-                  value={phoneNumber}
-                  onChange={handlePhoneChange}
-                  className={`w-full p-3 pl-12 bg-transparent outline-none ${
-                    isValid ? "border-green-500" : ""
-                  }`}
-                  placeholder="XXXXXXXXXX"
-                  maxLength={12}
-                />
-                {phoneNumber && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    {isValid ? (
-                      <Check className="w-5 h-5 text-green-500" />
-                    ) : (
-                      <X className="w-5 h-5 text-red-500" />
-                    )}
-                  </div>
-                )}
-                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
-                  Phone Number
-                </label>
-              </div>
+          <div className="flex justify-start">
+          <Button variant="secondary" >
+            <Link href="/phoneLogin">Sign In Using Phone Number</Link>
+          </Button> 
             </div>
-          </div>
 
           <div className="border-t my-6"></div>
 

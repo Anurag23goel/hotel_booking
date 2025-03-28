@@ -13,24 +13,42 @@ export default function Navbar2() {
   return (
     <nav className="flex w-full items-center justify-between lg:py-1 py-2 relative">
       {/* Logo */}
-      <h1 className="font-PlayfairDisplay-Bold text-white lg:text-2xl text-xl
+      <h1
+        className="font-PlayfairDisplay-Bold text-white lg:text-2xl text-xl
       cursor-pointer "
-      onClick={() => router.push("/")}>
+        onClick={() => router.push("/")}
+      >
         Bharat Trips
       </h1>
-  
+
       {/* Desktop Menu (Now showing on md screens and up) */}
-      <ul className="hidden md:flex gap-4 items-center">
+      <ul className="hidden md:flex gap-6 items-center">
         <li>
-          <Tooltip title="Contact Customer Service" arrow>
-            <IconButton className="gap-4">
-              {/* <button className="rounded-full border text-white">flag</button> */}
-              <CircleHelp color="white" />
-            </IconButton>
-          </Tooltip>
+          <Link
+            href="/contact"
+            className="text-white hover:text-gray-300 transition-colors"
+          >
+            Contact Us
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/help"
+            className="text-white hover:text-gray-300 transition-colors"
+          >
+            Help
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/about"
+            className="text-white hover:text-gray-300 transition-colors"
+          >
+            About Us
+          </Link>
         </li>
       </ul>
-  
+
       {/* Mobile Menu Button (visible only below md screens) */}
       <button
         className="md:hidden text-white focus:outline-none"
@@ -38,7 +56,7 @@ export default function Navbar2() {
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
-  
+
       {/* Mobile Dropdown Menu (visible only below md screens) */}
       {isOpen && (
         <ul
@@ -46,6 +64,33 @@ export default function Navbar2() {
           tabIndex={0}
           onBlur={() => setIsOpen(false)}
         >
+          <li>
+            <Link
+              href="/contact"
+              className="text-white font-semibold text-lg"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact Us
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/help"
+              className="text-white font-semibold text-lg"
+              onClick={() => setIsOpen(false)}
+            >
+              Help
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/about"
+              className="text-white font-semibold text-lg"
+              onClick={() => setIsOpen(false)}
+            >
+              About Us
+            </Link>
+          </li>
           <li>
             <Link
               href="/list-property"
@@ -61,7 +106,7 @@ export default function Navbar2() {
               className="text-[#057d23] px-4 py-2 text-sm rounded-md bg-white"
               onClick={() => setIsOpen(false)}
             >
-              Anurag
+              Register
             </Link>
           </li>
           <li>
@@ -77,5 +122,4 @@ export default function Navbar2() {
       )}
     </nav>
   );
-  
 }

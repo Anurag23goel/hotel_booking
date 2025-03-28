@@ -15,7 +15,7 @@ export default function Navbar() {
       <h1 className="font-PlayfairDisplay-Bold text-white lg:text-3xl text-xl">
         Bharat Trips
       </h1>
-  
+
       {/* Desktop Menu (Now showing on md screens and up) */}
       <ul className="hidden md:flex gap-4 items-center">
         <li>
@@ -50,7 +50,7 @@ export default function Navbar() {
           </Link>
         </li>
       </ul>
-  
+
       {/* Mobile Menu Button (visible only below md screens) */}
       <button
         className="md:hidden text-white focus:outline-none"
@@ -58,7 +58,7 @@ export default function Navbar() {
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
-  
+
       {/* Mobile Dropdown Menu (visible only below md screens) */}
       {isOpen && (
         <ul
@@ -97,5 +97,4 @@ export default function Navbar() {
       )}
     </nav>
   );
-  
 }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ChevronRight, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import Navbar2 from "@/custom_components/navbar2";
+import Navbar2 from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
