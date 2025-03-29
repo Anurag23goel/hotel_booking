@@ -10,6 +10,8 @@ export async function GET() {
   try {
     dbConnection();
 
+    
+
     const cookieStore = await cookies();
     const token = cookieStore.get("authToken");
 

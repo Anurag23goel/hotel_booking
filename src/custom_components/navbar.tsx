@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("api/logout", {
+      const response = await axios.get("/api/auth/logout", {
         withCredentials: true,
       });
       if (response.data.success) {
