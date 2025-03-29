@@ -1,5 +1,5 @@
 "use client";
-import { TYPE_OF_INITIAL_STATE, USER_DATA_TYPE } from "@/Types";
+import { TYPE_OF_INITIAL_STATE, USER_DATA_TYPE } from "@/types";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
