@@ -42,7 +42,7 @@ const NewPasswordForm = () => {
 
     try {
       const response = await axios.post(
-        "/api/reset-password",
+        "/api/auth/reset-password",
         { newPassword: data.newPassword },
         { withCredentials: true }
       );

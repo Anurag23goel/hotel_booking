@@ -18,8 +18,8 @@ export const fetchUserData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       console.log("STEP 1 - THUNK CHAL GAYA");
-      
-      const response = await axios.get("/api/auth/checkUser", {
+
+      const response = await axios.get("/api/auth/checkUserLoggedIn", {
         withCredentials: true,
       });
       console.log("response.data in fetchUserData is  -> ", response.data);
@@ -41,7 +41,6 @@ const authSlice = createSlice({
       state.userData = action.payload;
       state.loading = false;
       console.log("action.payload in login is -> ", action.payload);
-      
     },
     setToken: (state, action: PayloadAction<string | null>) => {
       state.token = action.payload;
@@ -58,8 +57,7 @@ const authSlice = createSlice({
       .addCase(fetchUserData.pending, (state) => {
         state.loading = true;
         state.error = null;
-        console.log("THUNK PENDING  HAI");
-
+        console.log("THUNK PENDING HAI");
       })
       .addCase(
         fetchUserData.fulfilled,
@@ -69,7 +67,6 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
           state.token = action.payload.token;
           console.log("THUNK FULLFILL HOGAYA HAI");
-          
         }
       )
       .addCase(fetchUserData.rejected, (state, action) => {
@@ -78,7 +75,6 @@ const authSlice = createSlice({
         state.userData = null;
         state.error = action.payload as string;
         console.log("THUNK REJECT HOGAYA HAI");
-
       });
   },
 });

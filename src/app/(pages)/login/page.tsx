@@ -31,12 +31,11 @@ function Page() {
     formState: { errors, isSubmitting },
   } = useForm<loginData>();
 
-
   const emailValue = watch("email");
 
   const handleLoginSubmit = async (data: loginData) => {
     try {
-      const response = await axios.post("/api/login", data, {
+      const response = await axios.post("/api/auth/login", data, {
         withCredentials: true, // Important for handling cookies
       });
 
@@ -44,7 +43,6 @@ function Page() {
 
       if (response.data.success) {
         dispatch(login(response.data.data.user));
-        dispatch(setToken(Cookies.get("authToken")?.value));
         toast.success("Login successful");
         router.push("/");
       }

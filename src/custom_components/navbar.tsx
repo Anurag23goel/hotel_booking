@@ -5,18 +5,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, Ellipsis, User2 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserData } from "@/app/redux/slices/authSlice";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/shadcn_components/ui/avatar";
+import { fetchUserData, logout } from "@/app/redux/slices/authSlice";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shadcn_components/ui/avatar";
 import { Button } from "@/shadcn_components/ui/button";
 import { usePathname } from "next/navigation";
+import { AppDispatch } from "@/app/redux/store";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const currentPath = usePathname();
   const { isLoggedIn, userData, loading, token } = useSelector(
@@ -27,10 +26,21 @@ export default function Navbar() {
     dispatch(fetchUserData());
   }, [dispatch]);
 
-  console.log("USER DATA JO HAMARA REDUX STATE SE AAYA", userData);
   console.log("TOKEN JO HAMARA REDUX STATE SE AAYA", token);
 
-  
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get("api/logout", {
+        withCredentials: true,
+      });
+      if (response.data.success) {
+        dispatch(logout());
+        router.push("/");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <header className="bg-[#040928] text-white p-4">
@@ -56,13 +66,15 @@ export default function Navbar() {
         <ul className="hidden md:flex flex-wrap items-center gap-2 md:gap-4">
           {currentPath === "/list-property" ? (
             <li>
-              <span className="text-sm md:text-base">Already a partner?</span>
+              <Link href={"/"} className="text-sm md:text-base">
+                Already a partner?
+              </Link>
             </li>
           ) : (
             <li>
               <Link
                 href="/list-property"
-                className="text-sm md:text-base hover:text-[#858589] transition-colors duration-200 font-medium"
+                className="text-sm md:text-base hover:text-[#858589] transition-colors duration-200 "
               >
                 List your property
               </Link>
@@ -88,6 +100,7 @@ export default function Navbar() {
                 <Button
                   variant="outline"
                   className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                  onClick={handleLogout}
                 >
                   Logout
                 </Button>
@@ -115,11 +128,6 @@ export default function Navbar() {
               </li>
             </>
           )}
-          <li>
-            <button className="text-sm md:text-base border border-white px-4 py-2 rounded">
-              Help
-            </button>
-          </li>
         </ul>
 
         {/* Mobile Dropdown Menu */}
@@ -139,7 +147,7 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/list-property"
-                  className="text-white font-semibold text-lg"
+                  className="text-white text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   List Your Property
@@ -161,6 +169,7 @@ export default function Navbar() {
                   <Button
                     variant="outline"
                     className="bg-white text-[#003580] hover:bg-gray-100"
+                    onClick={handleLogout}
                   >
                     Logout
                   </Button>
@@ -187,11 +196,6 @@ export default function Navbar() {
                 </li>
               </>
             )}
-            <li>
-              <button className="border border-white px-4 py-2 rounded text-sm">
-                Help
-              </button>
-            </li>
           </ul>
         )}
       </nav>

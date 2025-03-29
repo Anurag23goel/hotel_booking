@@ -1,7 +1,7 @@
 import GetInspiration from "@/custom_components/home/getInspiration";
 import HomesForGuests from "@/custom_components/home/homesForGuests";
 import HotelDeals from "@/custom_components/home/hotelDeals";
-import Navbar from "@/custom_components/HomeNavbar/navbar";
+import Navbar from "@/custom_components/navbar";
 import Offers from "@/custom_components/home/offers";
 import PopularAttractions from "@/custom_components/home/popularAttractions";
 import PropertyCarousel from "@/custom_components/home/propertyCarousel";
@@ -13,6 +13,8 @@ export default function Home() {
   return (
     <div className="w-full bg-[#d9dae8bd] overflow-hidden">
       <div className="bg-[#040928] md:min-h-[45vh] min-h-[25vh] w-full relative">
+        
+        
         {/* NAVBAR HEADER */}
         <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-0">
           <Navbar />

@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setLoggedIn } from "@/app/redux/features/authSlice";
 import { Button } from "@/shadcn_components/ui/button";
+import { login } from "@/app/redux/slices/authSlice";
 
 interface PhoneLoginData {
   phoneNumber: string;
@@ -46,7 +46,7 @@ function Page() {
     try {
       setIsSubmitting(true);
       const response = await axios.post(
-        "/api/login/phone",
+        "/api/auth/login/phone",
         {
           phoneNumber: phoneNumber.replace(/\D/g, ""),
         },
@@ -56,7 +56,7 @@ function Page() {
       );
 
       if (response.data.success) {
-        dispatch(setLoggedIn(true));
+        dispatch(login(response.data.data.user));
         toast.success("Login successful");
         router.push("/Assigment");
       }

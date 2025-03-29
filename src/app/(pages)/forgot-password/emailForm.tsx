@@ -21,7 +21,7 @@ const EmailForm = ({
   const emailHandler = async (data: dataInput) => {
     console.log(data);
     try {
-      const response = await axios.post("/api/forgot-password", data);
+      const response = await axios.post("/api/auth/forgot-password", data);
 
       console.log("this is response->", response.data);
 

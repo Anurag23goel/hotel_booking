@@ -3,7 +3,6 @@ import USER from "@/utils/models/user.model";
 import { ApiSuccess, ApiError } from "@/services/apiResponse";
 import jwt from "jsonwebtoken";
 import dbConnection from "@/utils/database/dbConnection";
-import { profile } from "console";
 
 export async function POST(req: NextRequest) {
   try {

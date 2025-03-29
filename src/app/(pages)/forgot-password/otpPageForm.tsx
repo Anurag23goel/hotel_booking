@@ -28,7 +28,7 @@ const OtpPageForm = ({
 
     try {
       const response = await axios.post(
-        "/api/verify-otp",
+        "/api/auth/verify-otp",
         { otp },
         {
           withCredentials: true,

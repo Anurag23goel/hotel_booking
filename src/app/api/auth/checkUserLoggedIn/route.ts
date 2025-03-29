@@ -3,14 +3,13 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { ApiSuccess, ApiError } from "@/services/apiResponse";
 import USER from "@/utils/models/user.model";
-
-interface UserData {
-  userID: string;
-  email: string;
-}
+import { TYPE_OF_DECODED_USER_DATA } from "@/Types";
+import dbConnection from "@/utils/database/dbConnection";
 
 export async function GET() {
   try {
+    dbConnection();
+
     const cookieStore = await cookies();
     const token = cookieStore.get("authToken");
 
@@ -21,16 +20,13 @@ export async function GET() {
     const decoded = jwt.verify(
       token.value,
       process.env.JWT_SECRET as string
-    ) as UserData;
+    ) as TYPE_OF_DECODED_USER_DATA;
 
     const existingUser = await USER.findOne({ _id: decoded.userID });
 
-    if(!existingUser){
+    if (!existingUser) {
       return ApiError("User not found");
     }
-
-    console.log("EXISTING USER JO DB SE AAYA HAI", existingUser);
-    
 
     const userData = {
       userID: existingUser._id,
@@ -39,10 +35,8 @@ export async function GET() {
       role: existingUser.role,
       profilePicture: existingUser.profilePicture,
       isActive: existingUser.isActive,
-      token: token.value
+      token: token.value,
     };
-
-    console.log("decoded is route me -> ", userData);
 
     return ApiSuccess("User data fetched successfully", userData, 200);
   } catch (error) {
