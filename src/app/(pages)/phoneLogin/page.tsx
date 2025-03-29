@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setLoggedIn } from "@/app/loginState/features/authSlice";
+import { setLoggedIn } from "@/app/redux/features/authSlice";
 import { Button } from "@/shadcn_components/ui/button";
 
 interface PhoneLoginData {

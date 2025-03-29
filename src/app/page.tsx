@@ -1,4 +1,3 @@
-"use client"
 import GetInspiration from "@/custom_components/home/getInspiration";
 import HomesForGuests from "@/custom_components/home/homesForGuests";
 import HotelDeals from "@/custom_components/home/hotelDeals";
@@ -9,28 +8,12 @@ import PropertyCarousel from "@/custom_components/home/propertyCarousel";
 import Searchbar from "@/custom_components/home/searchbar";
 import TrendingHotels from "@/custom_components/home/trendingHotels";
 import UniqueProperties from "@/custom_components/home/uniqueProperties";
-import { useEffect } from "react";
-import { fetchUserData } from "./loginState/features/authSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-// #057d23
-
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const { isLoggedIn,userData, loading } = useSelector(
-    (state: any) => state.auth
-  );
-  useEffect(()=>{
-    dispatch(fetchUserData());
-  },[dispatch])
-
-    console.log("userData on the home page is  -> ",userData);
-
   return (
-
     <div className="w-full bg-[#d9dae8bd] overflow-hidden">
       <div className="bg-[#040928] md:min-h-[45vh] min-h-[25vh] w-full relative">
+        {/* NAVBAR HEADER */}
         <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-0">
           <Navbar />
         </div>
@@ -41,7 +24,6 @@ export default function Home() {
         >
           {/* Gradient Overlay */}
           <div className="absolute inset-0"></div>x
-
           {/* Aligned content wrapper */}
           <div className="absolute inset-0 flex items-center">
             <div className="max-w-5xl w-full mx-auto px-3 sm:px-4 flex flex-col gap-2">
@@ -51,13 +33,15 @@ export default function Home() {
               <p className="text-white text-base sm:text-lg md:text-2xl">
                 Search low prices on hotels...
               </p>
-              <button className="bg-[#202962] flex items-center font-semibold gap-2 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-sm w-fit text-sm sm:text-base">Find Yours</button>
+              <button className="bg-[#202962] flex items-center font-semibold gap-2 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-sm w-fit text-sm sm:text-base">
+                Find Yours
+              </button>
             </div>
           </div>
         </div>
 
         {/* SEARCH BAR SECTION */}
-        <div className="hidden md:block md:gap-2 absolute left-1/2 -bottom-16 transform -translate-x-1/2 w-[95%] max-w-4xl">
+        <div className="hidden md:block md:gap-2 absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-[95%] max-w-5xl z-50">
           <div className=" w-full">
             <Searchbar />
           </div>
@@ -65,15 +49,14 @@ export default function Home() {
       </div>
 
       {/* Mobile Search Bar */}
-      <div className="md:hidden w-[100%]  mt-4 ">
+      <div className="md:hidden w-[100%] mt-4">
         <div className="w-full">
           <Searchbar />
         </div>
       </div>
 
       {/* OFFERS SECTION */}
-      <div className=" mt-[10%] max-w-5xl mx-auto px-3  md:px-0"
-      >
+      <div className=" mt-[10%] max-w-5xl mx-auto px-3  md:px-0">
         <div className=" flex flex-col gap-3">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold text-black">Offers</h1>

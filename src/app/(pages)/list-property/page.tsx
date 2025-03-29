@@ -5,7 +5,9 @@ import LoginForm from "./forms/loginForm";
 import { useState } from "react";
 import RegisterForm from "./forms/registerForm";
 import OtpForm from "./forms/otpForm";
-import Navbar from "@/custom_components/listProperty/navbar";
+import Navbar from "@/custom_components/HomeNavbar/navbar";
+
+
 const testimonials = [
   {
     quote:

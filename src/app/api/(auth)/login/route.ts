@@ -3,6 +3,7 @@ import USER from "@/utils/models/user.model";
 import { ApiSuccess, ApiError } from "@/services/apiResponse";
 import jwt from "jsonwebtoken";
 import dbConnection from "@/utils/database/dbConnection";
+import { profile } from "console";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,6 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     const existingUser = await USER.findOne({ email });
+
     if (!existingUser) {
       return ApiError("Invalid email or password", 401);
     }
@@ -31,13 +33,21 @@ export async function POST(req: NextRequest) {
       path: "/", // Cookie accessible across the whole site
     };
 
+    const userDataToSend = {
+      userID: existingUser._id,
+      name: existingUser.name,
+      email: existingUser.email,
+      role: existingUser.role,
+      profilePicture: existingUser.profilePicture,
+      isActive: existingUser.isActive,
+    };
+
     // Send JWT token as a secure cookie
-    return ApiSuccess("Login successful", {}, 200, {
+    return ApiSuccess("Login successful", { user: userDataToSend }, 200, {
       name: "authToken",
       value: token,
       options: cookieOptions,
     });
-    
   } catch (error) {
     return ApiError(error);
   }
