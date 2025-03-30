@@ -1,16 +1,22 @@
 "use client";
 import { Calendar, ChevronDown, SearchIcon, User, MapPin } from "lucide-react";
 import { useRef, useState } from "react";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // Main style file
+import "react-date-range/dist/theme/default.css"; // Theme CSS file
+import { format } from "date-fns";
 
 export default function Searchbar() {
-  const [checkInDate, setCheckInDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-  const [checkOutDate, setCheckOutDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
   const [location, setLocation] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
   const [guests, setGuests] = useState({
     adults: 3,
     children: 0,
@@ -18,15 +24,20 @@ export default function Searchbar() {
     pets: false,
   });
 
-  // Refs for the input fields
-  const checkInRef = useRef<HTMLInputElement>(null);
-  const checkOutRef = useRef<HTMLInputElement>(null);
+  // Refs
+  const dateContainerRef = useRef<HTMLDivElement>(null);
   const guestInputRef = useRef<HTMLInputElement>(null);
 
-  // Update guest selection placeholder
+  // Guest selection placeholder
   const guestPlaceholder = `${guests.adults} Adults · ${
     guests.children
   } Children · ${guests.rooms} Room${guests.rooms > 1 ? "s" : ""}`;
+
+  // Formatted date display
+  const dateDisplay = `${format(
+    dateRange[0].startDate,
+    "MMM d"
+  )} - ${format(dateRange[0].endDate, "MMM d")}`;
 
   // Handle increment and decrement for guests
   const handleIncrement = (key: keyof typeof guests) => {
@@ -50,13 +61,6 @@ export default function Searchbar() {
     }
   };
 
-  // const togglePets = () => {
-  //   setGuests((prev) => ({
-  //     ...prev,
-  //     pets: !prev.pets,
-  //   }));
-  // };
-
   return (
     <div className="relative flex flex-col sm:flex-row items-center justify-between bg-white opacity-100 rounded-3xl py-2 sm:py-3 px-2 sm:px-4 w-[90%] md:w-full shadow-md mx-auto h-auto">
       {/* Location Input */}
@@ -73,40 +77,33 @@ export default function Searchbar() {
         />
       </div>
 
-      {/* Check-in Date Picker */}
-      <div className="flex items-center w-full sm:w-auto sm:flex-1 min-w-0 border border-gray-400 rounded-full px-2 sm:px-3 py-1 sm:py-2 mx-1 my-1 sm:my-0 sm:mx-2">
-        <span
-          className="text-gray-500 cursor-pointer flex-shrink-0"
-          onClick={() => checkInRef.current?.showPicker()}
-        >
+      {/* Combined Check-in/Check-out Container */}
+      <div
+        ref={dateContainerRef}
+        className="relative flex items-center w-full sm:w-auto sm:flex-1 min-w-0 border border-gray-400 rounded-full px-2 sm:px-3 py-1 sm:py-2 mx-1 my-1 sm:my-0 sm:mx-2 cursor-pointer"
+        onClick={() => setIsDatePickerOpen((prev) => !prev)}
+      >
+        <span className="text-gray-500 flex-shrink-0">
           <Calendar className="h-5 w-5 sm:h-6 sm:w-6" color="black" />
         </span>
-        <input
-          type="date"
-          ref={checkInRef}
-          value={checkInDate}
-          onChange={(e) => setCheckInDate(e.target.value)}
-          className="w-full min-w-0 ml-2 sm:ml-3 outline-none bg-transparent text-sm sm:text-base text-black"
-          style={{ appearance: "none" }}
-        />
-      </div>
+        <span className="w-full min-w-0 ml-2 sm:ml-3 outline-none bg-transparent text-sm sm:text-base text-black">
+          {dateDisplay}
+        </span>
 
-      {/* Check-out Date Picker */}
-      <div className="flex items-center w-full sm:w-auto sm:flex-1 min-w-0 border border-gray-400 rounded-full px-2 sm:px-3 py-1 sm:py-2 mx-1 my-1 sm:my-0 sm:mx-2">
-        <span
-          className="text-gray-500 cursor-pointer flex-shrink-0"
-          onClick={() => checkOutRef.current?.showPicker()}
-        >
-          <Calendar className="h-5 w-5 sm:h-6 sm:w-6" color="black" />
-        </span>
-        <input
-          type="date"
-          ref={checkOutRef}
-          value={checkOutDate}
-          onChange={(e) => setCheckOutDate(e.target.value)}
-          className="w-full min-w-0 ml-2 sm:ml-3 outline-none bg-transparent text-sm sm:text-base text-black"
-          style={{ appearance: "none" }}
-        />
+        {/* Date Range Picker */}
+        {isDatePickerOpen && (
+          <div className="absolute top-full mt-2 left-0 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+            <DateRange
+              editableDateInputs={true}
+              onChange={(item) => setDateRange([item.selection])}
+              moveRangeOnFirstSelection={false}
+              ranges={dateRange}
+              months={2}
+              direction="horizontal"
+              minDate={new Date()}
+            />
+          </div>
+        )}
       </div>
 
       {/* Guest Selection */}
@@ -119,16 +116,16 @@ export default function Searchbar() {
           type="text"
           placeholder={guestPlaceholder}
           className="w-full min-w-0 ml-2 sm:ml-3 outline-none bg-transparent text-sm sm:text-base text-black cursor-pointer"
-          onClick={() => setIsModalOpen((prev) => !prev)}
+          onClick={() => setIsGuestModalOpen((prev) => !prev)}
           readOnly
         />
         <span className="text-gray-500 flex-shrink-0 ml-1">
           <ChevronDown color="black" size={20} />
         </span>
 
-        {/* Modal */}
-        {isModalOpen && (
-          <div className="absolute top-full mt-2  right-0 sm:left-0 bg-white border border-gray-300 rounded-lg shadow-lg p-4 sm:w-64 md:w-50  z-10">
+        {/* Guest Modal */}
+        {isGuestModalOpen && (
+          <div className="absolute top-full mt-2 right-0 sm:left-0 bg-white border border-gray-300 rounded-lg shadow-lg p-4 sm:w-64 md:w-50 z-10">
             {/* Adults */}
             <div className="flex justify-between items-center mb-3">
               <span className="text-sm font-medium">Adults</span>
@@ -189,37 +186,9 @@ export default function Searchbar() {
               </div>
             </div>
 
-            {/* Travelling with pets */}
-            {/* <div className="flex justify-between items-center mb-3">
-              <span className="text-sm font-medium">Travelling with pets?</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={guests.pets}
-                  onChange={togglePets}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-gray-600">
-                  <div
-                    className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
-                      guests.pets ? "translate-x-5" : "translate-x-0"
-                    }`}
-                  ></div>
-                </div>
-              </label>
-            </div> */}
-
-            {/* Assistance animals note */}
-            {/* <p className="text-xs text-gray-500 mb-3">
-              Assistance animals aren’t considered pets.{" "}
-              <a href="#" className="text-blue-600 hover:underline">
-                Read more about travelling with assistance animals
-              </a>
-            </p> */}
-
             {/* Done Button */}
             <button
-              onClick={() => setIsModalOpen(false)}
+              onClick={() => setIsGuestModalOpen(false)}
               className="w-full py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100"
             >
               DONE
