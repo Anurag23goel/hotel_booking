@@ -40,10 +40,10 @@ const LoginForm = ({ setCurrentForm }: LoginFormProps) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl text-black font-semibold">
+        <h1 className="text-2xl text-black font-PLayfairDisplay-Bold">
           Sign in to manage your property
         </h1>
-        <p className="font-semibold text-black text-md">
+        <p className="text-black text-md">
           Welcome back! Please enter your details.
         </p>
       </div>
@@ -85,7 +85,7 @@ const LoginForm = ({ setCurrentForm }: LoginFormProps) => {
           Next
         </button>
 
-        <div className="text-center text-sm">
+        <div className="text-center text-black text-sm">
           <p>Having trouble signing in?</p>
         </div>
 

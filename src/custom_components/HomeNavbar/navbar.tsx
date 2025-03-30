@@ -14,6 +14,7 @@ import {
 } from "@/shadcn_components/ui/avatar";
 import { Button } from "@/shadcn_components/ui/button";
 import { CircleUserRound } from "lucide-react";
+import axios from "axios";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +30,15 @@ export default function Navbar() {
 
   console.log("userData in the navbar is -> ", userData);
   console.log("isLoggedIn in the navbar is -> ", isLoggedIn);
+
+  const handleLogout = async () => {
+    try{
+      const response = await axios.post("/api/auth/logout");
+      console.log("response in the navbar is -> ", response);
+    } catch (error) {
+      console.error("error in the navbar is -> ", error);
+    }
+  };
 
   return (
     <nav className="flex w-full items-center justify-between lg:py-4 py-2 relative">
@@ -68,6 +78,7 @@ export default function Navbar() {
             </li>
             <li>
               <Button
+                onClick={() => handleLogout()}
                 variant="outline"
                 className="bg-white text-[#003580] hover:bg-gray-100"
               >

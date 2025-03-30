@@ -18,12 +18,13 @@ export const fetchUserData = createAsyncThunk(
       const response = await axios.get("/api/auth/checkUser", {
         withCredentials: true,
       });
+      console.log("response in the authSlice is -> ", response);
       const userData = response.data;
       console.log("response.data in fetchUserData is  -> ", userData);
       return userData;
     } catch (error) {
       state.isLoggedIn = false;
-      console.log("error is -> ", error);
+      console.log("error in the authSlice is -> ", error);
     }
   }
 );
@@ -38,6 +39,7 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
+    
   },
   extraReducers: (builder) => {
     builder
@@ -54,6 +56,7 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.userData = null;
       });
+
   },
 });
 
