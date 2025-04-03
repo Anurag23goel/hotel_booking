@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import { Menu, X, Ellipsis, User2 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserData, logout } from "@/app/redux/slices/authSlice";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shadcn_components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/shadcn_components/ui/avatar";
 import { Button } from "@/shadcn_components/ui/button";
 import { usePathname } from "next/navigation";
 import { AppDispatch } from "@/app/redux/store";
@@ -64,7 +68,51 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex flex-wrap items-center gap-2 md:gap-4">
-          {currentPath === "/list-property" ? (
+          {currentPath === "/hotel-info" ? (
+            <>
+              {loading ? (
+                <li>
+                  <User2 />
+                </li>
+              ) : isLoggedIn ? (
+                <>
+                  <li>
+                    <span className="text-sm md:text-base">Hiii</span>
+                  </li>
+                  <li>
+                    <Avatar>
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link href="/register">
+                      <Button
+                        variant="outline"
+                        className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                      >
+                        Register
+                      </Button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/login"
+                      className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
+                    >
+                      Sign In
+                    </Link>
+                  </li>
+                </>
+              )}
+            </>
+          ) : currentPath === "/list-property" ? (
             <li>
               <Link href={"/"} className="text-sm md:text-base">
                 Already a partner?
@@ -81,51 +129,55 @@ export default function Navbar() {
             </li>
           )}
 
-          {loading ? (
-            <li>
-              <User2 />
-            </li>
-          ) : isLoggedIn ? (
+          {currentPath !== "/hotel-info" && (
             <>
-              <li>
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </li>
-              <li>
-                <Button
-                  variant="outline"
-                  className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link href="/register">
-                  <Button
-                    variant="outline"
-                    className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
-                  >
-                    Register
-                  </Button>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/login"
-                  className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
-                >
-                  Sign In
-                </Link>
-              </li>
+              {loading ? (
+                <li>
+                  <User2 />
+                </li>
+              ) : isLoggedIn ? (
+                <>
+                  <li>
+                    <Avatar>
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </li>
+                  <li>
+                    <Button
+                      variant="outline"
+                      className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link href="/register">
+                      <Button
+                        variant="outline"
+                        className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                      >
+                        Register
+                      </Button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/login"
+                      className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
+                    >
+                      Sign In
+                    </Link>
+                  </li>
+                </>
+              )}
             </>
           )}
         </ul>
