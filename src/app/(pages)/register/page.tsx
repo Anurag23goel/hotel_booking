@@ -31,7 +31,7 @@ function Page() {
 
   const handleRegisterSubmit = async (data: registerData) => {
     try {
-      const response = await axios.post("/api/register", data);
+      const response = await axios.post("/api/auth/register", data);
 
       if (response.data.success) {
         toast.success("Registration successful");

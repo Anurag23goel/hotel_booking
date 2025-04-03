@@ -36,7 +36,7 @@ const OtpForm = ({ setCurrentForm }: OtpFormProps) => {
 
     try {
       const response = await axios.post(
-        "/api/owner-verify-otp",
+        "/api/auth/owner-verify-otp",
         { otp },
         {
           withCredentials: true,

@@ -25,7 +25,7 @@ const LoginForm = ({ setCurrentForm }: LoginFormProps) => {
 
   const emailHandler = async (data: LoginFormData) => {
     try {
-      const response = await axios.post("/api/owner-login", data);
+      const response = await axios.post("/api/auth/owner-login", data);
       console.log("this is response->", response.data);
 
       if (response.data.success) {

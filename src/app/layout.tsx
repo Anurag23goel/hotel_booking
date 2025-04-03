@@ -3,9 +3,8 @@ import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import {Provider} from 'react-redux'
-import { loginStore } from './loginState/loginStore/store.js'
-
+import { Provider } from "react-redux";
+import { store } from "./redux/store"
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -25,8 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Provider store={loginStore}>
-          
+        <Provider store={store}>
           <Toaster />
           {children}
         </Provider>
