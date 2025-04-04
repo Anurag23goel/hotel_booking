@@ -20,3 +20,28 @@ export interface TYPE_OF_INITIAL_STATE {
   loading: boolean;
   error: string | null;
 }
+
+export interface Hotel {
+  id: string
+  name: string
+  location: string
+  area: string
+  stars: number
+  originalPrice: number
+  discountedPrice: number
+  amenities: string[]
+  viewers?: number
+  tags: string[]
+  savings: number
+  featured: boolean
+  rating?: {
+    score: number
+    type: string
+    reviews: number
+  }
+  image: string
+  bookings?: {
+    times: number
+    hours: number
+  }
+}
