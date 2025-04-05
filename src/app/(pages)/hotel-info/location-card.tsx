@@ -48,33 +48,8 @@ const Location = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4">
       <div className="bg-white rounded-xl shadow-lg border border-gray-200">
-        {/* Header */}
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
-            <MapPin className="w-6 h-6 mr-2 text-indigo-600" />
-            Location
-          </h2>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search distance from any location in Goa"
-              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-gray-50"
-            />
-          </div>
-          <label className="flex items-center mt-3 space-x-2">
-            <input
-              type="checkbox"
-              checked={showNearby}
-              onChange={() => setShowNearby(!showNearby)}
-              className="rounded text-indigo-600 w-4 h-4 focus:ring-indigo-500"
-            />
-            <span className="text-sm text-gray-600">Show Nearby Properties</span>
-          </label>
-        </div>
-
         {/* Key Landmarks */}
         <div className="p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
@@ -109,11 +84,15 @@ const Location = () => {
                         </span>
                       )}
                     </div>
-                    <span className="text-sm text-gray-500">{landmark.type}</span>
+                    <span className="text-sm text-gray-500">
+                      {landmark.type}
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-600">{landmark.distance}</span>
+                  <span className="text-sm text-gray-600">
+                    {landmark.distance}
+                  </span>
                   <MapPin className="w-4 h-4 text-indigo-600" />
                 </div>
               </div>
@@ -130,7 +109,9 @@ const Location = () => {
             ].map((section) => (
               <div key={section.key} className="border-t border-gray-200 pt-4">
                 <button
-                  onClick={() => toggleSection(section.key as keyof typeof expandedSections)}
+                  onClick={() =>
+                    toggleSection(section.key as keyof typeof expandedSections)
+                  }
                   className="w-full flex items-center justify-between text-left"
                 >
                   <div className="flex items-center space-x-2">
@@ -139,13 +120,17 @@ const Location = () => {
                       {section.name}
                     </span>
                   </div>
-                  {expandedSections[section.key as keyof typeof expandedSections] ? (
+                  {expandedSections[
+                    section.key as keyof typeof expandedSections
+                  ] ? (
                     <ChevronUp className="w-5 h-5 text-gray-400" />
                   ) : (
                     <ChevronDown className="w-5 h-5 text-gray-400" />
                   )}
                 </button>
-                {expandedSections[section.key as keyof typeof expandedSections] && (
+                {expandedSections[
+                  section.key as keyof typeof expandedSections
+                ] && (
                   <div className="mt-4 text-sm text-gray-600">
                     {/* Placeholder content; replace with actual data */}
                     <p>No {section.name.toLowerCase()} data available yet.</p>

@@ -271,7 +271,7 @@ function ReviewSystem() {
 
             <p className="text-gray-600 mt-4">{sampleReview.content}</p>
 
-            <div className="mt-4 flex md:flex-row flex-col gap-4">
+            <div className="mt-4 flex md:flex-row flex-row gap-4">
               {sampleReview.images.map((image, index) => (
                 <Image
                   key={index}
