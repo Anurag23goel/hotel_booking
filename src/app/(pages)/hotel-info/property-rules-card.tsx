@@ -5,7 +5,7 @@ import { Clock, Users, Ban, Coffee, Cigarette } from "lucide-react";
 
 const PropertyRules = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4">
       <div className="bg-white rounded-xl shadow-lg border border-gray-200">
         <div className="p-6">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
