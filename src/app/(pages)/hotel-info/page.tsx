@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import {
   Home,
   BedDouble,
@@ -27,14 +27,14 @@ import {
   Car,
   CookingPotIcon as Kitchen,
   ChevronRight,
-} from "lucide-react"
-import Navbar from "@/custom_components/navbar"
-import Location from "./location-card"
-import PropertyRules from "./property-rules-card"
-import ReviewSystem from "./review-system"
-import PropertyCard from "./property-details-card"
-import RoomDetails from "./room-details"
-import SearchBar from "./searchBar"
+} from "lucide-react";
+import Navbar from "@/custom_components/navbar";
+import Location from "./location-card";
+import PropertyRules from "./property-rules-card";
+import ReviewSystem from "./review-system";
+import PropertyCard from "./property-details-card";
+import RoomDetails from "./room-details";
+import SearchBar from "./searchBar";
 
 const HotelGallery = ({ hotelImages, setShowAllPhotos }) => {
   return (
@@ -68,8 +68,8 @@ const HotelGallery = ({ hotelImages, setShowAllPhotos }) => {
         <ChevronRight className="w-4 h-4" />
       </button>
     </div>
-  )
-}
+  );
+};
 
 const PhotoGalleryModal = ({ hotelImages, setShowAllPhotos }) => {
   return (
@@ -117,11 +117,11 @@ const PhotoGalleryModal = ({ hotelImages, setShowAllPhotos }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const HotelDetails = () => {
-  const [showAllPhotos, setShowAllPhotos] = useState(false)
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   const hotelImages = [
     {
@@ -144,7 +144,7 @@ const HotelDetails = () => {
       url: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80",
       alt: "Hotel Pool",
     },
-  ]
+  ];
 
   const amenities = [
     { icon: Coffee, name: "Free Breakfast" },
@@ -155,7 +155,7 @@ const HotelDetails = () => {
     { icon: Map, name: "Beach Access" },
     { icon: Star, name: "Room Service" },
     { icon: Hotel, name: "24/7 Front Desk" },
-  ]
+  ];
 
   return (
     <div className="max-w-7xl mx-auto px-4">
@@ -163,10 +163,15 @@ const HotelDetails = () => {
       <div className="flex flex-col md:flex-row justify-between items-start mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <span className="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-md">HOTEL</span>
+            <span className="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-md">
+              HOTEL
+            </span>
             <div className="flex items-center">
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="w-4 h-4 text-yellow-400 fill-current" />
+                <Star
+                  key={star}
+                  className="w-4 h-4 text-yellow-400 fill-current"
+                />
               ))}
             </div>
           </div>
@@ -175,7 +180,9 @@ const HotelDetails = () => {
           </h1>
           <div className="flex items-center text-gray-600 gap-2">
             <MapPin className="w-4 h-4" />
-            <span className="text-sm">150m from Candolim Beach, Goa, India</span>
+            <span className="text-sm">
+              150m from Candolim Beach, Goa, India
+            </span>
           </div>
         </div>
         <div className="flex gap-3 mt-4 md:mt-0">
@@ -191,7 +198,10 @@ const HotelDetails = () => {
       </div>
 
       {/* Image Gallery */}
-      <HotelGallery hotelImages={hotelImages} setShowAllPhotos={setShowAllPhotos} />
+      <HotelGallery
+        hotelImages={hotelImages}
+        setShowAllPhotos={setShowAllPhotos}
+      />
 
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
@@ -203,15 +213,19 @@ const HotelDetails = () => {
               About this property
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Located in the heart of Candolim, this beautiful retreat offers a perfect blend of comfort and luxury.
-              Just 150 meters from the pristine Candolim Beach, the property features modern amenities and stunning
-              views of the surrounding area. Enjoy easy access to popular restaurants, shops, and entertainment options
-              in the vibrant Candolim area.
+              Located in the heart of Candolim, this beautiful retreat offers a
+              perfect blend of comfort and luxury. Just 150 meters from the
+              pristine Candolim Beach, the property features modern amenities
+              and stunning views of the surrounding area. Enjoy easy access to
+              popular restaurants, shops, and entertainment options in the
+              vibrant Candolim area.
             </p>
             <p className="text-gray-600 leading-relaxed mt-4">
-              Our rooms are designed with your comfort in mind, featuring contemporary furnishings, air conditioning,
-              and private balconies. Whether you`&apos;`re traveling for business or pleasure, Valentines Retreat provides the
-              perfect setting for a memorable stay in Goa.
+              Our rooms are designed with your comfort in mind, featuring
+              contemporary furnishings, air conditioning, and private balconies.
+              Whether you`&apos;`re traveling for business or pleasure,
+              Valentines Retreat provides the perfect setting for a memorable
+              stay in Goa.
             </p>
           </section>
 
@@ -282,16 +296,23 @@ const HotelDetails = () => {
             <button className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               Reserve Now
             </button>
-            <p className="text-center text-xs text-gray-500 mt-3">You won&apos;t be charged yet</p>
+            <p className="text-center text-xs text-gray-500 mt-3">
+              You won&apos;t be charged yet
+            </p>
           </div>
         </div>
       </div>
 
       {/* Photo Modal */}
-      {showAllPhotos && <PhotoGalleryModal hotelImages={hotelImages} setShowAllPhotos={setShowAllPhotos} />}
+      {showAllPhotos && (
+        <PhotoGalleryModal
+          hotelImages={hotelImages}
+          setShowAllPhotos={setShowAllPhotos}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
 const StickyNavigation = ({ activeSection, scrollToSection, navItems }) => {
   return (
@@ -301,11 +322,13 @@ const StickyNavigation = ({ activeSection, scrollToSection, navItems }) => {
           <h2 className="font-semibold text-gray-900">Valentines Retreat</h2>
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-indigo-600">₹1,849</span>
-            <button className="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium">Reserve</button>
+            <button className="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium">
+              Reserve
+            </button>
           </div>
         </div>
-        <div className="flex justify-center px-4 py-2 overflow-x-auto hide-scrollbar">
-          {navItems.map((item) => (
+        <div className="flex flex-row  justify-center px-4 py-2 overflow-x-auto hide-scrollbar">
+          {navItems.map((item: any) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
@@ -322,53 +345,52 @@ const StickyNavigation = ({ activeSection, scrollToSection, navItems }) => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
 function Page() {
-  const [activeSection, setActiveSection] = useState("hotel")
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const observerRef = useRef<IntersectionObserver | null>(null)
-
+  const [activeSection, setActiveSection] = useState("hotel");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const [searchDetails, setSearchDetails] = useState({
     location: "Valentines Retreat - Near Candolim Beach",
     checkIn: "03 April' 25",
     checkOut: "04 April' 25",
     guests: "1 Room, 2 Guests",
-  })
+  });
 
   const updateSearchDetails = (details: typeof searchDetails) => {
-    setSearchDetails(details)
-  }
+    setSearchDetails(details);
+  };
 
   useEffect(() => {
     const options = {
       root: null,
       rootMargin: "-20% 0px -35% 0px",
       threshold: 0,
-    }
+    };
 
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id)
+          setActiveSection(entry.target.id);
         }
-      })
-    }, options)
+      });
+    }, options);
 
-    const sections = document.querySelectorAll("section[id]")
+    const sections = document.querySelectorAll("section[id]");
     sections.forEach((section) => {
       if (section.id !== "") {
-        observerRef.current?.observe(section)
+        observerRef.current?.observe(section);
       }
-    })
+    });
 
     return () => {
       if (observerRef.current) {
-        observerRef.current.disconnect()
+        observerRef.current.disconnect();
       }
-    }
-  }, [])
+    };
+  }, []);
 
   const navItems = [
     { id: "hotel", label: "Overview", icon: Home },
@@ -376,24 +398,28 @@ function Page() {
     { id: "location", label: "Location", icon: Map },
     { id: "rules", label: "Rules", icon: ScrollText },
     { id: "reviews", label: "Reviews", icon: MessageSquare },
-  ]
+  ];
 
   const scrollToSection = (divId: string) => {
-    setActiveSection(divId)
-    const element = document.getElementById(divId)
+    setActiveSection(divId);
+    const element = document.getElementById(divId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   const properties = [
     {
       name: "Valentines Retreat- Near Candolim Beach",
       price: 1849,
       rating: 3,
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80",
       distance: "150m from Candolim Beach",
-      amenities: ["Free Cancellation", "Free Breakfast Available at Higher Price"],
+      amenities: [
+        "Free Cancellation",
+        "Free Breakfast Available at Higher Price",
+      ],
       isMmtValueStays: true,
       taxesAndFees: "+ ₹454 taxes & fees Per Night",
     },
@@ -401,7 +427,8 @@ function Page() {
       name: "Resort Primo Bom Terra Verde",
       price: 1752,
       rating: 3,
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80",
       distance: "4.8 km from Valentines Retreat",
       amenities: ["Free Cancellation", "Free Breakfast"],
       isMmtValueStays: true,
@@ -411,24 +438,31 @@ function Page() {
       name: "SinQ Beach Resort",
       price: 1813,
       rating: 3,
-      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80",
       distance: "2.7 km from Valentines Retreat",
-      amenities: ["Free Cancellation", "Free Breakfast Available at Higher Price"],
+      amenities: [
+        "Free Cancellation",
+        "Free Breakfast Available at Higher Price",
+      ],
       isMmtValueStays: false,
       taxesAndFees: "+ ₹315 taxes & fees Per Night",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* Header Section */}
       <header className="bg-gradient-to-r from-indigo-900 to-indigo-700 text-white">
         <Navbar />
-        
       </header>
 
       {/* Navigation */}
-      <StickyNavigation activeSection={activeSection} scrollToSection={scrollToSection} navItems={navItems} />
+      <StickyNavigation
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+        navItems={navItems}
+      />
 
       {/* Main Content */}
       <main className="flex-grow">
@@ -517,16 +551,26 @@ function Page() {
             <div className="space-y-4">
               <h3 className="text-xl font-bold">BharatTrips</h3>
               <p className="text-sm text-indigo-200">
-                Discover the perfect stay with BharatTrips - your gateway to India&apos;s finest hotels and resorts.
+                Discover the perfect stay with BharatTrips - your gateway to
+                India&apos;s finest hotels and resorts.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-indigo-200 hover:text-white transition-colors"
+                >
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-indigo-200 hover:text-white transition-colors"
+                >
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-indigo-200 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-indigo-200 hover:text-white transition-colors"
+                >
                   <Instagram className="w-5 h-5" />
                 </a>
               </div>
@@ -534,7 +578,12 @@ function Page() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Explore</h3>
               <ul className="space-y-2">
-                {["Hotels in Goa", "Beach Resorts", "Luxury Stays", "Weekend Getaways"].map((item) => (
+                {[
+                  "Hotels in Goa",
+                  "Beach Resorts",
+                  "Luxury Stays",
+                  "Weekend Getaways",
+                ].map((item) => (
                   <li key={item}>
                     <a
                       href="#"
@@ -566,7 +615,9 @@ function Page() {
             </div>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Newsletter</h3>
-              <p className="text-sm text-indigo-200">Stay updated with our latest offers</p>
+              <p className="text-sm text-indigo-200">
+                Stay updated with our latest offers
+              </p>
               <form className="flex">
                 <input
                   type="email"
@@ -580,7 +631,9 @@ function Page() {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-indigo-800 text-center text-sm text-indigo-200">
-            <p>© {new Date().getFullYear()} BharatTrips. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} BharatTrips. All rights reserved.
+            </p>
             <div className="mt-2 space-x-6">
               <a href="#" className="hover:text-white transition-colors">
                 Privacy Policy
@@ -596,8 +649,7 @@ function Page() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default Page
-
+export default Page;
