@@ -519,8 +519,8 @@ function Page() {
 
         {/* Reviews */}
         <section id="reviews" className="py-10 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+          <div className="max-w-7xl  mx-auto px-4">
+            <h2 className="text-2xl  font-bold text-gray-900 mb-6 flex items-center">
               <MessageSquare className="w-6 h-6 mr-2 text-indigo-600" />
               Guest Reviews
             </h2>

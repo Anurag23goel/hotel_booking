@@ -120,8 +120,8 @@ function ReviewSystem() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen  bg-gray-50 p-2">
+      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column - Overall Rating */}
           <div className="space-y-6">
@@ -271,7 +271,7 @@ function ReviewSystem() {
 
             <p className="text-gray-600 mt-4">{sampleReview.content}</p>
 
-            <div className="mt-4 flex md:flex-row flex-col gap-4">
+            <div className="mt-4 flex md:flex-row flex-row gap-4">
               {sampleReview.images.map((image, index) => (
                 <Image
                   key={index}

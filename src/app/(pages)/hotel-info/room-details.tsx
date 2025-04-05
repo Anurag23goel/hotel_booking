@@ -108,7 +108,7 @@ const RoomDetails: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto p-2">
       <div className="space-y-8">
         {rooms.map((room, index) => (
           <div
@@ -175,7 +175,7 @@ const RoomDetails: React.FC = () => {
                   <h4 className="text-lg font-semibold text-gray-900 mb-4">
                     Choose Your Package
                   </h4>
-                  <div className="space-y-4">
+                  <div className=" space-y-4">
                     {room.options.map((option, optIdx) => (
                       <div
                         key={optIdx}
