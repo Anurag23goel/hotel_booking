@@ -304,7 +304,7 @@ const StickyNavigation = ({ activeSection, scrollToSection, navItems }) => {
             <button className="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium">Reserve</button>
           </div>
         </div>
-        <div className="flex justify-center px-4 py-2 overflow-x-auto hide-scrollbar">
+        <div className=" flex justify-around px-2 py-2 overflow-x-auto hide-scrollbar">
           {navItems.map((item) => (
             <button
               key={item.id}
