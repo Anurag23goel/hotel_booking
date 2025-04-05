@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Star,
-  ThumbsUp,
-  Image as ImageIcon,
-} from "lucide-react";
+import { Star, ThumbsUp, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { REVIEW_TYPE } from "@/Types";
 
@@ -28,22 +24,10 @@ type FilterType =
   | "Breakfast"
   | "Good Food";
 
-
-
 function ReviewSystem() {
-  const [selectedCategory, setSelectedCategory] =
-    useState<ReviewCategory>("Everyone");
   const [selectedFilter, setSelectedFilter] =
     useState<FilterType>("All Reviews");
 
-  const categories: ReviewCategory[] = [
-    "Everyone",
-    "Couple",
-    "Family",
-    "Group",
-    "Solo",
-    "Business",
-  ];
   const filters: FilterType[] = [
     "All Reviews",
     "Staff Courtesy",
@@ -204,22 +188,6 @@ function ReviewSystem() {
 
         {/* Filter Section */}
         <div className="mt-8">
-          <div className="flex gap-4 overflow-x-auto pb-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 rounded-full whitespace-nowrap ${
-                  selectedCategory === category
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
           <div className="mt-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-semibold">Filter By:</h3>
