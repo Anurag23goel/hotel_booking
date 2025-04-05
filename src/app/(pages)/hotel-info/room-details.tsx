@@ -108,8 +108,8 @@ const RoomDetails: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <div className="space-y-8">
+    <div className="max-w-7xl px-4">
+      <div className="space-y-8 border-2 border-red-500">
         {rooms.map((room, index) => (
           <div
             key={index}

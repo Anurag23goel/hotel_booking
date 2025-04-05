@@ -120,8 +120,8 @@ function ReviewSystem() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen  bg-gray-50 p-2">
+      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column - Overall Rating */}
           <div className="space-y-6">
