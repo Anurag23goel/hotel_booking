@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Star,
-  ThumbsUp,
-  Image as ImageIcon,
-} from "lucide-react";
+import { Star, ThumbsUp, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { REVIEW_TYPE } from "@/Types";
 
@@ -28,22 +24,10 @@ type FilterType =
   | "Breakfast"
   | "Good Food";
 
-
-
 function ReviewSystem() {
-  const [selectedCategory, setSelectedCategory] =
-    useState<ReviewCategory>("Everyone");
   const [selectedFilter, setSelectedFilter] =
     useState<FilterType>("All Reviews");
 
-  const categories: ReviewCategory[] = [
-    "Everyone",
-    "Couple",
-    "Family",
-    "Group",
-    "Solo",
-    "Business",
-  ];
   const filters: FilterType[] = [
     "All Reviews",
     "Staff Courtesy",
@@ -120,8 +104,8 @@ function ReviewSystem() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen  bg-gray-50 p-2">
+      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column - Overall Rating */}
           <div className="space-y-6">
@@ -204,22 +188,6 @@ function ReviewSystem() {
 
         {/* Filter Section */}
         <div className="mt-8">
-          <div className="flex gap-4 overflow-x-auto pb-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 rounded-full whitespace-nowrap ${
-                  selectedCategory === category
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
           <div className="mt-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-semibold">Filter By:</h3>
@@ -271,7 +239,7 @@ function ReviewSystem() {
 
             <p className="text-gray-600 mt-4">{sampleReview.content}</p>
 
-            <div className="mt-4 flex md:flex-row flex-col gap-4">
+            <div className="mt-4 flex md:flex-row flex-row gap-4">
               {sampleReview.images.map((image, index) => (
                 <Image
                   key={index}

@@ -46,97 +46,123 @@ const HotelDetails = () => {
 
   return (
     <div>
-      <div className="relative">
-        <div
-          ref={scrollContainerRef}
-          className="flex overflow-x-hidden snap-x snap-mandatory"
-          onScroll={handleScroll}
-        >
-          {hotelImages.map((image, index) => (
-            <div key={index} className="w-full flex-shrink-0 snap-center">
+      {/* Hotel Name Above Images */}
+      <div className="p-4">
+        <h1 className="text-2xl md:text-3xl font-semibold mb-4">
+          Valentines Retreat - Near Candolim Beach ⭐⭐⭐
+        </h1>
+      </div>
+
+      {/* Image Grid and Rating Section */}
+      <div className="flex flex-col md:flex-row gap-4 px-4">
+        {/* Image Grid */}
+        <div className="relative md:w-3/4">
+          <div className="grid grid-cols-3 gap-2 h-[300px]">
+            {/* Main large image */}
+            <div className="col-span-2 row-span-1 relative">
               <Image
-                src={image}
-                alt={`Hotel Image ${index + 1}`}
-                width={1200}
-                height={768}
-                className="w-full h-48 md:h-64 object-cover"
-                priority={index === 0}
+                src={hotelImages[0]}
+                alt="Main Hotel Image"
+                layout="fill"
+                className="object-cover rounded-lg"
+                priority
               />
             </div>
-          ))}
+
+            {/* Right side smaller images */}
+            <div className="grid grid-rows-2 gap-2">
+              <div className="relative">
+                <Image
+                  src={hotelImages[1]}
+                  alt="Hotel Image 2"
+                  layout="fill"
+                  className="object-cover rounded-lg"
+                />
+              </div>
+              <div className="relative">
+                <Image
+                  src={hotelImages[2]}
+                  alt="Hotel Image 3"
+                  layout="fill"
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            </div>
+
+            {/* View all photos button */}
+            <div className="absolute bottom-4 right-4 z-10">
+              <button className="bg-white text-gray-800 px-4 py-2 rounded-lg flex items-center gap-2 shadow-lg hover:bg-gray-100 transition-colors">
+                <Camera size={16} />
+                <span className="text-sm">
+                  View all {hotelImages.length} photos
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Navigation buttons */}
-        <button
-          onClick={() => scrollToImage("left")}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 rounded-full hover:bg-black/70 transition-colors"
-          aria-label="Previous image"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          onClick={() => scrollToImage("right")}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 rounded-full hover:bg-black/70 transition-colors"
-          aria-label="Next image"
-        >
-          <ChevronRight size={24} />
-        </button>
-
-        {/* Image counter */}
-        <div className="absolute top-2 md:top-4 left-2 md:left-4 bg-blue-600 text-white px-2 md:px-3 py-1 rounded flex items-center gap-1">
-          <Camera size={14} className="md:w-4 md:h-4" />
-          <span className="text-xs md:text-sm">
-            {hotelImages.length} Property Photos
-          </span>
-        </div>
-
-        {/* Image indicators */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1">
-          {hotelImages.map((_, index) => (
-            <button
-              key={index}
-              className={`w-2 h-2 rounded-full ${
-                index === currentImageIndex ? "bg-white" : "bg-white/50"
-              }`}
-              onClick={() => {
-                if (scrollContainerRef.current) {
-                  const container = scrollContainerRef.current;
-                  const imageWidth = container.clientWidth;
-                  container.scrollTo({
-                    left: imageWidth * index,
-                    behavior: "smooth",
-                  });
-                  setCurrentImageIndex(index);
-                }
-              }}
-              aria-label={`Go to image ${index + 1}`}
-            />
-          ))}
+        {/* Rating Section */}
+        <div className="md:w-1/4">
+          <div className="p-4 rounded-lg">
+            <div className="text-4xl font-bold text-blue-700 mb-2">4.1</div>
+            <div className="text-lg text-blue-600 mb-1">Very Good</div>
+            <div className="text-sm text-gray-500 mb-4">(897 ratings)</div>
+            <button className="w-full bg-[#310744]  text-white px-4 py-5 rounded-lg hover:bg-[#4a0d66] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg">
+              <span className="font-medium">Reserve Now</span>
+              <span className="text-sm"></span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="p-3 md:p-6">
-        <div className="flex flex-row md:flex-row md:justify-between md:items-start gap-4 md:gap-0">
-          <div>
-            <h1 className="text-xl md:text-2xl font-semibold mb-2">
-              Valentines Retreat - Near Candolim Beach ⭐⭐⭐
-            </h1>
-            <p className="text-sm md:text-base text-gray-600 mb-4">
-              Well-appointed hotel near Candolim beach offering city-view rooms,
-              a plush pool, dining area & sit-outs on the lawn.
-            </p>
-          </div>
-          <div className="text-right">
-            <div className="md:bg-blue-100 p-2 md:p-3 rounded-lg inline-block">
-              <div className="text-xl md:text-2xl font-bold text-blue-700">
-                4.1
-              </div>
-              <div className="text-xs md:text-sm text-blue-600">Very Good</div>
-              <div className="text-xs text-gray-500">(897 ratings)</div>
+      {/* Description Section - Moved below images */}
+      <div className="px-4 mt-6">
+        <div className=" p-6 ">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+            About the Property
+          </h3>
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:w-2/3">
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Nestled in the heart of Candolim, this charming retreat offers a
+                perfect blend of comfort and convenience. Just 9 minutes from
+                the pristine Candolim Beach, our hotel features modern amenities
+                and exceptional service to ensure a memorable stay.
+              </p>
+            </div>
+            <div className="md:w-1/3">
+              <h4 className="font-semibold text-gray-700 mb-3">
+                Key Features:
+              </h4>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                  Elegant rooms with modern amenities
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                  Stunning pool with lounging area
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                  In-house restaurant & bar
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                  Easy access to popular attractions
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                  24/7 friendly staff assistance
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
+      {/* Rest of the content */}
+      <div className="p-3 md:p-6">
         <div className="flex gap-4 md:gap-6 my-4 md:my-6">
           <div className="flex items-center gap-2">
             <MapPin className="text-blue-600 w-4 h-4 md:w-5 md:h-5" />
