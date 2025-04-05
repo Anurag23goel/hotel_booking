@@ -1,6 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Star, ThumbsUp } from "lucide-react";
+import {
+  Star,
+  ThumbsUp,
+  Image as ImageIcon,
+} from "lucide-react";
+import Image from "next/image";
+import { REVIEW_TYPE } from "@/Types";
 
 type ReviewCategory =
   | "Everyone"
@@ -22,16 +28,7 @@ type FilterType =
   | "Breakfast"
   | "Good Food";
 
-interface Review {
-  id: number;
-  rating: number;
-  date: string;
-  userType: string;
-  title: string;
-  content: string;
-  images: string[];
-  helpful: number;
-}
+
 
 function ReviewSystem() {
   const [selectedCategory, setSelectedCategory] =
@@ -79,7 +76,7 @@ function ReviewSystem() {
     },
   };
 
-  const sampleReview: Review = {
+  const sampleReview: REVIEW_TYPE = {
     id: 1,
     rating: 3.0,
     date: "Feb 02, 2023",
@@ -274,12 +271,14 @@ function ReviewSystem() {
 
             <p className="text-gray-600 mt-4">{sampleReview.content}</p>
 
-            <div className="mt-4 flex gap-4">
+            <div className="mt-4 flex md:flex-row flex-col gap-4">
               {sampleReview.images.map((image, index) => (
-                <img
+                <Image
                   key={index}
                   src={image}
                   alt={`Review image ${index + 1}`}
+                  width={80}
+                  height={80}
                   className="w-20 h-20 object-cover rounded-lg"
                 />
               ))}
