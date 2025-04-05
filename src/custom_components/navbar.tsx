@@ -3,15 +3,33 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, X, Ellipsis, User2 } from "lucide-react";
+import {
+  Menu,
+  X,
+  Ellipsis,
+  User2,
+  ChevronDown,
+  HelpCircle,
+  Phone,
+} from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserData, logout } from "@/app/redux/slices/authSlice";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shadcn_components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/shadcn_components/ui/avatar";
 import { Button } from "@/shadcn_components/ui/button";
 import { usePathname } from "next/navigation";
 import { AppDispatch } from "@/app/redux/store";
 import toast from "react-hot-toast";
 import axios from "axios";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/shadcn_components/ui/dropdown-menu";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +66,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex w-full md:w-auto justify-between items-center">
           <Link
-            href="/"
+            href="/hotel-info"
             className="text-xl md:text-2xl font-PlayfairDisplay-Bold mb-4 md:mb-0"
           >
             Bharat Trips
@@ -64,7 +82,109 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex flex-wrap items-center gap-2 md:gap-4">
-          {currentPath === "/list-property" ? (
+          {currentPath === "/hotel-info" ? (
+            <>
+              {loading ? (
+                <li>
+                  <User2 />
+                </li>
+              ) : isLoggedIn ? (
+                <>
+                  <li className="flex items-center gap-2">
+                    <span className="text-sm md:text-base">
+                      Hi, {userData?.data?.name || "User"}
+                    </span>
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src={
+                          userData?.data?.avatar ||
+                          "https://github.com/shadcn.png"
+                        }
+                        alt={userData?.data?.name || "User"}
+                      />
+                      <AvatarFallback>
+                        {userData?.data?.name?.charAt(0) || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </li>
+                  <li>
+                    <Link
+                      href="/support"
+                      className="flex items-center gap-1 text-sm md:text-base hover:text-gray-300 transition-colors"
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      <span>Support</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="flex items-center gap-1 text-sm md:text-base hover:text-gray-300 transition-colors"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Contact Us</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Button
+                      variant="outline"
+                      className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  
+                  <li>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className=" text-white   hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded flex items-center gap-1"
+                        >
+                          My Account
+                          <ChevronDown className="w-4 h-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-40">
+                        <DropdownMenuItem asChild>
+                          <Link href="/register" className="cursor-pointer">
+                            Register
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href="/login" className="cursor-pointer">
+                            Sign In
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </li>
+                  <li>
+                    <Link
+                      href="/support"
+                      className="flex items-center gap-1 text-sm md:text-base hover:text-gray-300 transition-colors"
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      <span>Support</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="flex items-center gap-1 text-sm md:text-base hover:text-gray-300 transition-colors"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Contact Us</span>
+                    </Link>
+                  </li>
+                </>
+              )}
+            </>
+          ) : currentPath === "/list-property" ? (
             <li>
               <Link href={"/"} className="text-sm md:text-base">
                 Already a partner?
@@ -81,52 +201,54 @@ export default function Navbar() {
             </li>
           )}
 
-          {loading ? (
-            <li>
-              <User2 />
-            </li>
-          ) : isLoggedIn ? (
+          {currentPath !== "/hotel-info" && (
             <>
-              <li>
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </li>
-              <li>
-                <Button
-                  variant="outline"
-                  className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link href="/register">
-                  <Button
-                    variant="outline"
-                    className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
-                  >
-                    Register
-                  </Button>
-                </Link>
-              </li>
-              { currentPath !== "/login" && (
-              <li>
-                <Link
-                  href="/login"
-                  className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
-                >
-                  Sign In
-                </Link>
-              </li>
+              {loading ? (
+                <li>
+                  <User2 />
+                </li>
+              ) : isLoggedIn ? (
+                <>
+                  <li>
+                    <Avatar>
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </li>
+                  <li>
+                    <Button
+                      variant="outline"
+                      className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link href="/register">
+                      <Button
+                        variant="outline"
+                        className="bg-white text-[#003580] hover:bg-gray-100 text-sm md:text-base px-4 py-2 rounded"
+                      >
+                        Register
+                      </Button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/login"
+                      className="text-sm md:text-base bg-white text-[#003580] px-4 py-2 rounded font-medium"
+                    >
+                      Sign In
+                    </Link>
+                  </li>
+                </>
               )}
             </>
           )}
@@ -162,11 +284,47 @@ export default function Navbar() {
               </li>
             ) : isLoggedIn ? (
               <>
-                <li>
+                <li className="flex items-center gap-2">
                   <span className="text-white font-semibold text-lg">
-                    {userData?.data?.email || "User"}
+                    Hi, {userData?.data?.name || "User"}
                   </span>
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage
+                      src={
+                        userData?.data?.avatar ||
+                        "https://github.com/shadcn.png"
+                      }
+                      alt={userData?.data?.name || "User"}
+                    />
+                    <AvatarFallback>
+                      {userData?.data?.name?.charAt(0) || "U"}
+                    </AvatarFallback>
+                  </Avatar>
                 </li>
+                {currentPath === "/hotel-info" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/support"
+                        className="text-white text-lg flex items-center gap-1"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <HelpCircle className="w-4 h-4" />
+                        <span>Support</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/contact"
+                        className="text-white text-lg flex items-center gap-1"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Phone className="w-4 h-4" />
+                        <span>Contact Us</span>
+                      </Link>
+                    </li>
+                  </>
+                )}
                 <li>
                   <Button
                     variant="outline"
@@ -189,14 +347,39 @@ export default function Navbar() {
                     </Button>
                   </Link>
                 </li>
-                {currentPath !== "/login" && (
-                  <li>
-                    <Link href="/login" onClick={() => setIsOpen(false)}>
-                      <Button className="bg-[#003580] text-white hover:bg-[#002b6b]">
-                        Sign In
-                      </Button>
-                    </Link>
-                  </li>
+                <li>
+                  <Link href="/login" onClick={() => setIsOpen(false)}>
+                    <Button
+                      variant="outline"
+                      className="bg-white text-[#003580] hover:bg-gray-100"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                </li>
+                {currentPath === "/hotel-info" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/support"
+                        className="text-white text-lg flex items-center gap-1"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <HelpCircle className="w-4 h-4" />
+                        <span>Support</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/contact"
+                        className="text-white text-lg flex items-center gap-1"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Phone className="w-4 h-4" />
+                        <span>Contact Us</span>
+                      </Link>
+                    </li>
+                  </>
                 )}
               </>
             )}

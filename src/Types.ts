@@ -21,27 +21,31 @@ export interface TYPE_OF_INITIAL_STATE {
   error: string | null;
 }
 
-export interface Hotel {
-  id: string
-  name: string
-  location: string
-  area: string
-  stars: number
-  originalPrice: number
-  discountedPrice: number
-  amenities: string[]
-  viewers?: number
-  tags: string[]
-  savings: number
-  featured: boolean
-  rating?: {
-    score: number
-    type: string
-    reviews: number
-  }
-  image: string
-  bookings?: {
-    times: number
-    hours: number
-  }
+export interface REVIEW_TYPE {
+  id: number;
+  rating: number;
+  date: string;
+  userType: string;
+  title: string;
+  content: string;
+  images: string[];
+  helpful: number;
+}
+
+export interface PROPERTY_CARD_TYPE {
+  name: string;
+  price: number;
+  rating: number;
+  image: string;
+  distance: string;
+  amenities: string[];
+  isValueStays?: boolean;
+  taxesAndFees: string;
+}
+
+export interface LANDMARK_TYPE {
+  name: string;
+  type: string;
+  distance: string;
+  isPopular?: boolean;
 }

@@ -7,7 +7,6 @@ import RegisterForm from "./forms/registerForm";
 import OtpForm from "./forms/otpForm";
 import Navbar from "@/custom_components/navbar";
 
-
 const testimonials = [
   {
     quote:
@@ -77,7 +76,6 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      
       {/* Header */}
       <Navbar />
 
@@ -219,8 +217,8 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-4">Import your reviews</h3>
               <p>
                 We import your review score from other platforms and display it
-                on your Booking.com property page, so you don&apso;t start at zero
-                reviews.
+                on your Booking.com property page, so you don&apso;t start at
+                zero reviews.
               </p>
               <button className="bg-[#0071c2] text-white px-6 py-3 rounded-md mt-6">
                 Import your listing
