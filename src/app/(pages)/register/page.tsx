@@ -1,48 +1,67 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { ChevronRight, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import Navbar2 from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
+import { Label } from "@/custom_components/loginPage/label";
+import { Input } from "@/custom_components/loginPage/input";
+import { IconBrandGoogle, IconBrandApple } from "@tabler/icons-react";
 
-interface registerData {
+interface RegisterData {
   name: string;
   email: string;
   password: string;
-  phoneNumber?: string;
 }
 
-function Page() {
+const images = [
+  {
+    url: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba",
+    title: "Capturing Moments",
+    subtitle: "Creating Memories",
+  },
+  {
+    url: "/assets/swimmingGirl.avif",
+    title: "Share Stories",
+    subtitle: "Connect with Others",
+  },
+  {
+    url: "https://images.unsplash.com/photo-1682687220063-4742bd7fd538",
+    title: "Explore Places",
+    subtitle: "Discover the World",
+  },
+];
+
+export default function RegisterPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<registerData>();
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterData>();
 
-  const emailValue = watch("email");
-  const nameValue = watch("name");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const handleRegisterSubmit = async (data: registerData) => {
+  const handleRegisterSubmit = async (data: RegisterData) => {
     try {
       const response = await axios.post("/api/auth/register", data);
-
       if (response.data.success) {
         toast.success("Registration successful");
         router.push("/login");
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast.error(
-          error.response?.data?.message ||
-            "Registration failed. Please try again."
-        );
+        toast.error(error.response?.data?.message || "Registration failed");
       } else {
         toast.error("An unexpected error occurred");
       }
@@ -50,29 +69,62 @@ function Page() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="bg-[#040928] w-full py-3">
-        <div className="max-w-5xl mx-auto px-4 lg:px-0">
-          <Navbar2 />
+    <div className="min-h-screen bg-[#6b6680] flex items-center justify-center px-2 py-4">
+      <div className="w-full max-w-5xl bg-[#232231] rounded-2xl shadow-xl flex flex-col md:flex-row overflow-hidden">
+        {/* Left Carousel */}
+        <div className="hidden md:block w-1/2 relative max-h-[700px]">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentImageIndex ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <img
+                src={image.url}
+                alt={image.title}
+                className="object-cover w-full h-full"
+              />
+              <div className="absolute bottom-16 left-8 text-white drop-shadow-lg">
+                <h2 className="text-2xl font-semibold mb-1">{image.title}</h2>
+                <p className="text-sm">{image.subtitle}</p>
+              </div>
+              <div className="absolute bottom-6 left-8 flex space-x-2">
+                {images.map((_, dotIndex) => (
+                  <div
+                    key={dotIndex}
+                    className={`w-2 h-2 rounded-full ${
+                      dotIndex === currentImageIndex
+                        ? "bg-white"
+                        : "bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
 
-      <div className="flex flex-col items-center justify-center flex-1 px-4 py-10">
-        <div className="border-black shadow-xl w-full max-w-md bg-white p-6">
-          <h2 className="text-2xl font-PlayfairDisplay-Bold">
-            Create an account
-          </h2>
-          <p className="text-gray-600 mt-2">
-            Sign up to start booking your perfect stays.
-          </p>
+        {/* Right Form */}
+        <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-6">
+          <div className="w-full max-w-md space-y-5">
+            <div>
+              <h2 className="text-2xl font-bold text-white">Create Account</h2>
+              <p className="mt-1 text-sm text-gray-400">
+                Please enter your details to sign up
+              </p>
+            </div>
 
-          <form
-            onSubmit={handleSubmit(handleRegisterSubmit)}
-            className="mt-10 space-y-4"
-          >
-            <div className="relative">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <input
+            <form
+              onSubmit={handleSubmit(handleRegisterSubmit)}
+              className="space-y-4"
+            >
+              <div>
+                <Label htmlFor="name" className="text-gray-300 text-sm">
+                  Full Name
+                </Label>
+                <Input
+                  id="name"
                   type="text"
                   {...register("name", {
                     required: "Name is required",
@@ -81,28 +133,22 @@ function Page() {
                       message: "Name must be at least 2 characters",
                     },
                   })}
-                  className="w-full p-3 bg-transparent rounded-md outline-none"
+                  className="bg-[#2a2a2a] border-[#3a3a3a] text-white placeholder-gray-400 text-sm"
                   placeholder="Enter your full name"
                 />
-                {nameValue && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-600 rounded-full p-1">
-                    <ChevronRight className="h-4 w-4 text-white" />
-                  </div>
+                {errors.name && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.name.message}
+                  </p>
                 )}
-                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
-                  Full Name
-                </label>
               </div>
-              {errors.name && (
-                <p className="mt-1 text-red-600 text-sm">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
 
-            <div className="relative">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <input
+              <div>
+                <Label htmlFor="email" className="text-gray-300 text-sm">
+                  Email
+                </Label>
+                <Input
+                  id="email"
                   type="email"
                   {...register("email", {
                     required: "Email is required",
@@ -111,135 +157,94 @@ function Page() {
                       message: "Invalid email address",
                     },
                   })}
-                  className="w-full p-3 bg-transparent rounded-md outline-none"
-                  placeholder="Enter your email address"
+                  className="bg-[#2a2a2a] border-[#3a3a3a] text-white placeholder-gray-400 text-sm"
+                  placeholder="Enter your email"
                 />
-                {emailValue && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-600 rounded-full p-1">
-                    <ChevronRight className="h-4 w-4 text-white" />
-                  </div>
+                {errors.email && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.email.message}
+                  </p>
                 )}
-                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
-                  Email Address
-                </label>
               </div>
-              {errors.email && (
-                <p className="mt-1 text-red-600 text-sm">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
 
-            <div className="relative">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
-                    },
-                  })}
-                  className="w-full p-3 bg-transparent outline-none"
-                  placeholder="Create a password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                >
-                  {showPassword ? (
-                    <Eye className="h-5 w-5" />
-                  ) : (
-                    <EyeOff className="h-5 w-5" />
-                  )}
-                </button>
-                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
+              <div>
+                <Label htmlFor="password" className="text-gray-300 text-sm">
                   Password
-                </label>
+                </Label>
+                <div className="relative mt-2">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 5,
+                        message: "Password must be at least 5 characters",
+                      },
+                    })}
+                    className="bg-[#2a2a2a] border-[#3a3a3a] text-white placeholder-gray-400 text-sm"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                  {errors.password && (
+                    <p className="text-xs text-red-500 mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
               </div>
-              {errors.password && (
-                <p className="mt-1 text-red-600 text-sm">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-2 px-4 bg-[#6c5dd3] hover:bg-[#5e4fa2] text-white rounded-lg font-medium text-sm transition-colors"
+              >
+                {isSubmitting ? "Signing up..." : "Sign up"}
+              </button>
+            </form>
 
             <div className="relative">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                  +91
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-700"></div>
+              </div>
+              <div className="relative flex justify-center text-xs">
+                <span className="px-2 bg-[#232231] text-gray-400">
+                  Or continue with
                 </span>
-                <input
-                  type="tel"
-                  {...register("phoneNumber")}
-                  className="w-full p-3 pl-12 bg-transparent outline-none"
-                  placeholder="Enter your phone number"
-                />
-                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
-                  Phone Number (Optional)
-                </label>
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-[#040928] text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Create account
-            </button>
-          </form>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+            <div className="grid grid-cols-2 gap-3">
+              <button className="flex items-center justify-center py-2 bg-[#2a2a2a] hover:bg-[#3a3a3a] rounded-lg transition-colors">
+                <IconBrandGoogle className="h-5 w-5 text-white" />
+              </button>
+              <button className="flex items-center justify-center py-2 bg-[#2a2a2a] hover:bg-[#3a3a3a] rounded-lg transition-colors">
+                <IconBrandApple className="h-5 w-5 text-white" />
+              </button>
             </div>
-            <div className="relative flex justify-center">
-              <span className="bg-white px-4 text-sm text-black">
-                or use one of these options
-              </span>
-            </div>
-          </div>
 
-          <div className="flex justify-center mb-4">
-            <Link
-              href="/login"
-              className="text-blue-500 hover:text-blue-600 hover:underline"
-            >
-              Already have an account? Sign in
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 justify-center">
-            <button className="border border-gray-200 py-3 rounded-md hover:outline hover:outline-blue-500 focus:ring-0">
-              Google
-            </button>
-            <button className="border border-gray-200 py-3 rounded-md hover:outline hover:outline-blue-500 focus:ring-0">
-              Apple
-            </button>
-            <button className="border border-gray-200 py-3 rounded-md hover:outline hover:outline-blue-500 focus:ring-0">
-              Facebook
-            </button>
-          </div>
-
-          <div className="border-t my-6"></div>
-
-          <div className="text-center text-sm text-gray-600">
-            <p>By creating an account, you agree with our</p>
-            <p className="font-semibold text-black">
-              Terms & Conditions and Privacy Statement
+            <p className="text-center text-sm text-gray-400">
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="text-purple-400 hover:text-purple-300"
+              >
+                Sign in
+              </Link>
             </p>
-          </div>
-
-          <div className="text-center mt-4 text-gray-500 text-xs">
-            <p>All rights reserved.</p>
-            <p>Copyright (2006-2025) – Booking.com™</p>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Page;

@@ -18,7 +18,7 @@
       type: "Excellent",
       reviews: 12928,
     },
-    image: "/placeholder.svg?height=250&width=320",
+    image: "/assets/Swimming_Pool.webp",
   },
   {
     id: "2",
@@ -38,7 +38,7 @@
       type: "Very Good",
       reviews: 3731,
     },
-    image: "/placeholder.svg?height=250&width=320",
+    image: "/assets/bambolimBeach.jpg",
   },
   {
     id: "3",
@@ -58,7 +58,7 @@
       type: "Very Good",
       reviews: 4163,
     },
-    image: "/placeholder.svg?height=250&width=320",
+    image: "/assets/paradiseVillage.jpg",
   },
   {
     id: "4",
@@ -78,7 +78,7 @@
       type: "Excellent",
       reviews: 6156,
     },
-    image: "/src/",
+    image: "/assets/marquiss.jpg",
   },
   {
     id: "5",
@@ -98,7 +98,7 @@
       type: "Excellent",
       reviews: 667,
     },
-    image: "/placeholder.svg?height=250&width=320",
+    image: "/assets/cubapatnem.avif",
   },
   {
     id: "6",
@@ -118,7 +118,7 @@
       type: "Very Good",
       reviews: 1660,
     },
-    image: "/placeholder.svg?height=250&width=320",
+    image: "/assets/casablanca.avif",
     bookings: {
       times: 2,
       hours: 24,
@@ -142,7 +142,7 @@
       type: "Very Good",
       reviews: 2794,
     },
-    image: "/assets/marquiss.jpg",
+    image: "/assets/resortemarinha.avif",
   },
   {
     id: "8",
@@ -162,6 +162,6 @@
       type: "Excellent",
       reviews: 1455,
     },
-    image: "/placeholder.svg?height=250&width=320",
+    image: "/assets/soulvacationresportspa.avif",
   },
 ]
