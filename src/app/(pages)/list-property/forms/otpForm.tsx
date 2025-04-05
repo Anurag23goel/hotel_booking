@@ -3,8 +3,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import OtpInput from "react-otp-input";
 import { useRouter } from "next/navigation";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/shadcn_components/ui/input-otp";
+import { Button } from "@/shadcn_components/ui/button";
 
 interface OtpFormData {
   otp: string;
@@ -30,13 +36,12 @@ const OtpForm = ({ setCurrentForm }: OtpFormProps) => {
 
     try {
       const response = await axios.post(
-        "/api/owner-verify-otp",
+        "/api/auth/owner-verify-otp",
         { otp },
         {
           withCredentials: true,
         }
       );
-      console.log("this is otp form response->", response.data);
 
       if (response.data.success) {
         toast.success("OTP verified successfully");
@@ -44,67 +49,72 @@ const OtpForm = ({ setCurrentForm }: OtpFormProps) => {
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Something went wrong");
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 
   return (
     <div className="w-full h-full flex flex-col space-y-6">
       <div className="space-y-1">
-        <h2 className="text-2xl font-bold">Enter OTP</h2>
+        <h2 className="text-2xl text-[#040928] font-bold">Enter OTP</h2>
         <p className="text-sm text-gray-500">
           Please enter the OTP sent to your email address
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="relative">
-          <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500 p-3">
-            <OtpInput
-              value={otp}
-              onChange={setOtp}
-              numInputs={6}
-              renderInput={(props) => (
-                <input
-                  {...props}
-                  className="!w-[40px] h-[40px] border-gray-300 text-center mx-1"
-                />
-              )}
-              containerStyle="flex justify-between"
-            />
-            <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-[#0091EA]">
-              OTP Code
-            </label>
-          </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="mx-5 space-y-2">
+          <InputOTP
+            maxLength={6}
+            value={otp}
+            onChange={(value) => setOtp(value)}
+            className="flex justify-center text-black "
+          >
+            <InputOTPGroup>
+              <InputOTPSlot className="text-black" index={0} />
+              <InputOTPSlot className="text-black" index={1} />
+              <InputOTPSlot className="text-black" index={2} />
+              <InputOTPSeparator className="text-gray-600" />
+              <InputOTPSlot className="text-black" index={3} />
+              <InputOTPSlot className="text-black" index={4} />
+              <InputOTPSlot className="text-black" index={5} />
+            </InputOTPGroup>
+          </InputOTP>
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
+          disabled={otp.length !== 6 || isSubmitting}
+          className="w-full bg-[#040928] text-white hover:bg-black transition-colors"
         >
-          Verify OTP
-        </button>
+          {isSubmitting ? "Verifying..." : "Verify OTP"}
+        </Button>
 
-        <div className="mb-6 mt-6 text-center text-sm">
-          <p>Didn&apos;t receive the code?</p>
-          <button type="button" className="text-[#0091EA] hover:underline">
+        <div className="text-center space-y-2">
+          <p className="text-sm text-gray-600">Didn&apos;t receive the code?</p>
+          <Button
+            type="button"
+            variant="link"
+            className="text-[#0091EA] hover:text-[#0077c0]"
+          >
             Resend OTP
-          </button>
+          </Button>
         </div>
 
-        <div className="relative mt-5">
+        <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-500"></div>
+            <div className="w-full border-t border-gray-300"></div>
           </div>
         </div>
 
-        <button
+        <Button
           type="button"
+          variant="outline"
           onClick={() => setCurrentForm("login")}
-          className="w-full mt-5 bg-black text-white rounded-[5px] py-3 hover:bg-[#003580] hover:text-white transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-white text-[#040928] border-[#040928] hover:bg-gray-50"
         >
           Back to Login
-        </button>
+        </Button>
       </form>
     </div>
   );

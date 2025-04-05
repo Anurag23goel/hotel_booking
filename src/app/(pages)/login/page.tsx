@@ -1,15 +1,15 @@
 "use client";
 import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
-import { ChevronRight, Eye, EyeOff, Check, X } from "lucide-react";
+import { ChevronRight, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { toast } from "react-hot-toast";
-
+import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { setLoggedIn } from "@/app/loginState/features/authSlice";
+import { login, setToken } from "@/app/redux/slices/authSlice";
 import { Button } from "@/shadcn_components/ui/button";
 
 interface loginData {
@@ -35,14 +35,16 @@ function Page() {
 
   const handleLoginSubmit = async (data: loginData) => {
     try {
-      const response = await axios.post("/api/login", data, {
+      const response = await axios.post("/api/auth/login", data, {
         withCredentials: true, // Important for handling cookies
       });
 
+      // console.log(response.data.data.user);
+
       if (response.data.success) {
-        dispatch(setLoggedIn(true));
+        dispatch(login(response.data.data.user));
         toast.success("Login successful");
-        router.push("/Assigment");
+        router.push("/");
       }
     } catch (error) {
       console.log("Login failed");
@@ -179,10 +181,10 @@ function Page() {
           </div>
 
           <div className="flex justify-start">
-          <Button variant="secondary" >
-            <Link href="/phoneLogin">Sign In Using Phone Number</Link>
-          </Button> 
-            </div>
+            <Button variant="secondary">
+              <Link href="/phoneLogin">Sign In Using Phone Number</Link>
+            </Button>
+          </div>
 
           <div className="border-t my-6"></div>
 

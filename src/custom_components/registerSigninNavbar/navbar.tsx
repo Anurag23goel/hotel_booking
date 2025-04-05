@@ -94,7 +94,7 @@ export default function Navbar2() {
           <li>
             <Link
               href="/list-property"
-              className="text-white font-semibold text-lg"
+              className="text-white text-lg"
               onClick={() => setIsOpen(false)}
             >
               List Your Property
