@@ -118,6 +118,7 @@ export default function Navbar() {
                   </Button>
                 </Link>
               </li>
+              { currentPath !== "/login" && (
               <li>
                 <Link
                   href="/login"
@@ -126,6 +127,7 @@ export default function Navbar() {
                   Sign In
                 </Link>
               </li>
+              )}
             </>
           )}
         </ul>
@@ -187,13 +189,15 @@ export default function Navbar() {
                     </Button>
                   </Link>
                 </li>
-                <li>
-                  <Link href="/login" onClick={() => setIsOpen(false)}>
-                    <Button className="bg-[#003580] text-white hover:bg-[#002b6b]">
-                      Sign In
-                    </Button>
-                  </Link>
-                </li>
+                {currentPath !== "/login" && (
+                  <li>
+                    <Link href="/login" onClick={() => setIsOpen(false)}>
+                      <Button className="bg-[#003580] text-white hover:bg-[#002b6b]">
+                        Sign In
+                      </Button>
+                    </Link>
+                  </li>
+                )}
               </>
             )}
           </ul>

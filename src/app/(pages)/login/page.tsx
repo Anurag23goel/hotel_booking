@@ -1,45 +1,40 @@
 "use client";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ChevronRight, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import Navbar from "@/custom_components/registerSigninNavbar/navbar";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { login, setToken } from "@/app/redux/slices/authSlice";
-import { Button } from "@/shadcn_components/ui/button";
+import { login } from "@/app/redux/slices/authSlice";
+import { Label } from "@/custom_components/loginPage/label";
+import { Input } from "@/custom_components/loginPage/input";
+import { cn } from "@/lib/utils";
+import { IconBrandGoogle, IconBrandApple, IconBrandFacebook } from "@tabler/icons-react";
+import Navbar from "@/custom_components/navbar";
 
-interface loginData {
+interface LoginData {
   email: string;
   password: string;
 }
 
-function Page() {
+export default function LoginPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isValid, setIsValid] = useState(false);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
-  } = useForm<loginData>();
+  } = useForm<LoginData>();
 
-  const emailValue = watch("email");
-
-  const handleLoginSubmit = async (data: loginData) => {
+  const handleLoginSubmit = async (data: LoginData) => {
     try {
       const response = await axios.post("/api/auth/login", data, {
-        withCredentials: true, // Important for handling cookies
+        withCredentials: true,
       });
-
-      // console.log(response.data.data.user);
 
       if (response.data.success) {
         dispatch(login(response.data.data.user));
@@ -48,161 +43,133 @@ function Page() {
       }
     } catch (error) {
       console.log("Login failed");
+      toast.error("Login failed");
     }
   };
 
-  const formatPhoneNumber = (value: string) => {
-    const digits = value.replace(/\D/g, "");
-    if (digits.length <= 3) return digits;
-    if (digits.length <= 6) return `${digits.slice(0, 3)}${digits.slice(3)}`;
-    return `${digits.slice(0, 3)}${digits.slice(3, 6)}${digits.slice(6, 10)}`;
-  };
-
-  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const formattedNumber = formatPhoneNumber(e.target.value);
-    setPhoneNumber(formattedNumber);
-    const digitsOnly = formattedNumber.replace(/\D/g, "");
-    setIsValid(digitsOnly.length === 10);
-  };
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="bg-[#040928] w-full py-3">
-        <div className="max-w-5xl mx-auto px-4 lg:px-0">
-          <Navbar />
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center flex-1 px-4 py-10">
-        <div className="border-black shadow-xl w-full max-w-md bg-white p-6">
-          <h2 className="text-2xl font-PlayfairDisplay-Bold">
-            Sign in or create an account
-          </h2>
-          <p className="text-gray-600 mt-2">
-            You can sign in using your Booking.com account to access our
-            services.
-          </p>
-
-          <form
-            onSubmit={handleSubmit(handleLoginSubmit)}
-            className="mt-10 space-y-4"
-          >
-            <div className="relative ">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <input
-                  type="email"
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  className="w-full p-3 bg-transparent rounded-md outline-none"
-                  placeholder="Enter your email address"
-                />
-                {emailValue && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-600 rounded-full p-1">
-                    <ChevronRight className="h-4 w-4 text-white" />
-                  </div>
-                )}
-                <label className="absolute -top-3 left-3 bg-white  px-1 text-sm font-medium text-black">
-                  Email Address
-                </label>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col">
+      <Navbar/>
+      <div className="flex-1 flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-md">
+          <div className="backdrop-blur-xl bg-white/80 rounded-3xl shadow-2xl p-8">
+            <div className="flex justify-center mb-8">
+              <div className="h-12 w-12 bg-black rounded-full flex items-center justify-center">
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M20 12h-8m0 0l4 4m-4-4l4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2" />
+                </svg>
               </div>
-              {errors.email && (
-                <p className="mt-1 text-red-600 text-sm">
-                  {errors.email.message as string}
-                </p>
-              )}
             </div>
 
-            <div className="relative">
-              <div className="relative border border-gray-300 rounded-md bg-white focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 5,
-                      message: "Password must be at least 5 characters",
-                    },
-                  })}
-                  className="w-full p-3 bg-transparent outline-none"
-                  placeholder="Enter your password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                >
-                  {showPassword ? (
-                    <Eye className="h-5 w-5" />
-                  ) : (
-                    <EyeOff className="h-5 w-5" />
-                  )}
-                </button>
-                <label className="absolute -top-3 left-3 bg-white px-1 text-sm font-medium text-black">
-                  Password
-                </label>
-              </div>
-              {errors.password && (
-                <p className="mt-1 text-red-600 text-sm">
-                  {errors.password.message as string}
-                </p>
-              )}
-            </div>
-
-            <div className="flex justify-end">
-              <Link
-                href="/forgot-password"
-                className="text-blue-500 hover:text-blue-600 hover:underline transition-colors"
-              >
-                Forgot Password?
-              </Link>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-[#040928] text-white rounded-md py-3 hover:bg-black transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Sign In
-            </button>
-          </form>
-
-          <div className="relative my-5">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-white px-4 text-sm text-black">or</span>
-            </div>
-          </div>
-
-          <div className="flex justify-start">
-            <Button variant="secondary">
-              <Link href="/phoneLogin">Sign In Using Phone Number</Link>
-            </Button>
-          </div>
-
-          <div className="border-t my-6"></div>
-
-          <div className="text-center text-sm text-gray-600">
-            <p>By signing in or creating an account, you agree with our</p>
-            <p className="font-semibold text-black">
-              Terms & Conditions and Privacy Statements
+            <h1 className="text-2xl font-semibold text-center mb-2">Sign in with email</h1>
+            <p className="text-gray-500 text-center mb-8">
+              Make a new doc to bring your words, data, and teams together. For free
             </p>
-          </div>
 
-          <div className="text-center mt-4 text-gray-500 text-xs">
-            <p>All rights reserved.</p>
-            <p>Copyright (2006-2025) – Booking.com™</p>
+            <form onSubmit={handleSubmit(handleLoginSubmit)} className="space-y-6">
+              <div>
+                <div className="relative">
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    className="pl-10 w-full"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address",
+                      },
+                    })}
+                  />
+                  <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" />
+                  </svg>
+                </div>
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div>
+                <div className="relative">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="pl-10 w-full"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 5,
+                        message: "Password must be at least 5 characters",
+                      },
+                    })}
+                  />
+                  <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2zm10-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  </svg>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+                )}
+              </div>
+~
+              <div className="flex justify-end">
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-gray-600 hover:text-gray-800"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-black text-white rounded-lg py-3 font-medium hover:bg-gray-800 transition-colors"
+              >
+                {isSubmitting ? "Signing in..." : "Get Started"}
+              </button>
+            </form>
+
+            <div className="mt-8">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white/80 text-gray-500">Or sign in with</span>
+                </div>
+              </div>
+
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <IconBrandGoogle className="h-5 w-5" />
+                </button>
+                <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <IconBrandFacebook className="h-5 w-5" />
+                </button>
+                <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <IconBrandApple className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
+            <p className="mt-8 text-center text-sm text-gray-500">
+              Don't have an account?{" "}
+              <Link href="/register" className="font-medium text-black hover:text-gray-800">
+                Sign up
+              </Link>
+            </p>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Page;
