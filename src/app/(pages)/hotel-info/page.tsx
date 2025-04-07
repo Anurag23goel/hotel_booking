@@ -332,10 +332,10 @@ const StickyNavigation = ({ activeSection, scrollToSection, navItems }) => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-4 py-2 whitespace-nowrap relative ${
                 activeSection === item.id
-                  ? "bg-indigo-100 text-indigo-700 font-semibold"
-                  : "text-gray-600 hover:bg-gray-100"
+                  ? "text-indigo-700 font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-700 after:transition-all after:duration-300 after:ease-in-out"
+                  : "text-gray-600 hover:text-indigo-600 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-700 after:transition-all after:duration-300 after:ease-in-out"
               }`}
             >
               <item.icon className="w-4 h-4" />

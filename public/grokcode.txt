@@ -1,0 +1,380 @@
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface BedroomFormData {
+  roomName: string;
+  guestAccess: "yes" | "no";
+  bedOptions: {
+    singleBed: boolean;
+    twinBed: boolean;
+    queenBed: boolean;
+    kingBed: boolean;
+    doubleBed: boolean;
+    bunkBed: boolean;
+  };
+  extraBed: {
+    mattress: boolean;
+    cot: boolean;
+    sofaCumBed: boolean;
+  };
+  baseAdults: string;
+  maxAdults: string;
+  hasAttachedBathroom: "yes" | "no";
+  hasAttachedBalcony: "yes" | "no";
+  balconyFurniture: "yes" | "no";
+  amenities: {
+    bedsAndBlanket: {
+      electric: boolean;
+      woollen: boolean;
+    };
+    roomFeatures: {
+      chargingPoint: boolean;
+      seatingArea: boolean;
+      workDesk: boolean;
+    };
+    popularWithGuests: {
+      housekeeping: "24hours" | "limited" | "daily" | "none";
+      kettle: boolean;
+      mineralWater: "free" | "paid" | "none";
+      roomService: "24hours" | "limited" | "none";
+      wifi: "free" | "paid" | "none";
+    };
+    basicFacilities: {
+      powerBackup: "genset" | "inverter" | "none";
+    };
+    mediaAndEntertainment: {
+      tv: "led" | "lcd" | "flatScreen" | "smartTV" | "none";
+      cable: boolean;
+      satelliteChannels: boolean;
+      netflix: boolean;
+    };
+  };
+  roomDescription: string;
+  roomView:
+    | "noView"
+    | "seaView"
+    | "valleyView"
+    | "hillView"
+    | "poolView"
+    | "gardenView"
+    | "riverView"
+    | "lakeView";
+  roomSize: string;
+  roomSizeUnit: "sqMtr" | "sqFt";
+  floorLevel: "ground" | "upper";
+}
+
+const BedroomDetails = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<BedroomFormData>({
+    defaultValues: {
+      roomName: "",
+      guestAccess: "no",
+      bedOptions: {
+        singleBed: false,
+        twinBed: false,
+        queenBed: false,
+        kingBed: false,
+        doubleBed: false,
+        bunkBed: false,
+      },
+      extraBed: {
+        mattress: false,
+        cot: false,
+        sofaCumBed: false,
+      },
+      baseAdults: "2",
+      maxAdults: "2",
+      hasAttachedBathroom: "no",
+      hasAttachedBalcony: "no",
+      balconyFurniture: "no",
+      amenities: {
+        bedsAndBlanket: { electric: false, woollen: false },
+        roomFeatures: { chargingPoint: false, seatingArea: false, workDesk: false },
+        popularWithGuests: {
+          housekeeping: "none",
+          kettle: false,
+          mineralWater: "none",
+          roomService: "none",
+          wifi: "none",
+        },
+        basicFacilities: { powerBackup: "none" },
+        mediaAndEntertainment: { tv: "none", cable: false, satelliteChannels: false, netflix: false },
+      },
+      roomDescription: "",
+      roomView: "noView",
+      roomSize: "",
+      roomSizeUnit: "sqFt",
+      floorLevel: "ground",
+    },
+  });
+
+  const [showNextPage, setShowNextPage] = useState(false);
+
+  const guestAccess = watch("guestAccess");
+  const hasAttachedBalcony = watch("hasAttachedBalcony");
+
+  const onSubmit = (data: BedroomFormData) => {
+    console.log(data);
+    setShowNextPage(true); // Placeholder for navigation to next page
+  };
+
+  return (
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
+        <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
+          <h1 className="text-4xl font-bold text-gray-900">Bedroom 1 Details</h1>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            {/* Access Info */}
+            <div className="bg-white rounded-lg p-6 space-y-6 shadow-lg border border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-800">Access Information</h2>
+              <div className="space-y-2">
+                <label className="block text-gray-700">Room Name</label>
+                <input
+                  type="text"
+                  {...register("roomName", { required: "Room name is required" })}
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Master Bedroom"
+                />
+                {errors.roomName && (
+                  <p className="mt-1 text-sm text-red-600">{errors.roomName.message}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <p className="text-gray-700">Will guests have access to this bedroom?</p>
+                <div className="space-y-2">
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="radio"
+                      value="yes"
+                      {...register("guestAccess", { required: "Please select an option" })}
+                      className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">Yes</span>
+                  </label>
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="radio"
+                      value="no"
+                      {...register("guestAccess", { required: "Please select an option" })}
+                      className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">No</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Sleeping Arrangements */}
+            {guestAccess === "yes" && (
+              <div className="bg-white rounded-lg p-6 space-y-6 shadow-lg border border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-800">Sleeping Arrangements</h2>
+                <div className="space-y-2">
+                  <p className="text-gray-700">Bed Options (Select all that apply)</p>
+                  <div className="space-y-2">
+                    {["singleBed", "twinBed", "queenBed", "kingBed", "doubleBed", "bunkBed"].map(
+                      (bedType) => (
+                        <label key={bedType} className="flex items-center space-x-3">
+                          <input
+                            type="checkbox"
+                            {...register(`bedOptions.${bedType}` as keyof BedroomFormData["bedOptions"])}
+                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                          />
+                          <span className="text-md text-gray-700">
+                            {bedType.replace(/([A-Z])/g, " $1").trim()}
+                          </span>
+                        </label>
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-gray-700">Extra Bed/Cot Options (Select all that apply)</p>
+                  <div className="space-y-2">
+                    {["mattress", "cot", "sofaCumBed"].map((extraBed) => (
+                      <label key={extraBed} className="flex items-center space-x-3">
+                        <input
+                          type="checkbox"
+                          {...register(`extraBed.${extraBed}` as keyof BedroomFormData["extraBed"])}
+                          className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        />
+                        <span className="text-md text-gray-700">
+                          {extraBed.replace(/([A-Z])/g, " $1").trim()}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-gray-700">Base Adults</label>
+                  <input
+                    type="number"
+                    {...register("baseAdults", { required: "Please enter base adults" })}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="e.g., 2"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-gray-700">Maximum Adults</label>
+                  <input
+                    type="number"
+                    {...register("maxAdults", { required: "Please enter maximum adults" })}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="e.g., 4"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Facilities */}
+            {guestAccess === "yes" && (
+              <div className="bg-white rounded-lg p-6 space-y-6 shadow-lg border border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-800">Facilities</h2>
+                <div className="space-y-2">
+                  <p className="text-gray-700">Does the room have an attached bathroom?</p>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-3">
+                      <input
+                        type="radio"
+                        value="yes"
+                        {...register("hasAttachedBathroom", { required: "Please select an option" })}
+                        className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                      <span className="text-md text-gray-700">Yes</span>
+                    </label>
+                    <label className="flex items-center space-x-3">
+                      <input
+                        type="radio"
+                        value="no"
+                        {...register("hasAttachedBathroom", { required: "Please select an option" })}
+                        className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                      <span className="text-md text-gray-700">No</span>
+                    </label>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-gray-700">Does the room have an attached balcony?</p>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-3">
+                      <input
+                        type="radio"
+                        value="yes"
+                        {...register("hasAttachedBalcony", { required: "Please select an option" })}
+                        className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                      <span className="text-md text-gray-700">Yes</span>
+                    </label>
+                    <label className="flex items-center space-x-3">
+                      <input
+                        type="radio"
+                        value="no"
+                        {...register("hasAttachedBalcony", { required: "Please select an option" })}
+                        className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                      <span className="text-md text-gray-700">No</span>
+                    </label>
+                  </div>
+                  {hasAttachedBalcony === "yes" && (
+                    <div className="space-y-2 mt-4">
+                      <p className="text-gray-700">Outdoor furniture on the balcony?</p>
+                      <div className="space-y-2">
+                        <label className="flex items-center space-x-3">
+                          <input
+                            type="radio"
+                            value="yes"
+                            {...register("balconyFurniture", { required: "Please select an option" })}
+                            className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                          />
+                          <span className="text-md text-gray-700">Yes</span>
+                        </label>
+                        <label className="flex items-center space-x-3">
+                          <input
+                            type="radio"
+                            value="no"
+                            {...register("balconyFurniture", { required: "Please select an option" })}
+                            className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+                          />
+                          <span className="text-md text-gray-700">No</span>
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <p className="text-gray-700">Amenities - Beds and Blankets</p>
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      {...register("amenities.bedsAndBlanket.electric")}
+                      className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">Electric Blanket</span>
+                  </label>
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      {...register("amenities.bedsAndBlanket.woollen")}
+                      className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">Woollen Blanket</span>
+                  </label>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-gray-700">Amenities - Room Features</p>
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      {...register("amenities.roomFeatures.chargingPoint")}
+                      className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">Charging Point</span>
+                  </label>
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      {...register("amenities.roomFeatures.seatingArea")}
+                      className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">Seating Area</span>
+                  </label>
+                  <label className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      {...register("amenities.roomFeatures.workDesk")}
+                      className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-md text-gray-700">Work Desk</span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {/* Buttons */}
+            <div className="flex gap-4 pt-6">
+              <button
+                type="button"
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
+              >
+                Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BedroomDetails;

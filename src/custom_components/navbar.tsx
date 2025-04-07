@@ -66,7 +66,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex w-full md:w-auto justify-between items-center">
           <Link
-            href="/hotel-info"
+            href="/home-category-select"
             className="text-xl md:text-2xl font-PlayfairDisplay-Bold mb-4 md:mb-0"
           >
             Bharat Trips
