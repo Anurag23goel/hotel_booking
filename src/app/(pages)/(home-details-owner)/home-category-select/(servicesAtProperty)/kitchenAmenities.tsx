@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import HouseRules from "../houseRules";
+import HouseRules from "./houseRules";
 interface KitchenAmenitiesFormData {
   // Recommended Section
   recommended: {

@@ -33,7 +33,7 @@ interface ServicesFormData {
   propertyStaffChargesAmount: string;
 }
 
-const ServicesAtProperty = () => {
+const CookingFrom  = () => {
   const {
     register,
     handleSubmit,
@@ -654,4 +654,4 @@ const ServicesAtProperty = () => {
   );
 };
 
-export default ServicesAtProperty;
+export default CookingFrom;

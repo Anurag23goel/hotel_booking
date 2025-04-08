@@ -3,7 +3,7 @@ import { Home, CheckCircle2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import locationBg from "../../../../../public/assets/mapsphotu2.jpg";
-import GstAndTaxesForm from "./gstAndTaxesForm";
+import GstAndTaxesForm from "../gstAndTaxesForm";
 
 interface FormData {
   address: string;
@@ -25,11 +25,9 @@ function LocationForm() {
     },
   });
 
-
-
   const [showGstAndTaxes, setShowGstAndTaxes] = useState(false);
-  if(showGstAndTaxes){
-    return <GstAndTaxesForm />
+  if (showGstAndTaxes) {
+    return <GstAndTaxesForm />;
   }
 
   const onSubmit = (data: FormData) => {
@@ -39,18 +37,6 @@ function LocationForm() {
   return (
     <div className="min-h-screen relative">
       {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src={locationBg}
-          alt="Location background"
-          fill
-          priority
-          className="object-cover"
-          quality={100}
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
 
       {/* Form Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
@@ -174,7 +160,9 @@ function LocationForm() {
             </div>
 
             <button
-              onClick={() => {setShowGstAndTaxes(true)}}
+              onClick={() => {
+                setShowGstAndTaxes(true);
+              }}
               type="submit"
               className="w-full p-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors"
             >

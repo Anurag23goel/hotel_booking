@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import CookingFrom from "./(servicesAtProperty)/cookingFrom";
+import CookingFrom from "./cookingFrom";
+
 interface GuestAmenities {
   swimmingPool: boolean;
   parking: boolean;

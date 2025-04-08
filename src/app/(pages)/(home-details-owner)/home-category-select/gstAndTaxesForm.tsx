@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import GuestCanUse from "./guestCanUse";
+
 interface FormData {
   // Ownership Details
   propertyOwnership: "owned" | "leased";
@@ -35,14 +36,13 @@ const GstAndTaxesForm = () => {
   } = useForm<FormData>();
   const [showGuestCanUse, setShowGuestCanUse] = useState(false);
 
-  if(showGuestCanUse){
-    return <GuestCanUse />
+  if (showGuestCanUse) {
+    return <GuestCanUse />;
   }
 
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
-
 
   const hasAadhar = watch("hasAadhar");
   const hasGSTN = watch("hasGSTN");
@@ -54,7 +54,9 @@ const GstAndTaxesForm = () => {
         {/* Content */}
         <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
           <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
-            <h1 className="text-4xl font-bold text-gray-900">Goods and Services Tax (GST)</h1>
+            <h1 className="text-4xl font-bold text-gray-900">
+              Goods and Services Tax (GST)
+            </h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 p-4">
               {/* Ownership Details Section */}
@@ -387,7 +389,9 @@ const GstAndTaxesForm = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {setShowGuestCanUse(true)}}
+                  onClick={() => {
+                    setShowGuestCanUse(true);
+                  }}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

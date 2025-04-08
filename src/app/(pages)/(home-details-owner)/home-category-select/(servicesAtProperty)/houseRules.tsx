@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
+import HotelName from "../(basicInfo)/hotelName";
 interface HouseRulesFormData {
   checkInOut: {
     checkInTime: string;
@@ -76,6 +76,11 @@ const HouseRules = () => {
       },
     },
   });
+  const [showHotelName, setShowHotelName] = useState(false);
+
+  if (showHotelName) {
+    return <HotelName />;
+  }
 
   const onSubmit = (data: HouseRulesFormData) => {
     console.log(data);
@@ -468,6 +473,9 @@ const HouseRules = () => {
                   Back
                 </button>
                 <button
+                  onClick={() => {
+                    setShowHotelName(true);
+                  }}
                   type="submit"
                   className="flex-1 px-3 py-1.5 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium text-sm"
                 >
