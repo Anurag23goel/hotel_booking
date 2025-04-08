@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import MapComponent from "@/components/map-component"
+import MapComponent from "./map-component"
 
 interface PropertyLocationFormProps {
   setCurrentForm: (form: string) => void

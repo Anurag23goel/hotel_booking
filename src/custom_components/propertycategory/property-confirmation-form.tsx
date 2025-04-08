@@ -4,7 +4,13 @@ import Image from "next/image"
 
 interface PropertyConfirmationFormProps {
   setCurrentForm: (form: string) => void
-  formData: { propertyType: string; quantity: string; address: string }
+  formData: { propertyType: string; quantity: string; address: {
+    street: string
+    apartment: string
+    country: string
+    city: string
+    postalCode: string
+  } }
 }
 
 export default function PropertyConfirmationForm({ setCurrentForm, formData }: PropertyConfirmationFormProps) {
@@ -41,7 +47,7 @@ export default function PropertyConfirmationForm({ setCurrentForm, formData }: P
 
         <div className="mb-4">
           <Image
-            src="/placeholder.svg?height=80&width=80"
+            src="/assets/house2.png"
             alt="Property icon"
             width={80}
             height={80}

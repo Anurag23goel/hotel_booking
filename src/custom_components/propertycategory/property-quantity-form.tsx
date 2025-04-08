@@ -6,7 +6,13 @@ import Image from "next/image"
 interface PropertyQuantityFormProps {
   setCurrentForm: (form: string) => void
   updateFormData: (data: { quantity: string }) => void
-  formData: { propertyType: string; quantity: string; address: string }
+  formData: { propertyType: string; quantity: string; address: {
+    street: string
+    apartment: string
+    country: string
+    city: string
+    postalCode: string
+  } }
 }
 
 export default function PropertyQuantityForm({ setCurrentForm, updateFormData, formData }: PropertyQuantityFormProps) {
@@ -91,13 +97,13 @@ export default function PropertyQuantityForm({ setCurrentForm, updateFormData, f
           onClick={() => setSelectedOption("multiple")}
         >
           <div className="flex gap-4">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 mr-[-0.5rem]">
               <Image
-                src="/placeholder.svg?height=40&width=40"
+                src="/assets/multipleHouse.jpg"
                 alt="Multiple properties"
-                width={40}
-                height={40}
-                className="text-[#0071c2]"
+                width={50}
+                height={50}
+                className="text-[#0071c2] "
               />
             </div>
             <div className="flex-1">

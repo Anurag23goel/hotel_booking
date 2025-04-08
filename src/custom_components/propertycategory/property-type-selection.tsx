@@ -61,8 +61,16 @@ const propertyTypes: PropertyType[] = [
 interface PropertyTypeSelectionProps {
   setCurrentForm: (form: string) => void
   updateFormData: (data: { propertyType: string }) => void
-  formData: { propertyType: string; quantity: string; address: string }
-}
+  formData: { propertyType: string; quantity: string; 
+    address: {
+        street: string
+        apartment: string
+        country: string
+        city: string
+        postalCode: string
+      }
+  } }
+
 
 export default function PropertyTypeSelection({
   setCurrentForm,
@@ -95,7 +103,7 @@ export default function PropertyTypeSelection({
               selectedType === type.id ? "border-[#0071c2] border-2" : "border-gray-200 hover:border-gray-300"
             }`}
             onClick={() => setSelectedType(type.id)}
-          >
+          >  
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-lg">{type.title}</h3>
               {selectedType === type.id && (
