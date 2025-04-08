@@ -336,3 +336,4 @@ export default function PropertyRulesForm({ setCurrentForm, updateFormData, form
     </div>
   )
 }
+ 
