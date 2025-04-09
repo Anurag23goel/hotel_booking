@@ -74,37 +74,7 @@ export default function PropertyRulesForm({ setCurrentForm, updateFormData, form
       <h1 className="text-2xl md:text-3xl font-bold mb-6">House rules</h1>
 
       <div className="bg-white rounded-md border border-gray-200 p-6 mb-6 relative">
-        <div className="absolute right-6 top-6 bg-gray-50 border border-gray-200 p-4 rounded-md w-full md:w-64 shadow-md">
-          <div className="flex justify-between items-start mb-2">
-            <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-2"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              <h3 className="font-medium">What if my house rules change?</h3>
-            </div>
-            <button className="text-gray-500 hover:text-gray-700" aria-label="Close">
-              ×
-            </button>
-          </div>
-          <p className="text-sm text-gray-600">
-            You can easily customise these house rules later and additional house rules can be set on the Policies page
-            of the extranet after you complete registration.
-          </p>
-        </div>
-
+  
         <h2 className="text-lg font-semibold mb-4">What are your check-in and check-out times?</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
