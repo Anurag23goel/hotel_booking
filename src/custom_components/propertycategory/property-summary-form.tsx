@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import AddRoomFlow from "@/components/add-room-flow"
+import AddRoomFlow from "../add-room-flow"
 
 interface PropertySummaryFormProps {
   setCurrentForm: (form: string) => void

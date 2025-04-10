@@ -1,6 +1,6 @@
 import AddRoomProgressBar from "./add-room-progress-bar"
 import RoomDetailsForm from "./room-details-form"
-import BathroomDetailsForm from "./bathroom-details-form"
+import BathroomDetailsForm from "./bathroom-details-forms"
 import RoomNameForm from "./room-name-form"
 import RoomPriceForm from "./room-price-form"
 
