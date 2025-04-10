@@ -63,7 +63,7 @@ export default function RoomPriceForm({ setCurrentForm, updateRoomData, roomData
   }
 
   // Calculate commission and earnings
-  const commission = priceDetails.price ? Number.parseFloat(priceDetails.price) * 0.15 : 0
+  const commission = priceDetails.price ? Number.parseFloat(priceDetails.price) * 0.69 : 0
   const earnings = priceDetails.price ? Number.parseFloat(priceDetails.price) - commission : 0
 
   return (
@@ -73,7 +73,7 @@ export default function RoomPriceForm({ setCurrentForm, updateRoomData, roomData
           <h1 className="text-2xl md:text-3xl font-bold mb-6">Set the price per night for this room</h1>
 
           <div className="bg-white rounded-md border border-gray-200 p-6 mb-6 relative">
-            {showInfoBox && (
+            {/* {showInfoBox && (
               <div className="absolute right-6 top-6 bg-gray-50 border border-gray-200 p-4 rounded-md w-full md:w-64 shadow-md">
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex items-center">
@@ -108,7 +108,7 @@ export default function RoomPriceForm({ setCurrentForm, updateRoomData, roomData
                   prices, giving you more control over what you earn.
                 </p>
               </div>
-            )}
+            )} */}
 
             <div className="mb-6">
               <h2 className="text-lg font-semibold mb-3">How much do you want to charge per night?</h2>
@@ -135,7 +135,7 @@ export default function RoomPriceForm({ setCurrentForm, updateRoomData, roomData
 
               <div className="mt-4 space-y-2">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium">15.00% Booking.com commission</span>
+                  <span className="font-medium">69.00% Booking.com commission</span>
                 </div>
 
                 <div className="flex items-center text-sm text-green-600">
@@ -266,7 +266,7 @@ export default function RoomPriceForm({ setCurrentForm, updateRoomData, roomData
                     <span>× 2</span>
                   </div>
                   <div>
-                    <span>
+                    <span >
                       {priceDetails.currency} {Number.parseFloat(priceDetails.price).toFixed(2)}
                     </span>
                   </div>
