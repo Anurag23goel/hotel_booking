@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import KitchenAmenities from "./kitchenAmenities";
+
 interface ServicesFormData {
   servesBreakfast: "yes" | "no";
   parkingOption: "free" | "paid" | "no";
@@ -33,7 +34,11 @@ interface ServicesFormData {
   propertyStaffChargesAmount: string;
 }
 
-const CookingFrom  = () => {
+interface CookingFromProps {
+  onComplete?: () => void;
+}
+
+function CookingFrom({ onComplete }: CookingFromProps) {
   const {
     register,
     handleSubmit,
@@ -74,8 +79,9 @@ const CookingFrom  = () => {
   });
 
   const [showKitchenAmenities, setShowKitchenAmenities] = useState(false);
-  if(showKitchenAmenities){
-    return <KitchenAmenities />
+  
+  if (showKitchenAmenities) {
+    return <KitchenAmenities onComplete={onComplete} />;
   }
 
   const hasCook = watch("hasCook");
@@ -85,6 +91,8 @@ const CookingFrom  = () => {
 
   const onSubmit = (data: ServicesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowKitchenAmenities(true);
   };
 
   return (
@@ -311,9 +319,9 @@ const CookingFrom  = () => {
                         <p className="text-gray-700">Cook Charges</p>
                         <p className="text-sm text-gray-500">
                           (Mention the cook charges applicable for your
-                          property`&apos;`s Base Occupancy. These charges are payable
-                          at the property. Please DO NOT include the cost of
-                          ingredients.)
+                          property`&apos;`s Base Occupancy. These charges are
+                          payable at the property. Please DO NOT include the
+                          cost of ingredients.)
                         </p>
                         <div className="space-y-2">
                           <label className="flex items-center space-x-3">
@@ -639,7 +647,6 @@ const CookingFrom  = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {setShowKitchenAmenities(true)}}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

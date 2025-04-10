@@ -88,7 +88,11 @@ interface GeneralServicesFormData {
   };
 }
 
-const GeneralServices = () => {
+interface GeneralServicesProps {
+  onComplete: () => void;
+}
+
+const GeneralServices = ({ onComplete }: GeneralServicesProps) => {
   const {
     register,
     handleSubmit,
@@ -182,12 +186,14 @@ const GeneralServices = () => {
   });
   const [showCommonAreaServices, setShowCommonAreaServices] = useState(false);
 
-  if(showCommonAreaServices){
-      return <CommonArea />
+  if (showCommonAreaServices) {
+    return <CommonArea onComplete={onComplete} />;
   }
 
   const onSubmit = (data: GeneralServicesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowCommonAreaServices(true);
   };
 
   return (
@@ -195,65 +201,19 @@ const GeneralServices = () => {
       <div className="min-h-screen relative overflow-hidden">
         <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
           <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
-            <h1 className="text-4xl font-bold text-gray-900">
-              General Services
-            </h1>
-
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                 {/* General Services Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">
                     General Services
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Bellboy Service */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="bellboyService"
-                        {...register("bellboyService")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="bellboyService"
-                        className="text-sm font-medium"
-                      >
-                        Bellboy Service
-                      </label>
-                    </div>
+                    
 
-                    {/* Caretaker */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="caretaker"
-                        {...register("caretaker")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="caretaker"
-                        className="text-sm font-medium"
-                      >
-                        Caretaker
-                      </label>
-                    </div>
+                    
 
-                    {/* Concierge */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="concierge"
-                        {...register("concierge")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="concierge"
-                        className="text-sm font-medium"
-                      >
-                        Concierge
-                      </label>
-                    </div>
+                    
 
                     {/* Multilingual Staff */}
                     <div className="space-y-2">
@@ -295,38 +255,6 @@ const GeneralServices = () => {
                           </label>
                         </div>
                       </div>
-                    </div>
-
-                    {/* Luggage Assistance */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="luggageAssistance"
-                        {...register("luggageAssistance")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="luggageAssistance"
-                        className="text-sm font-medium"
-                      >
-                        Luggage Assistance
-                      </label>
-                    </div>
-
-                    {/* Luggage Storage */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="luggageStorage"
-                        {...register("luggageStorage")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="luggageStorage"
-                        className="text-sm font-medium"
-                      >
-                        Luggage Storage
-                      </label>
                     </div>
 
                     {/* Especially Abled Assistance */}
@@ -386,22 +314,6 @@ const GeneralServices = () => {
                           </label>
                         </div>
                       </div>
-                    </div>
-
-                    {/* Wake-up Call */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="wakeUpCall"
-                        {...register("wakeUpCall")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="wakeUpCall"
-                        className="text-sm font-medium"
-                      >
-                        Wake-up Call/Service
-                      </label>
                     </div>
 
                     {/* Wheelchair */}
@@ -477,9 +389,109 @@ const GeneralServices = () => {
                         </div>
                       </div>
                     </div>
+                        
+
+                    {/* Caretaker */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="caretaker"
+                        {...register("caretaker")}
+                        className="w-5 h-5   text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="caretaker"
+                        className="text-sm font-medium"
+                      >
+                        Caretaker
+                      </label>
+                    </div>
+
+                    {/* Bellboy Service */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="bellboyService"
+                        {...register("bellboyService")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="bellboyService"
+                        className="text-sm font-medium"
+                      >
+                        Bellboy Service
+                      </label>
+                    </div>
+
+                    {/* Concierge */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="concierge"
+                        {...register("concierge")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="concierge"
+                        className="text-sm font-medium"
+                      >
+                        Concierge
+                      </label>
+                    </div>
+
+                    {/* Luggage Assistance */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="luggageAssistance"
+                        {...register("luggageAssistance")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="luggageAssistance"
+                        className="text-sm font-medium"
+                      >
+                        Luggage Assistance
+                      </label>
+                    </div>
+
+                    {/* Luggage Storage */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="luggageStorage"
+                        {...register("luggageStorage")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="luggageStorage"
+                        className="text-sm font-medium"
+                      >
+                        Luggage Storage
+                      </label>
+                    </div>
+
+                    
+                    {/* Wake-up Call */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="wakeUpCall"
+                        {...register("wakeUpCall")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="wakeUpCall"
+                        className="text-sm font-medium"
+                      >
+                        Wake-up Call/Service
+                      </label>
+                    </div>
+
+                    
 
                     {/* Doctor on Call */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="doctorOnCall"
@@ -495,7 +507,7 @@ const GeneralServices = () => {
                     </div>
 
                     {/* Medical Center */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="medicalCenter"
@@ -511,7 +523,7 @@ const GeneralServices = () => {
                     </div>
 
                     {/* Pool/Beach Towels */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="poolBeachTowels"
@@ -533,7 +545,7 @@ const GeneralServices = () => {
                   <h2 className="text-xl font-semibold mb-4">
                     Outdoor Activities and Sports
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     {/* Beach */}
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Beach</label>
@@ -626,31 +638,7 @@ const GeneralServices = () => {
                       </div>
                     </div>
 
-                    {/* Golf */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="golf"
-                        {...register("outdoorActivities.golf")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label htmlFor="golf" className="text-sm font-medium">
-                        Golf
-                      </label>
-                    </div>
-
-                    {/* Kayaks */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="kayaks"
-                        {...register("outdoorActivities.kayaks")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label htmlFor="kayaks" className="text-sm font-medium">
-                        Kayaks
-                      </label>
-                    </div>
+                    
 
                     {/* Outdoor Sports */}
                     <div className="space-y-2">
@@ -853,21 +841,7 @@ const GeneralServices = () => {
                       </div>
                     </div>
 
-                    {/* Telescope */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="telescope"
-                        {...register("outdoorActivities.telescope")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label
-                        htmlFor="telescope"
-                        className="text-sm font-medium"
-                      >
-                        Telescope
-                      </label>
-                    </div>
+                    
 
                     {/* Water Sports */}
                     <div className="space-y-2">
@@ -1110,7 +1084,7 @@ const GeneralServices = () => {
                     </div>
 
                     {/* Cycling */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex  items-center space-x-2">
                       <input
                         type="checkbox"
                         id="cycling"
@@ -1121,6 +1095,49 @@ const GeneralServices = () => {
                         Cycling
                       </label>
                     </div>
+
+                    {/* Telescope */}
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="telescope"
+                        {...register("outdoorActivities.telescope")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="telescope"
+                        className="text-sm font-medium"
+                      >
+                        Telescope
+                      </label>
+                    </div>
+                    {/* Golf */}
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="golf"
+                        {...register("outdoorActivities.golf")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label htmlFor="golf" className="text-sm font-medium">
+                        Golf
+                      </label>
+                    </div>
+
+                    {/* Kayaks */}
+                    <div className="flex  items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="kayaks"
+                        {...register("outdoorActivities.kayaks")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label htmlFor="kayaks" className="text-sm font-medium">
+                        Kayaks
+                      </label>
+                    </div>
+
+                    
                   </div>
                 </div>
               </div>
@@ -1133,7 +1150,6 @@ const GeneralServices = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => setShowCommonAreaServices(true)}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

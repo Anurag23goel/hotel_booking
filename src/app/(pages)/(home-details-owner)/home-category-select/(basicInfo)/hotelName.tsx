@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
-import GuestCanUse from "../(servicesAtProperty)/guestCanUse";
+import PropertyLocationForm from "./location-form";
 
 interface FormData {
   propertyName: string;
   propertyDescription: string;
 }
 
-const HotelName = () => {
+interface PropertyNameFormProps {
+  onComplete?: () => void;
+}
+
+const HotelName = ({ onComplete }: PropertyNameFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const [showGuestCanUse, setShowGuestCanUse] = useState(false);
+  const [showPropertyLocation, setShowPropertyLocation] = useState(false);
 
-  if (showGuestCanUse) {
-    return <GuestCanUse />;
+  if (showPropertyLocation) {
+    return <PropertyLocationForm onComplete={onComplete} />;
   }
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    setShowGuestCanUse(true);
+    onComplete?.();
+    setShowPropertyLocation(true);
   };
 
   return (

@@ -8,12 +8,19 @@ interface FinanceAndLegalFormData {
     propertyOwnership: "owned" | "leased";
     hasRegistrationDocument: boolean;
     registrationDocument: File | null;
+    ownerName: string;
+    ownerEmail: string;
+    ownerPhone: string;
+    ownerAddress: string;
   };
   idProofs: {
     hasAadhar: boolean;
     aadharNumber: string;
     selectedDocument: "drivingLicense" | "voterId" | "passport" | "none";
     documentFile: File | null;
+    panCard: File | null;
+    aadharCard: File | null;
+    gstCertificate: File | null;
   };
   paymentDetails: {
     gstPan: {
@@ -27,10 +34,20 @@ interface FinanceAndLegalFormData {
       ifscCode: string;
       bankName: string;
     };
+    bankName: string;
+    accountHolderName: string;
+    upiId: string;
+  };
+  termsAndConditions: {
+    accepted: boolean;
   };
 }
 
-const FinanceAndLegal = () => {
+interface FinanceAndLegalProps {
+  onComplete?: () => void;
+}
+
+const FinanceAndLegal = ({ onComplete }: FinanceAndLegalProps) => {
   const {
     register,
     handleSubmit,
@@ -43,12 +60,19 @@ const FinanceAndLegal = () => {
         propertyOwnership: "owned",
         hasRegistrationDocument: false,
         registrationDocument: null,
+        ownerName: "",
+        ownerEmail: "",
+        ownerPhone: "",
+        ownerAddress: "",
       },
       idProofs: {
         hasAadhar: false,
         aadharNumber: "",
         selectedDocument: "none",
         documentFile: null,
+        panCard: null,
+        aadharCard: null,
+        gstCertificate: null,
       },
       paymentDetails: {
         gstPan: {
@@ -62,6 +86,12 @@ const FinanceAndLegal = () => {
           ifscCode: "",
           bankName: "",
         },
+        bankName: "",
+        accountHolderName: "",
+        upiId: "",
+      },
+      termsAndConditions: {
+        accepted: false,
       },
     },
   });
@@ -77,11 +107,13 @@ const FinanceAndLegal = () => {
   const selectedDocument = watch("idProofs.selectedDocument");
 
   if (showHotelName) {
-    return <HotelName />;
+    return <HotelName onComplete={onComplete} />;
   }
 
   const onSubmit = (data: FinanceAndLegalFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowHotelName(true);
   };
 
   const handleFileChange = (
@@ -616,9 +648,6 @@ const FinanceAndLegal = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {
-                    setShowHotelName(true);
-                  }}
                   type="submit"
                   className="flex-1 px-3 py-1.5 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium text-sm"
                 >

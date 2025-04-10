@@ -72,7 +72,11 @@ interface GeneralServicesFormData {
   };
 }
 
-const ThreeMoreAmenities = () => {
+interface ThreeMoreAmenitiesProps { 
+  onComplete: () => void;
+}
+
+const ThreeMoreAmenities = ({ onComplete }: ThreeMoreAmenitiesProps) => {
   const {
     register,
     handleSubmit,
@@ -92,7 +96,11 @@ const ThreeMoreAmenities = () => {
       },
       healthAndWellness: {
         activityCentre: false,
-        gym: { available: false, twentyFourHours: false, personalTrainer: false },
+        gym: {
+          available: false,
+          twentyFourHours: false,
+          personalTrainer: false,
+        },
         reflexology: false,
         yoga: false,
         meditationRoom: false,
@@ -112,18 +120,24 @@ const ThreeMoreAmenities = () => {
         spa: { available: false, type: "free" },
         steamAndSauna: { available: false, type: "free" },
         openAirBath: false,
-        hammam: { available: false, womenOnly: false, availableForCouple: false },
+        hammam: {
+          available: false,
+          womenOnly: false,
+          availableForCouple: false,
+        },
       },
     },
   });
   const [showFourMoreServices, setShowFourMoreServices] = useState(false);
 
-  if(showFourMoreServices){
-    return <FourMore />
-  } 
+  if (showFourMoreServices) {
+    return <FourMore onComplete={onComplete} />;
+  }
 
   const onSubmit = (data: GeneralServicesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowFourMoreServices(true);
   };
 
   return (
@@ -131,26 +145,17 @@ const ThreeMoreAmenities = () => {
       <div className="min-h-screen relative overflow-hidden">
         <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
           <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
-            <h1 className="text-4xl font-bold text-gray-900">Continue Services</h1>
+            
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                 {/* Food and Drinks Section */}
                 <div className="col-span-2">
-                  <h2 className="text-xl font-semibold mb-4">Food and Drinks</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Bar */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="bar"
-                        {...register("foodAndDrinks.bar")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label htmlFor="bar" className="text-sm font-medium">
-                        Bar
-                      </label>
-                    </div>
+                  <h2 className="text-xl font-semibold mb-4">
+                    Food and Drinks
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
 
                     {/* Barbeque */}
                     <div className="space-y-2">
@@ -163,7 +168,10 @@ const ThreeMoreAmenities = () => {
                             {...register("foodAndDrinks.barbeque.available")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="barbequeAvailable" className="text-sm">
+                          <label
+                            htmlFor="barbequeAvailable"
+                            className="text-sm"
+                          >
                             Available
                           </label>
                         </div>
@@ -232,45 +240,6 @@ const ThreeMoreAmenities = () => {
                       </div>
                     </div>
 
-                    {/* Coffee Shop */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="coffeeShop"
-                        {...register("foodAndDrinks.coffeeShop")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label htmlFor="coffeeShop" className="text-sm font-medium">
-                        Coffee Shop
-                      </label>
-                    </div>
-
-                    {/* Dining Area */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="diningArea"
-                        {...register("foodAndDrinks.diningArea")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label htmlFor="diningArea" className="text-sm font-medium">
-                        Dining Area
-                      </label>
-                    </div>
-
-                    {/* Kids Meals */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        id="kidsMeals"
-                        {...register("foodAndDrinks.kidsMeals")}
-                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <label htmlFor="kidsMeals" className="text-sm font-medium">
-                        Kids Meals
-                      </label>
-                    </div>
-
                     {/* Restaurant */}
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Restaurant</label>
@@ -282,7 +251,10 @@ const ThreeMoreAmenities = () => {
                             {...register("foodAndDrinks.restaurant.available")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="restaurantAvailable" className="text-sm">
+                          <label
+                            htmlFor="restaurantAvailable"
+                            className="text-sm"
+                          >
                             Available
                           </label>
                         </div>
@@ -315,8 +287,53 @@ const ThreeMoreAmenities = () => {
                       </div>
                     </div>
 
-                    {/* Bakery */}
-                    <div className="flex items-center space-x-2">
+                    {/* Bar */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="bar"
+                        {...register("foodAndDrinks.bar")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label htmlFor="bar" className="text-sm font-medium">
+                        Bar
+                      </label>
+                    </div>
+
+{/* Coffee Shop */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="coffeeShop"
+                        {...register("foodAndDrinks.coffeeShop")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="coffeeShop"
+                        className="text-sm font-medium"
+                      >
+                        Coffee Shop
+                      </label>
+                    </div>
+
+ {/* Kids Meals */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="kidsMeals"
+                        {...register("foodAndDrinks.kidsMeals")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="kidsMeals"
+                        className="text-sm font-medium"
+                      >
+                        Kids Meals
+                      </label>
+                    </div>
+
+{/* Bakery */}
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="bakery"
@@ -327,29 +344,54 @@ const ThreeMoreAmenities = () => {
                         Bakery
                       </label>
                     </div>
+
+{/* Dining Area */}
+                    <div className="flex ml-4 items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="diningArea"
+                        {...register("foodAndDrinks.diningArea")}
+                        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="diningArea"
+                        className="text-sm font-medium"
+                      >
+                        Dining Area
+                      </label>
+                    </div>
+
+                    
                   </div>
                 </div>
 
                 {/* Health and Wellness Section */}
                 <div className="col-span-2">
-                  <h2 className="text-xl font-semibold mb-4">Health and Wellness</h2>
+                  <h2 className="text-xl font-semibold mb-4">
+                    Health and Wellness
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Activity Centre */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="activityCentre"
                         {...register("healthAndWellness.activityCentre")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="activityCentre" className="text-sm font-medium">
+                      <label
+                        htmlFor="activityCentre"
+                        className="text-sm font-medium"
+                      >
                         Activity Centre
                       </label>
                     </div>
 
                     {/* Gym/Fitness Centre */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Gym/Fitness Centre</label>
+                    <div className=" space-y-2">
+                      <label className="text-sm font-medium">
+                        Gym/Fitness Centre
+                      </label>
                       <div className="ml-4 space-y-2">
                         <div className="flex items-center space-x-2">
                           <input
@@ -368,7 +410,9 @@ const ThreeMoreAmenities = () => {
                               <input
                                 type="checkbox"
                                 id="gym24Hours"
-                                {...register("healthAndWellness.gym.twentyFourHours")}
+                                {...register(
+                                  "healthAndWellness.gym.twentyFourHours"
+                                )}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
                               <label htmlFor="gym24Hours" className="text-sm">
@@ -379,10 +423,15 @@ const ThreeMoreAmenities = () => {
                               <input
                                 type="checkbox"
                                 id="personalTrainer"
-                                {...register("healthAndWellness.gym.personalTrainer")}
+                                {...register(
+                                  "healthAndWellness.gym.personalTrainer"
+                                )}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
-                              <label htmlFor="personalTrainer" className="text-sm">
+                              <label
+                                htmlFor="personalTrainer"
+                                className="text-sm"
+                              >
                                 Personal Trainer
                               </label>
                             </div>
@@ -392,20 +441,23 @@ const ThreeMoreAmenities = () => {
                     </div>
 
                     {/* Reflexology */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="reflexology"
                         {...register("healthAndWellness.reflexology")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="reflexology" className="text-sm font-medium">
+                      <label
+                        htmlFor="reflexology"
+                        className="text-sm font-medium"
+                      >
                         Reflexology
                       </label>
                     </div>
 
                     {/* Yoga */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="yoga"
@@ -418,27 +470,33 @@ const ThreeMoreAmenities = () => {
                     </div>
 
                     {/* Meditation Room */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="meditationRoom"
                         {...register("healthAndWellness.meditationRoom")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="meditationRoom" className="text-sm font-medium">
+                      <label
+                        htmlFor="meditationRoom"
+                        className="text-sm font-medium"
+                      >
                         Meditation Room
                       </label>
                     </div>
 
                     {/* First Aid Services */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="firstAidServices"
                         {...register("healthAndWellness.firstAidServices")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="firstAidServices" className="text-sm font-medium">
+                      <label
+                        htmlFor="firstAidServices"
+                        className="text-sm font-medium"
+                      >
                         First Aid Services
                       </label>
                     </div>
@@ -447,10 +505,12 @@ const ThreeMoreAmenities = () => {
 
                 {/* Business Centre and Conferences Section */}
                 <div className="col-span-2">
-                  <h2 className="text-xl font-semibold mb-4">Business Centre and Conferences</h2>
+                  <h2 className="text-xl font-semibold mb-4">
+                    Business Centre and Conferences
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Banquet */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="banquet"
@@ -463,59 +523,71 @@ const ThreeMoreAmenities = () => {
                     </div>
 
                     {/* Business Center */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4  items-center space-x-2">
                       <input
                         type="checkbox"
                         id="businessCenter"
                         {...register("businessCentre.businessCenter")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="businessCenter" className="text-sm font-medium">
+                      <label
+                        htmlFor="businessCenter"
+                        className="text-sm font-medium"
+                      >
                         Business Center
                       </label>
                     </div>
 
                     {/* Conference Room */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="conferenceRoom"
                         {...register("businessCentre.conferenceRoom")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="conferenceRoom" className="text-sm font-medium">
+                      <label
+                        htmlFor="conferenceRoom"
+                        className="text-sm font-medium"
+                      >
                         Conference Room
                       </label>
                     </div>
 
                     {/* Photocopying */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="photocopying"
                         {...register("businessCentre.photocopying")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="photocopying" className="text-sm font-medium">
+                      <label
+                        htmlFor="photocopying"
+                        className="text-sm font-medium"
+                      >
                         Photocopying
                       </label>
                     </div>
 
                     {/* Fax Service */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="faxService"
                         {...register("businessCentre.faxService")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="faxService" className="text-sm font-medium">
+                      <label
+                        htmlFor="faxService"
+                        className="text-sm font-medium"
+                      >
                         Fax Service
                       </label>
                     </div>
 
                     {/* Printer */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="printer"
@@ -554,10 +626,15 @@ const ThreeMoreAmenities = () => {
                               <input
                                 type="checkbox"
                                 id="coupleMassage"
-                                {...register("beautyAndSpa.massage.coupleMassage")}
+                                {...register(
+                                  "beautyAndSpa.massage.coupleMassage"
+                                )}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
-                              <label htmlFor="coupleMassage" className="text-sm">
+                              <label
+                                htmlFor="coupleMassage"
+                                className="text-sm"
+                              >
                                 Couple Massage
                               </label>
                             </div>
@@ -565,7 +642,9 @@ const ThreeMoreAmenities = () => {
                               <input
                                 type="checkbox"
                                 id="footMassage"
-                                {...register("beautyAndSpa.massage.footMassage")}
+                                {...register(
+                                  "beautyAndSpa.massage.footMassage"
+                                )}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
                               <label htmlFor="footMassage" className="text-sm">
@@ -663,16 +742,23 @@ const ThreeMoreAmenities = () => {
 
                     {/* Steam and Sauna */}
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Steam and Sauna</label>
+                      <label className="text-sm font-medium">
+                        Steam and Sauna
+                      </label>
                       <div className="ml-4 space-y-2">
                         <div className="flex items-center space-x-2">
                           <input
                             type="checkbox"
                             id="steamSaunaAvailable"
-                            {...register("beautyAndSpa.steamAndSauna.available")}
+                            {...register(
+                              "beautyAndSpa.steamAndSauna.available"
+                            )}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="steamSaunaAvailable" className="text-sm">
+                          <label
+                            htmlFor="steamSaunaAvailable"
+                            className="text-sm"
+                          >
                             Available
                           </label>
                         </div>
@@ -702,14 +788,17 @@ const ThreeMoreAmenities = () => {
                     </div>
 
                     {/* Open Air Bath */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="openAirBath"
                         {...register("beautyAndSpa.openAirBath")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="openAirBath" className="text-sm font-medium">
+                      <label
+                        htmlFor="openAirBath"
+                        className="text-sm font-medium"
+                      >
                         Open Air Bath
                       </label>
                     </div>
@@ -738,7 +827,10 @@ const ThreeMoreAmenities = () => {
                                 {...register("beautyAndSpa.hammam.womenOnly")}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
-                              <label htmlFor="hammamWomenOnly" className="text-sm">
+                              <label
+                                htmlFor="hammamWomenOnly"
+                                className="text-sm"
+                              >
                                 Women Only
                               </label>
                             </div>
@@ -746,7 +838,9 @@ const ThreeMoreAmenities = () => {
                               <input
                                 type="checkbox"
                                 id="hammamCouple"
-                                {...register("beautyAndSpa.hammam.availableForCouple")}
+                                {...register(
+                                  "beautyAndSpa.hammam.availableForCouple"
+                                )}
                                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                               />
                               <label htmlFor="hammamCouple" className="text-sm">
@@ -769,7 +863,6 @@ const ThreeMoreAmenities = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => setShowFourMoreServices(true)}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

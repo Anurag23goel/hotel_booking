@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import HotelName from "./(basicInfo)/hotelName";
+import FinanceAndLegal from "./FinanceAndLegal";
 
 interface PricingAndAvailabilityFormData {
   inventory: {
@@ -33,7 +34,13 @@ interface PricingAndAvailabilityFormData {
   };
 }
 
-const PricingAndAvailability = () => {
+interface PricingAndAvailabilityProps {
+  onComplete?: () => void;
+}
+
+const PricingAndAvailability = ({
+  onComplete,
+}: PricingAndAvailabilityProps) => {
   const {
     register,
     handleSubmit,
@@ -70,14 +77,16 @@ const PricingAndAvailability = () => {
       },
     },
   });
-  const [showHotelName, setShowHotelName] = useState(false);
+  const [showFinanceAndLegal, setShowFinanceAndLegal] = useState(false);
 
-  if (showHotelName) {
-    return <HotelName />;
+  if (showFinanceAndLegal) {
+    return <FinanceAndLegal onComplete={onComplete} />;
   }
 
   const onSubmit = (data: PricingAndAvailabilityFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowFinanceAndLegal(true);
   };
 
   return (
@@ -532,9 +541,6 @@ const PricingAndAvailability = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {
-                    setShowHotelName(true);
-                  }}
                   type="submit"
                   className="flex-1 px-3 py-1.5 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium text-sm"
                 >

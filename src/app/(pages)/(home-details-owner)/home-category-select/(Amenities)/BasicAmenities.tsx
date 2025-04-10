@@ -80,7 +80,11 @@ interface BasicFacilitiesFormData {
   evChargingStation: boolean;
 }
 
-const BasicAmenities = () => {
+interface BasicAmenitiesProps {
+  onComplete: () => void;
+}
+
+const BasicAmenities = ({ onComplete }: BasicAmenitiesProps) => {
   const [showGeneralServices, setShowGeneralServices] = useState(false);
 
   const {
@@ -168,11 +172,13 @@ const BasicAmenities = () => {
   });
 
   if (showGeneralServices) {
-    return <GeneralServices />;
+    return <GeneralServices onComplete={onComplete} />;
   }
 
   const onSubmit = (data: BasicFacilitiesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowGeneralServices(true);
   };
 
   return (
@@ -181,27 +187,14 @@ const BasicAmenities = () => {
         <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
           <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
             <h1 className="text-4xl font-bold text-gray-900">
-              Basic Facilities
+              Basic Facilities & Services
             </h1>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Elevator */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="elevator"
-                    {...register("elevator")}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="elevator" className="text-sm font-medium">
-                    Elevator/Lift
-                  </label>
-                </div>
-
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
+              <div className="grid grid-cols-1 md:grid-cols-1   gap-6 ">
                 {/* Air Conditioning */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">
+                  <label className="text-md font-medium">
                     Air Conditioning
                   </label>
                   <div className="ml-4 space-y-2">
@@ -212,7 +205,10 @@ const BasicAmenities = () => {
                         {...register("airConditioning.roomControlled")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="roomControlled" className="text-sm">
+                      <label
+                        htmlFor="roomControlled"
+                        className="text-sm font-medium"
+                      >
                         Room Controlled
                       </label>
                     </div>
@@ -223,29 +219,19 @@ const BasicAmenities = () => {
                         {...register("airConditioning.centralized")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="centralized" className="text-sm">
+                      <label
+                        htmlFor="centralized"
+                        className="text-sm font-medium"
+                      >
                         Centralized
                       </label>
                     </div>
                   </div>
                 </div>
 
-                {/* Housekeeping */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="housekeeping"
-                    {...register("housekeeping")}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="housekeeping" className="text-sm font-medium">
-                    Housekeeping
-                  </label>
-                </div>
-
                 {/* Ironing Service */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Ironing Service</label>
+                  <label className="text-md font-medium">Ironing Service</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -254,7 +240,10 @@ const BasicAmenities = () => {
                         {...register("ironingService.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="ironingAvailable" className="text-sm">
+                      <label
+                        htmlFor="ironingAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -267,7 +256,7 @@ const BasicAmenities = () => {
                             {...register("ironingService.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Free</span>
+                          <span className="text-sm font-medium">Free</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input
@@ -276,7 +265,7 @@ const BasicAmenities = () => {
                             {...register("ironingService.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Paid</span>
+                          <span className="text-sm font-medium">Paid</span>
                         </label>
                       </div>
                     )}
@@ -285,7 +274,7 @@ const BasicAmenities = () => {
 
                 {/* Kitchen */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">
+                  <label className="text-md font-medium">
                     Kitchen/Kitchenette
                   </label>
                   <div className="ml-4 space-y-2">
@@ -296,7 +285,10 @@ const BasicAmenities = () => {
                         {...register("kitchen.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="kitchenAvailable" className="text-sm">
+                      <label
+                        htmlFor="kitchenAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -311,7 +303,7 @@ const BasicAmenities = () => {
                           />
                           <label
                             htmlFor="cookingAppliances"
-                            className="text-sm"
+                            className="text-sm font-medium"
                           >
                             Cooking Appliances
                           </label>
@@ -323,7 +315,10 @@ const BasicAmenities = () => {
                             {...register("kitchen.microwave")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="microwave" className="text-sm">
+                          <label
+                            htmlFor="microwave"
+                            className="text-sm font-medium"
+                          >
                             Microwave
                           </label>
                         </div>
@@ -334,7 +329,10 @@ const BasicAmenities = () => {
                             {...register("kitchen.utensils")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="utensils" className="text-sm">
+                          <label
+                            htmlFor="utensils"
+                            className="text-sm font-medium"
+                          >
                             Utensils
                           </label>
                         </div>
@@ -345,7 +343,10 @@ const BasicAmenities = () => {
                             {...register("kitchen.toaster")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="toaster" className="text-sm">
+                          <label
+                            htmlFor="toaster"
+                            className="text-sm font-medium"
+                          >
                             Toaster
                           </label>
                         </div>
@@ -356,7 +357,10 @@ const BasicAmenities = () => {
                             {...register("kitchen.induction")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="induction" className="text-sm">
+                          <label
+                            htmlFor="induction"
+                            className="text-sm font-medium"
+                          >
                             Induction
                           </label>
                         </div>
@@ -367,7 +371,10 @@ const BasicAmenities = () => {
                             {...register("kitchen.cutlery")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="cutlery" className="text-sm">
+                          <label
+                            htmlFor="cutlery"
+                            className="text-sm font-medium"
+                          >
                             Cutlery
                           </label>
                         </div>
@@ -378,7 +385,7 @@ const BasicAmenities = () => {
 
                 {/* LAN */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">LAN</label>
+                  <label className="text-md font-medium">LAN</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -387,7 +394,10 @@ const BasicAmenities = () => {
                         {...register("lan.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="lanAvailable" className="text-sm">
+                      <label
+                        htmlFor="lanAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -400,7 +410,7 @@ const BasicAmenities = () => {
                             {...register("lan.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Free</span>
+                          <span className="text-sm font-medium">Free</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input
@@ -409,7 +419,7 @@ const BasicAmenities = () => {
                             {...register("lan.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Paid</span>
+                          <span className="text-sm font-medium">Paid</span>
                         </label>
                       </div>
                     )}
@@ -418,7 +428,7 @@ const BasicAmenities = () => {
 
                 {/* Laundry */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Laundry</label>
+                  <label className="text-md font-medium">Laundry</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -427,7 +437,10 @@ const BasicAmenities = () => {
                         {...register("laundry.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="laundryAvailable" className="text-sm">
+                      <label
+                        htmlFor="laundryAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -440,7 +453,7 @@ const BasicAmenities = () => {
                             {...register("laundry.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Free</span>
+                          <span className="text-sm font-medium">Free</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input
@@ -449,7 +462,7 @@ const BasicAmenities = () => {
                             {...register("laundry.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Paid</span>
+                          <span className="text-sm font-medium">Paid</span>
                         </label>
                       </div>
                     )}
@@ -458,7 +471,7 @@ const BasicAmenities = () => {
 
                 {/* Newspaper */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Newspaper</label>
+                  <label className="text-md font-medium">Newspaper</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -467,7 +480,10 @@ const BasicAmenities = () => {
                         {...register("newspaper.localLanguage")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="localLanguage" className="text-sm">
+                      <label
+                        htmlFor="localLanguage"
+                        className="text-sm font-medium"
+                      >
                         Local Language
                       </label>
                     </div>
@@ -478,7 +494,7 @@ const BasicAmenities = () => {
                         {...register("newspaper.english")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="english" className="text-sm">
+                      <label htmlFor="english" className="text-sm font-medium">
                         English
                       </label>
                     </div>
@@ -487,7 +503,7 @@ const BasicAmenities = () => {
 
                 {/* Parking */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Parking</label>
+                  <label className="text-md font-medium">Parking</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -496,7 +512,10 @@ const BasicAmenities = () => {
                         {...register("parking.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="parkingAvailable" className="text-sm">
+                      <label
+                        htmlFor="parkingAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -509,7 +528,7 @@ const BasicAmenities = () => {
                             {...register("parking.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Free</span>
+                          <span className="text-sm font-medium">Free</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input
@@ -518,7 +537,7 @@ const BasicAmenities = () => {
                             {...register("parking.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Paid</span>
+                          <span className="text-sm font-medium">Paid</span>
                         </label>
                       </div>
                     )}
@@ -527,7 +546,7 @@ const BasicAmenities = () => {
 
                 {/* Power Backup */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Power Backup</label>
+                  <label className="text-md font-medium">Power Backup</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -536,7 +555,7 @@ const BasicAmenities = () => {
                         {...register("powerBackup.genset")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="genset" className="text-sm">
+                      <label htmlFor="genset" className="text-sm font-medium">
                         Genset
                       </label>
                     </div>
@@ -547,29 +566,16 @@ const BasicAmenities = () => {
                         {...register("powerBackup.inverter")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="inverter" className="text-sm">
+                      <label htmlFor="inverter" className="text-sm font-medium">
                         Inverter
                       </label>
                     </div>
                   </div>
                 </div>
 
-                {/* Refrigerator */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="refrigerator"
-                    {...register("refrigerator")}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="refrigerator" className="text-sm font-medium">
-                    Refrigerator
-                  </label>
-                </div>
-
                 {/* Room Service */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Room Service</label>
+                  <label className="text-md font-medium">Room Service</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -578,7 +584,10 @@ const BasicAmenities = () => {
                         {...register("roomService.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="roomServiceAvailable" className="text-sm">
+                      <label
+                        htmlFor="roomServiceAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -591,7 +600,7 @@ const BasicAmenities = () => {
                             {...register("roomService.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">24 Hours</span>
+                          <span className="text-sm font-medium">24 Hours</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input
@@ -600,7 +609,9 @@ const BasicAmenities = () => {
                             {...register("roomService.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Limited Duration</span>
+                          <span className="text-sm font-medium">
+                            Limited Duration
+                          </span>
                         </label>
                       </div>
                     )}
@@ -609,7 +620,7 @@ const BasicAmenities = () => {
 
                 {/* Smoke Detector */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Smoke Detector</label>
+                  <label className="text-md font-medium">Smoke Detector</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -618,7 +629,7 @@ const BasicAmenities = () => {
                         {...register("smokeDetector.inRoom")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="inRoom" className="text-sm">
+                      <label htmlFor="inRoom" className="text-sm font-medium">
                         In Room
                       </label>
                     </div>
@@ -629,29 +640,16 @@ const BasicAmenities = () => {
                         {...register("smokeDetector.lobby")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="lobby" className="text-sm">
+                      <label htmlFor="lobby" className="text-sm font-medium">
                         Lobby
                       </label>
                     </div>
                   </div>
                 </div>
 
-                {/* Smoking Rooms */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="smokingRooms"
-                    {...register("smokingRooms")}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="smokingRooms" className="text-sm font-medium">
-                    Smoking Rooms
-                  </label>
-                </div>
-
                 {/* Swimming Pool */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Swimming Pool</label>
+                  <label className="text-md font-medium">Swimming Pool</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -660,7 +658,10 @@ const BasicAmenities = () => {
                         {...register("swimmingPool.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="poolAvailable" className="text-sm">
+                      <label
+                        htmlFor="poolAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -673,7 +674,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.commonPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="commonPool" className="text-sm">
+                          <label
+                            htmlFor="commonPool"
+                            className="text-sm font-medium"
+                          >
                             Common Pool
                           </label>
                         </div>
@@ -684,7 +688,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.kidsPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="kidsPool" className="text-sm">
+                          <label
+                            htmlFor="kidsPool"
+                            className="text-sm font-medium"
+                          >
                             Kids Pool
                           </label>
                         </div>
@@ -695,7 +702,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.infinityPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="infinityPool" className="text-sm">
+                          <label
+                            htmlFor="infinityPool"
+                            className="text-sm font-medium"
+                          >
                             Infinity Pool
                           </label>
                         </div>
@@ -706,7 +716,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.indoorPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="indoorPool" className="text-sm">
+                          <label
+                            htmlFor="indoorPool"
+                            className="text-sm font-medium"
+                          >
                             Indoor Pool
                           </label>
                         </div>
@@ -717,7 +730,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.heatedPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="heatedPool" className="text-sm">
+                          <label
+                            htmlFor="heatedPool"
+                            className="text-sm font-medium"
+                          >
                             Heated Pool
                           </label>
                         </div>
@@ -728,7 +744,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.roofTopPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="roofTopPool" className="text-sm">
+                          <label
+                            htmlFor="roofTopPool"
+                            className="text-sm font-medium"
+                          >
                             Roof Top Pool
                           </label>
                         </div>
@@ -739,7 +758,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.sunnySwimming")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="sunnySwimming" className="text-sm">
+                          <label
+                            htmlFor="sunnySwimming"
+                            className="text-sm font-medium"
+                          >
                             Sunny Swimming
                           </label>
                         </div>
@@ -750,7 +772,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.plungePool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="plungePool" className="text-sm">
+                          <label
+                            htmlFor="plungePool"
+                            className="text-sm font-medium"
+                          >
                             Plunge Pool
                           </label>
                         </div>
@@ -761,7 +786,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.poolCover")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="poolCover" className="text-sm">
+                          <label
+                            htmlFor="poolCover"
+                            className="text-sm font-medium"
+                          >
                             Pool Cover
                           </label>
                         </div>
@@ -772,7 +800,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.poolWithView")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="poolWithView" className="text-sm">
+                          <label
+                            htmlFor="poolWithView"
+                            className="text-sm font-medium"
+                          >
                             Pool with a View
                           </label>
                         </div>
@@ -783,7 +814,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.saltwaterPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="saltwaterPool" className="text-sm">
+                          <label
+                            htmlFor="saltwaterPool"
+                            className="text-sm font-medium"
+                          >
                             Saltwater Pool
                           </label>
                         </div>
@@ -794,7 +828,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.shallowEnd")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="shallowEnd" className="text-sm">
+                          <label
+                            htmlFor="shallowEnd"
+                            className="text-sm font-medium"
+                          >
                             Shallow End
                           </label>
                         </div>
@@ -809,7 +846,7 @@ const BasicAmenities = () => {
                           />
                           <label
                             htmlFor="fullySecludedOutdoorPool"
-                            className="text-sm"
+                            className="text-sm font-medium"
                           >
                             Fully Secluded Outdoor Pool
                           </label>
@@ -821,7 +858,10 @@ const BasicAmenities = () => {
                             {...register("swimmingPool.womenOnlyPool")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="womenOnlyPool" className="text-sm">
+                          <label
+                            htmlFor="womenOnlyPool"
+                            className="text-sm font-medium"
+                          >
                             Women-only Pool
                           </label>
                         </div>
@@ -830,38 +870,9 @@ const BasicAmenities = () => {
                   </div>
                 </div>
 
-                {/* Umbrellas */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="umbrellas"
-                    {...register("umbrellas")}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="umbrellas" className="text-sm font-medium">
-                    Umbrellas
-                  </label>
-                </div>
-
-                {/* Washing Machine */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="washingMachine"
-                    {...register("washingMachine")}
-                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="washingMachine"
-                    className="text-sm font-medium"
-                  >
-                    Washing Machine
-                  </label>
-                </div>
-
                 {/* WiFi */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">WiFi</label>
+                  <label className="text-md font-medium">WiFi</label>
                   <div className="ml-4 space-y-2">
                     <div className="flex items-center space-x-2">
                       <input
@@ -870,7 +881,10 @@ const BasicAmenities = () => {
                         {...register("wifi.available")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="wifiAvailable" className="text-sm">
+                      <label
+                        htmlFor="wifiAvailable"
+                        className="text-sm font-medium"
+                      >
                         Available
                       </label>
                     </div>
@@ -883,7 +897,7 @@ const BasicAmenities = () => {
                             {...register("wifi.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Free</span>
+                          <span className="text-sm font-medium">Free</span>
                         </label>
                         <label className="flex items-center space-x-2">
                           <input
@@ -892,7 +906,7 @@ const BasicAmenities = () => {
                             {...register("wifi.type")}
                             className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-sm">Paid</span>
+                          <span className="text-sm font-medium">Paid</span>
                         </label>
                       </div>
                     )}
@@ -909,6 +923,87 @@ const BasicAmenities = () => {
                   />
                   <label htmlFor="laundromat" className="text-sm font-medium">
                     Laundromat
+                  </label>
+                </div>
+
+                {/* Elevator */}
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="elevator"
+                    {...register("elevator")}
+                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="elevator" className="text-sm font-medium">
+                    Elevator/Lift
+                  </label>
+                </div>
+
+                {/* Umbrellas */}
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="umbrellas"
+                    {...register("umbrellas")}
+                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="umbrellas" className="text-sm font-medium">
+                    Umbrellas
+                  </label>
+                </div>
+
+                {/* Washing Machine */}
+                <div className="flex  items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="washingMachine"
+                    {...register("washingMachine")}
+                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    htmlFor="washingMachine"
+                    className="text-sm font-medium"
+                  >
+                    Washing Machine
+                  </label>
+                </div>
+
+                {/* Smoking Rooms */}
+                <div className="flex  items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="smokingRooms"
+                    {...register("smokingRooms")}
+                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="smokingRooms" className="text-sm font-medium">
+                    Smoking Rooms
+                  </label>
+                </div>
+
+                {/* Refrigerator */}
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="refrigerator"
+                    {...register("refrigerator")}
+                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="refrigerator" className="text-sm font-medium">
+                    Refrigerator
+                  </label>
+                </div>
+
+                {/* Housekeeping */}
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="housekeeping"
+                    {...register("housekeeping")}
+                    className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="housekeeping" className="text-sm font-medium">
+                    Housekeeping
                   </label>
                 </div>
 
@@ -937,7 +1032,6 @@ const BasicAmenities = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => setShowGeneralServices(true)}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

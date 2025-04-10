@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Upload, X } from "lucide-react";
 
-import GuestCanUse from "./guestCanUse";
+import PricingAndAvailability from "./pricingAndAvailability";
 
 interface FormData {
   propertyName: string;
@@ -11,14 +11,18 @@ interface FormData {
   photos: FileList;
 }
 
-const Photos = () => {
+interface PhotosProps {
+  onComplete?: () => void;
+}
+
+const Photos = ({ onComplete }: PhotosProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm<FormData>();
-  const [showGuestCanUse, setShowGuestCanUse] = useState(false);
+  const [showPricingAndAvailability, setShowPricingAndAvailability] =useState(false);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [uploadError, setUploadError] = useState<string>("");
 
@@ -44,13 +48,14 @@ const Photos = () => {
     setPreviewImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  if (showGuestCanUse) {
-    return <GuestCanUse />;
+  if (showPricingAndAvailability) {
+    return <PricingAndAvailability onComplete={onComplete} />;
   }
 
   const onSubmit = (data: FormData) => {
     console.log(data);
-    setShowGuestCanUse(true);
+    onComplete?.();
+    setShowPricingAndAvailability(true);
   };
 
   return (

@@ -17,7 +17,11 @@ interface GuestAmenities {
   airConditioning: boolean;
 }
 
-const GuestCanUse = () => {
+interface GuestCanUseFormProps {
+  onComplete?: () => void;
+}
+
+const GuestCanUse = ({ onComplete }: GuestCanUseFormProps) => {
   const {
     register,
     handleSubmit,

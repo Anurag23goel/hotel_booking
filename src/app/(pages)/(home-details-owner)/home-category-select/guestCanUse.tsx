@@ -16,7 +16,11 @@ interface GuestAmenities {
   airConditioning: boolean;
 }
 
-const GuestCanUse = () => {
+interface GuestCanUseProps {
+  onComplete?: () => void;
+}
+
+function GuestCanUse({ onComplete }: GuestCanUseProps) {
   const {
     register,
     handleSubmit,
@@ -41,11 +45,13 @@ const GuestCanUse = () => {
   const [showServicesAtProperty, setShowServicesAtProperty] = useState(false);
 
   if (showServicesAtProperty) {
-    return <CookingFrom />;
+    return <CookingFrom onComplete={onComplete} />;
   }
 
   const onSubmit = (data: GuestAmenities) => {
     console.log(data);
+    onComplete?.();
+    setShowServicesAtProperty(true);
   };
 
   return (
@@ -231,9 +237,6 @@ const GuestCanUse = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {
-                    setShowServicesAtProperty(true);
-                  }}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

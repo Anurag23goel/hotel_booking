@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import BasicAmenities from "./BasicAmenities";
+import Photos from "../photos";
 
 interface GeneralServicesFormData {
   paymentServices: {
@@ -48,7 +49,11 @@ interface GeneralServicesFormData {
   };
 }
 
-const FiveMore = () => {
+interface FiveMoreProps {
+  onComplete?: () => void;
+}
+
+function FiveMore({ onComplete }: FiveMoreProps) {  
   const [showBasicAmenities, setShowBasicAmenities] = useState(false);
   const {
     register,
@@ -96,11 +101,13 @@ const FiveMore = () => {
   });
 
   if(showBasicAmenities){
-    return <BasicAmenities />
+    return <Photos onComplete={onComplete}/>
   }
 
   const onSubmit = (data: GeneralServicesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowBasicAmenities(true);
   };
 
   return (
@@ -108,16 +115,15 @@ const FiveMore = () => {
       <div className="min-h-screen relative overflow-hidden">
         <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
           <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
-            <h1 className="text-4xl font-bold text-gray-900">Continue Services</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                 {/* Payment Services Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Payment Services</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* ATM */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="atm"
@@ -130,7 +136,7 @@ const FiveMore = () => {
                     </div>
 
                     {/* Currency Exchange */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="currencyExchange"
@@ -147,7 +153,7 @@ const FiveMore = () => {
                 {/* Indoor Activities and Sports Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Indoor Activities and Sports</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     {/* Casino */}
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Casino</label>
@@ -299,7 +305,7 @@ const FiveMore = () => {
                 {/* Family and Kids Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Family and Kids</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1  gap-4">
                     {/* Child Care Service */}
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Child Care Service</label>
@@ -346,7 +352,7 @@ const FiveMore = () => {
 
                     {/* Children's Play Area */}
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Children's Play Area</label>
+                      <label className="text-sm font-medium">Children&apos;s Play Area</label>
                       <div className="ml-4 space-y-2">
                         <div className="flex items-center space-x-2">
                           <input
@@ -422,7 +428,7 @@ const FiveMore = () => {
                     </div>
 
                     {/* Kids Club */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="kidsClub"
@@ -435,7 +441,7 @@ const FiveMore = () => {
                     </div>
 
                     {/* Strollers */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="strollers"
@@ -452,9 +458,9 @@ const FiveMore = () => {
                 {/* Pet Essentials Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Pet Essentials</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     {/* Pet Bowls */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="petBowls"
@@ -467,7 +473,7 @@ const FiveMore = () => {
                     </div>
 
                     {/* Pet Baskets */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="petBaskets"
@@ -490,7 +496,6 @@ const FiveMore = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => setShowBasicAmenities(true)}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >

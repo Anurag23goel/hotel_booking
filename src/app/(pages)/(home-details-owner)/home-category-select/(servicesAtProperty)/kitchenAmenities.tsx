@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import HouseRules from "./houseRules";
+import BasicAmenities from "../(Amenities)/BasicAmenities";
+
 interface KitchenAmenitiesFormData {
   // Recommended Section
   recommended: {
@@ -70,7 +72,11 @@ interface KitchenAmenitiesFormData {
   };
 }
 
-const KitchenAmenities = () => {
+interface KitchenAmenitiesProps {
+  onComplete?: () => void;
+}
+
+function KitchenAmenities({ onComplete }: KitchenAmenitiesProps) {
   const {
     register,
     handleSubmit,
@@ -144,13 +150,18 @@ const KitchenAmenities = () => {
       },
     },
   });
-  const [showHouseRules, setShowHouseRules] = useState(false);
-  if (showHouseRules) {
-    return <HouseRules />;
+  
+  const [showBasicAmenities, setShowBasicAmenities] = useState(false);
+
+
+  if (showBasicAmenities) {
+    return <BasicAmenities onComplete={onComplete} />;
   }
 
   const onSubmit = (data: KitchenAmenitiesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowBasicAmenities(true);
   };
 
   return (
@@ -744,9 +755,6 @@ const KitchenAmenities = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {
-                    setShowHouseRules(true);
-                  }}
                   type="submit"
                   className="flex-1 px-3 py-1.5 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium text-sm"
                 >

@@ -3,7 +3,7 @@ import { Home, CheckCircle2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import locationBg from "../../../../../public/assets/mapsphotu2.jpg";
-import GstAndTaxesForm from "../gstAndTaxesForm";
+import HouseRulesForm from "../(servicesAtProperty)/houseRules";
 
 interface FormData {
   address: string;
@@ -14,7 +14,11 @@ interface FormData {
   isPrimary: boolean;
 }
 
-function LocationForm() {
+interface PropertyLocationFormProps {
+  onComplete?: () => void;
+}
+
+function LocationForm({ onComplete }: PropertyLocationFormProps) {
   const {
     register,
     handleSubmit,
@@ -25,13 +29,16 @@ function LocationForm() {
     },
   });
 
-  const [showGstAndTaxes, setShowGstAndTaxes] = useState(false);
-  if (showGstAndTaxes) {
-    return <GstAndTaxesForm />;
+  const [showHouseRules, setShowHouseRules] = useState(false);
+
+  if (showHouseRules) {
+    return <HouseRulesForm onComplete={onComplete} />;
   }
 
   const onSubmit = (data: FormData) => {
     console.log(data);
+    onComplete?.();
+    setShowHouseRules(true);
   };
 
   return (
@@ -160,9 +167,6 @@ function LocationForm() {
             </div>
 
             <button
-              onClick={() => {
-                setShowGstAndTaxes(true);
-              }}
               type="submit"
               className="w-full p-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors"
             >

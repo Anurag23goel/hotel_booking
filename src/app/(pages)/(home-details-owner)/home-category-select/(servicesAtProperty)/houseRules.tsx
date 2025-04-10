@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import HotelName from "../(basicInfo)/hotelName";
+import GuestCanUse from "./guestCanUse";
+
 interface HouseRulesFormData {
   checkInOut: {
     checkInTime: string;
@@ -35,7 +36,11 @@ interface HouseRulesFormData {
   };
 }
 
-const HouseRules = () => {
+interface HouseRulesFormProps {
+  onComplete?: () => void;
+}
+
+function HouseRules({ onComplete }: HouseRulesFormProps) {
   const {
     register,
     handleSubmit,
@@ -76,14 +81,16 @@ const HouseRules = () => {
       },
     },
   });
-  const [showHotelName, setShowHotelName] = useState(false);
+  const [showGuestCanUse, setShowGuestCanUse] = useState(false);
 
-  if (showHotelName) {
-    return <HotelName />;
+  if (showGuestCanUse) {
+    return <GuestCanUse onComplete={onComplete} />;
   }
 
   const onSubmit = (data: HouseRulesFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowGuestCanUse(true);
   };
 
   return (
@@ -473,9 +480,6 @@ const HouseRules = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => {
-                    setShowHotelName(true);
-                  }}
                   type="submit"
                   className="flex-1 px-3 py-1.5 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium text-sm"
                 >

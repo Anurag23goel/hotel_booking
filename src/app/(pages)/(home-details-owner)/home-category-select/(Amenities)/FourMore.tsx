@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import FiveMore from "./FiveMore";
 
-interface GeneralServicesFormData {
+interface FourMoreFormData {
   security: {
     cctv: boolean;
     fireExtinguishers: boolean;
@@ -50,30 +50,17 @@ interface GeneralServicesFormData {
   };
 }
 
-const FourMore = () => {
+interface FourMoreProps {
+  onComplete?: () => void;
+}
+function FourMore({ onComplete }: FourMoreProps) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<GeneralServicesFormData>({
+  } = useForm<FourMoreFormData>({
     defaultValues: {
-      security: {
-        cctv: false,
-        fireExtinguishers: false,
-        securityAlarms: false,
-        securityGuard: false,
-        carbonMonoxideDetector: false,
-      },
-      transfers: {
-        airportTransfers: { available: false, type: "free" },
-        shuttleService: { available: false, type: "free" },
-      },
-      shopping: {
-        bookShop: false,
-        souvenirShop: false,
-        jewelleryShop: false,
-      },
       entertainment: {
         movieRoom: false,
         musicSystem: false,
@@ -98,14 +85,16 @@ const FourMore = () => {
       },
     },
   });
-  const [showFiveMoreServices, setShowFiveMoreServices] = useState(false);
+  const [showFiveMore, setShowFiveMore] = useState(false);
 
-  if(showFiveMoreServices){
-    return <FiveMore />
+  if (showFiveMore) {
+    return <FiveMore onComplete={onComplete}  />;
   }
 
-  const onSubmit = (data: GeneralServicesFormData) => {
+  const onSubmit = (data: FourMoreFormData) => {
     console.log(data);
+    onComplete?.();
+    setShowFiveMore(true);
   };
 
   return (
@@ -113,7 +102,6 @@ const FourMore = () => {
       <div className="min-h-screen relative overflow-hidden">
         <div className="relative z-10 min-h-screen flex items-center justify-center p-8">
           <div className="max-w-3xl w-full space-y-6 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-white/20">
-            <h1 className="text-4xl font-bold text-gray-900">Continue Services</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -122,7 +110,7 @@ const FourMore = () => {
                   <h2 className="text-xl font-semibold mb-4">Security</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* CCTV */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="cctv"
@@ -135,53 +123,65 @@ const FourMore = () => {
                     </div>
 
                     {/* Fire Extinguishers */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="fireExtinguishers"
                         {...register("security.fireExtinguishers")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="fireExtinguishers" className="text-sm font-medium">
+                      <label
+                        htmlFor="fireExtinguishers"
+                        className="text-sm font-medium"
+                      >
                         Fire Extinguishers
                       </label>
                     </div>
 
                     {/* Security Alarms */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="securityAlarms"
                         {...register("security.securityAlarms")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="securityAlarms" className="text-sm font-medium">
+                      <label
+                        htmlFor="securityAlarms"
+                        className="text-sm font-medium"
+                      >
                         Security Alarms
                       </label>
                     </div>
 
                     {/* Security Guard */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="securityGuard"
                         {...register("security.securityGuard")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="securityGuard" className="text-sm font-medium">
+                      <label
+                        htmlFor="securityGuard"
+                        className="text-sm font-medium"
+                      >
                         Security Guard
                       </label>
                     </div>
 
                     {/* Carbon Monoxide Detector */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="carbonMonoxideDetector"
                         {...register("security.carbonMonoxideDetector")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="carbonMonoxideDetector" className="text-sm font-medium">
+                      <label
+                        htmlFor="carbonMonoxideDetector"
+                        className="text-sm font-medium"
+                      >
                         Carbon Monoxide Detector
                       </label>
                     </div>
@@ -191,19 +191,26 @@ const FourMore = () => {
                 {/* Transfers Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Transfers</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     {/* Airport Transfers */}
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Airport Transfers</label>
+                      <label className="text-sm font-medium">
+                        Airport Transfers
+                      </label>
                       <div className="ml-4 space-y-2">
                         <div className="flex items-center space-x-2">
                           <input
                             type="checkbox"
                             id="airportTransfersAvailable"
-                            {...register("transfers.airportTransfers.available")}
+                            {...register(
+                              "transfers.airportTransfers.available"
+                            )}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="airportTransfersAvailable" className="text-sm">
+                          <label
+                            htmlFor="airportTransfersAvailable"
+                            className="text-sm"
+                          >
                             Available
                           </label>
                         </div>
@@ -234,7 +241,9 @@ const FourMore = () => {
 
                     {/* Shuttle Service */}
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Shuttle Service</label>
+                      <label className="text-sm font-medium">
+                        Shuttle Service
+                      </label>
                       <div className="ml-4 space-y-2">
                         <div className="flex items-center space-x-2">
                           <input
@@ -243,7 +252,10 @@ const FourMore = () => {
                             {...register("transfers.shuttleService.available")}
                             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                           />
-                          <label htmlFor="shuttleServiceAvailable" className="text-sm">
+                          <label
+                            htmlFor="shuttleServiceAvailable"
+                            className="text-sm"
+                          >
                             Available
                           </label>
                         </div>
@@ -277,9 +289,9 @@ const FourMore = () => {
                 {/* Shopping Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Shopping</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     {/* Book Shop */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="bookShop"
@@ -292,27 +304,33 @@ const FourMore = () => {
                     </div>
 
                     {/* Souvenir Shop */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="souvenirShop"
                         {...register("shopping.souvenirShop")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="souvenirShop" className="text-sm font-medium">
+                      <label
+                        htmlFor="souvenirShop"
+                        className="text-sm font-medium"
+                      >
                         Souvenir Shop
                       </label>
                     </div>
 
                     {/* Jewellery Shop */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="jewelleryShop"
                         {...register("shopping.jewelleryShop")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="jewelleryShop" className="text-sm font-medium">
+                      <label
+                        htmlFor="jewelleryShop"
+                        className="text-sm font-medium"
+                      >
                         Jewellery Shop
                       </label>
                     </div>
@@ -322,29 +340,35 @@ const FourMore = () => {
                 {/* Entertainment Section */}
                 <div className="col-span-2">
                   <h2 className="text-xl font-semibold mb-4">Entertainment</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     {/* Movie Room */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="movieRoom"
                         {...register("entertainment.movieRoom")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="movieRoom" className="text-sm font-medium">
+                      <label
+                        htmlFor="movieRoom"
+                        className="text-sm font-medium"
+                      >
                         Movie Room
                       </label>
                     </div>
 
                     {/* Music System */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="musicSystem"
                         {...register("entertainment.musicSystem")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="musicSystem" className="text-sm font-medium">
+                      <label
+                        htmlFor="musicSystem"
+                        className="text-sm font-medium"
+                      >
                         Music System
                       </label>
                     </div>
@@ -489,7 +513,7 @@ const FourMore = () => {
                     </div>
 
                     {/* Pub */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex ml-4 items-center space-x-2">
                       <input
                         type="checkbox"
                         id="pub"
@@ -509,7 +533,10 @@ const FourMore = () => {
                         {...register("entertainment.photoSession")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="photoSession" className="text-sm font-medium">
+                      <label
+                        htmlFor="photoSession"
+                        className="text-sm font-medium"
+                      >
                         Photo Session
                       </label>
                     </div>
@@ -522,7 +549,10 @@ const FourMore = () => {
                         {...register("entertainment.nightClub")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="nightClub" className="text-sm font-medium">
+                      <label
+                        htmlFor="nightClub"
+                        className="text-sm font-medium"
+                      >
                         Night Club
                       </label>
                     </div>
@@ -535,7 +565,10 @@ const FourMore = () => {
                         {...register("entertainment.beachClub")}
                         className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor="beachClub" className="text-sm font-medium">
+                      <label
+                        htmlFor="beachClub"
+                        className="text-sm font-medium"
+                      >
                         Beach Club
                       </label>
                     </div>
@@ -551,7 +584,6 @@ const FourMore = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => setShowFiveMoreServices(true)}
                   type="submit"
                   className="flex-1 px-4 py-2 bg-[#040928] text-white rounded-lg hover:bg-[#1d2030] transition-colors font-medium"
                 >
@@ -564,6 +596,6 @@ const FourMore = () => {
       </div>
     </div>
   );
-};
+}
 
 export default FourMore;

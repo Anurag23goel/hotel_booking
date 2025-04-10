@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Home } from "lucide-react";
 import LocationForm from "./(basicInfo)/location-form";
-
+import MainDetailPage from "./mainDetailPage";
 interface ConfirmationProps {
   selectedCategory: string;
   selectedOption: string;
@@ -15,10 +15,11 @@ function Confirmation({
   selectedLocation,
   selectedChoice,
 }: ConfirmationProps) {
-  const [showLocationForm, setShowLocationForm] = useState(false);
+  
+  const [showMainDetailPage, setShowMainDetailPage] = useState(false);
 
-  if (showLocationForm) {
-    return <LocationForm />;
+  if (showMainDetailPage) {
+    return <MainDetailPage />;
   }
 
   return (
@@ -45,7 +46,7 @@ function Confirmation({
 
         <div className="space-y-3 pt-4">
           <button
-            onClick={() => setShowLocationForm(true)}
+            onClick={() => setShowMainDetailPage(true)}
             className="w-full px-4 py-3 bg-[#040928] text-white rounded-lg hover:bg-[#24273b] transition-colors font-medium"
           >
             Continue

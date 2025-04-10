@@ -9,12 +9,13 @@ import CommonArea from "./(Amenities)/CommonArea";
 import ThreeMoreAmenities from "./(Amenities)/ThreeMoreAmenities";
 import FourMore from "./(Amenities)/FourMore";
 import FiveMore from "./(Amenities)/FiveMore";
+import HotelBedroom from "./hotelBedroom";
 const page = () => {
   
   return (
     <div>
       <Navbar />
-      <MainDetailPage />  
+      {/* <MainDetailPage />   */}
       {/* <EntirePrivateModal /> */}
       {/* <FinanceAndLegal /> */}
       {/* <BasicAmenities /> */}
@@ -23,6 +24,7 @@ const page = () => {
       {/* <ThreeMoreAmenities /> */}
       {/* <FourMore /> */}
       {/* <FiveMore /> */}
+      <HotelBedroom />
     </div>
   );
 };
