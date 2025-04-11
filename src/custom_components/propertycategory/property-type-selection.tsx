@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Check } from "lucide-react"
+import { Check, HelpCircle, ChevronLeft, ChevronDown } from "lucide-react"
 
 type PropertyType = {
   id: string
@@ -13,7 +13,7 @@ const propertyTypes: PropertyType[] = [
   {
     id: "hotel",
     title: "Hotel",
-    description: "Accommodation for travellers often offering restaurants, meeting rooms and other guest services",
+    description: "Accommodation for travellers with restaurants and guest services",
   },
   {
     id: "guest-house",
@@ -28,23 +28,22 @@ const propertyTypes: PropertyType[] = [
   {
     id: "homestay",
     title: "Homestay",
-    description:
-      "A shared home where the guest has a private room and the host lives and is on site. Some facilities are shared between hosts and guests.",
+    description: "Shared home where guests have private rooms and some shared facilities",
   },
   {
     id: "hostel",
     title: "Hostel",
-    description: "Budget accommodation with mostly dorm-style bedding and a social atmosphere",
+    description: "Budget accommodation with dorm-style bedding and social atmosphere",
   },
   {
     id: "aparthotel",
     title: "Aparthotel",
-    description: "A self-catering apartment with some hotel facilities like a reception desk",
+    description: "Self-catering apartment with hotel facilities like reception desk",
   },
   {
     id: "capsule-hotel",
     title: "Capsule hotel",
-    description: "Extremely small units or capsules offering cheap and basic overnight accommodation",
+    description: "Small units offering basic overnight accommodation",
   },
   {
     id: "country-house",
@@ -61,16 +60,18 @@ const propertyTypes: PropertyType[] = [
 interface PropertyTypeSelectionProps {
   setCurrentForm: (form: string) => void
   updateFormData: (data: { propertyType: string }) => void
-  formData: { propertyType: string; quantity: string; 
+  formData: { 
+    propertyType: string
+    quantity: string
     address: {
-        street: string
-        apartment: string
-        country: string
-        city: string
-        postalCode: string
-      }
-  } }
-
+      street: string
+      apartment: string
+      country: string
+      city: string
+      postalCode: string
+    }
+  }
+}
 
 export default function PropertyTypeSelection({
   setCurrentForm,
@@ -90,63 +91,64 @@ export default function PropertyTypeSelection({
   }
 
   return (
-    <div className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 md:py-12">
-      <h1 className="text-2xl md:text-3xl font-bold mb-8">
-        From the list below, which property category is most similar to your place?
+    <div className="flex-1 max-w-3xl mx-auto w-full px-4 py-6 md:py-8">
+      <h1 className="text-xl md:text-2xl font-bold mb-6">
+        Which property category best describes your place?
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {displayedTypes.map((type) => (
           <div
             key={type.id}
-            className={`border rounded-md p-4 cursor-pointer transition-all ${
-              selectedType === type.id ? "border-[#0071c2] border-2" : "border-gray-200 hover:border-gray-300"
+            className={`border rounded-lg p-3 cursor-pointer transition-all hover:shadow-sm ${
+              selectedType === type.id ? "border-blue-600 border-2 bg-blue-50" : "border-gray-200"
             }`}
             onClick={() => setSelectedType(type.id)}
           >  
             <div className="flex justify-between items-start">
-              <h3 className="font-semibold text-lg">{type.title}</h3>
+              <h3 className="font-medium">{type.title}</h3>
               {selectedType === type.id && (
-                <div className="bg-[#0071c2] rounded-full p-1">
-                  <Check className="h-4 w-4 text-white" />
+                <div className="bg-blue-600 rounded-full p-1">
+                  <Check className="h-3 w-3 text-white" />
                 </div>
               )}
             </div>
-            <p className="text-gray-600 mt-2 text-sm">{type.description}</p>
+            <p className="text-gray-600 mt-1 text-xs">{type.description}</p>
           </div>
         ))}
 
-        {!showMore && (
+        {!showMore && propertyTypes.length > 6 && (
           <div
-            className="border border-gray-200 rounded-md p-4 cursor-pointer flex items-center justify-center hover:border-gray-300"
+            className="border border-gray-200 rounded-lg p-3 cursor-pointer flex items-center justify-center hover:bg-gray-50"
             onClick={() => setShowMore(true)}
           >
-            <div className="text-[#0071c2] font-medium flex items-center">
-              <span className="mr-2">▼</span>
-              More options
+            <div className="text-blue-600 font-medium flex items-center text-sm">
+              <ChevronDown className="h-4 w-4 mr-1" />
+              Show more options
             </div>
           </div>
         )}
       </div>
 
-      <div className="mt-4 text-[#0071c2]">
-        <button className="flex items-center text-sm font-medium">
-          <span className="mr-2">?</span>I don&apos;t see my property type on the list
+      <div className="mt-4">
+        <button className="flex items-center text-xs text-blue-600 font-medium">
+          <HelpCircle className="h-3 w-3 mr-1" />
+          I don't see my property type
         </button>
       </div>
 
-      <div className="mt-8 flex gap-4">
+      <div className="mt-6 flex gap-3">
         <button
-          className="px-8 py-2 h-12 border border-gray-300 rounded-md hover:bg-gray-50"
+          className="p-2 h-10 w-10 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center justify-center"
           onClick={() => {
             /* Back action if needed */
           }}
         >
-          <span className="text-[#0071c2]">←</span>
+          <ChevronLeft className="h-5 w-5 text-blue-600" />
         </button>
         <button
-          className={`flex-1 h-12 rounded-md text-white ${
-            selectedType ? "bg-[#0071c2] hover:bg-[#00487a]" : "bg-[#0071c2] opacity-50 cursor-not-allowed"
+          className={`flex-1 h-10 rounded-md text-white font-medium ${
+            selectedType ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-300 cursor-not-allowed"
           }`}
           disabled={!selectedType}
           onClick={handleContinue}
@@ -157,4 +159,3 @@ export default function PropertyTypeSelection({
     </div>
   )
 }
-
