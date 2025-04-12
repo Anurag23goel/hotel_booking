@@ -16,7 +16,7 @@ const page = () => {
     <div>
       <Navbar />
       {/* <MainDetailPage />   */}
-      {/* <EntirePrivateModal /> */}
+      <EntirePrivateModal />
       {/* <FinanceAndLegal /> */}
       {/* <BasicAmenities /> */}
       {/* <GeneralServices /> */}
@@ -24,7 +24,7 @@ const page = () => {
       {/* <ThreeMoreAmenities /> */}
       {/* <FourMore /> */}
       {/* <FiveMore /> */}
-      <HotelBedroom />
+      {/* <HotelBedroom /> */}
     </div>
   );
 };

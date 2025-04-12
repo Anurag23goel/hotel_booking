@@ -42,7 +42,11 @@ const hotelBedroomSchema = z.object({
 // Infer the type from the schema
 type HotelBedroomFormData = z.infer<typeof hotelBedroomSchema>;
 
-function HotelBedroom() {
+interface HotelBedroomProps {
+  onComplete: () => void;
+}
+
+function HotelBedroom({ onComplete }: HotelBedroomProps) {
   const [rooms, setRooms] = useState<Room[]>([
     {
       id: "bedroom1",

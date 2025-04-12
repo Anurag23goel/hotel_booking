@@ -16,6 +16,7 @@ import GeneralServices from "./(Amenities)/GeneralServices";
 import ThreeMore from "./(Amenities)/ThreeMoreAmenities";
 import FourMore from "./(Amenities)/FourMore";
 import FiveMore from "./(Amenities)/FiveMore";
+import HotelBedroom from "./hotelBedroom";
 
 type FormStep = {
   id: string;
@@ -36,17 +37,17 @@ export default function PropertyListingForm() {
       "property-location": false,
       "house-rules": false,
       "guest-amenities": false,
-      servicesAtProperty: false,
+      "servicesAtProperty": false,
       "kitchen-amenities": false,
       "basic-amenities": false,
-      GeneralServices: false,
-      CommonArea: false,
-      ThreeMore: false,
-      FourMore: false,
-      FiveMore: false,
-      photos: false,
-      pricing: false,
-      legal: false,
+      "GeneralServices": false,
+      "CommonArea": false,
+      "ThreeMore": false,
+      "FourMore": false,
+      "FiveMore": false,
+      "photos": false,
+      "pricing": false,
+      "legal": false,
     }
   );
 
@@ -122,6 +123,18 @@ export default function PropertyListingForm() {
   ];
 
   const propertySetupForms = [
+    {
+      id: "hotelBedroom",
+      component: (
+        <HotelBedroom
+          onComplete={() => {
+            setCompletedForms((prev) => ({ ...prev, "hotelBedroom": true   }));
+            setActiveSubForm("house-rules");
+          }}
+        />
+      ),
+    },
+  
     {
       id: "house-rules",
       component: (
@@ -344,7 +357,7 @@ export default function PropertyListingForm() {
             onClick={() => {
               setCurrentStep(step.id);
               if (step.id === "property-setup") {
-                setActiveSubForm("house-rules");
+                setActiveSubForm("hotelBedroom");
               }
               if (step.id === "basic-info") {
                 setActiveSubForm("property-name");
