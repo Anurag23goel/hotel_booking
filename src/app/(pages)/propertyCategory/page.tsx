@@ -83,6 +83,9 @@ export default function Home() {
   const updateFinalDetailsData = (data: any) => {
     setFinalDetailsData((prev) => ({ ...prev, ...data }))
   }
+  const handleSubmit = (data:any) => {
+    console.log(data);
+  }
 
   const handleFinishAddingRoom = () => {
     setFormData((prev) => ({

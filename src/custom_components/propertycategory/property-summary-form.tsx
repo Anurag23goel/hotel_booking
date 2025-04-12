@@ -167,7 +167,7 @@ export default function PropertySummaryForm({
           onClick={handleSubmit}
           disabled={!isReadyToSubmit}
         >
-          Submit Property
+          Submit Property 
         </button>
       </div>
       

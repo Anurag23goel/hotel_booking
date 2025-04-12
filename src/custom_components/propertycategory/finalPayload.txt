@@ -1,0 +1,119 @@
+{
+    "propertyType": "hotel",
+    "quantity": "single",
+    "address": {
+        "street": "B 36 A East Krishna Nagar",
+        "apartment": "",
+        "country": "India",
+        "city": "New delhi",
+        "postalCode": "110051"
+    },
+    "channelManager": true,
+    "propertyDetails": {
+        "name": "avaya",
+        "starRating": "4",
+        "isManagementCompany": true
+    },
+    "amenities": [
+        "Garden",
+        "Bar",
+        "Restaurant",
+        "Sauna",
+        "Spa and wellness centre",
+        "Free WiFi",
+        "Air conditioning",
+        "24-hour front desk",
+        "Airport shuttle",
+        "Electric vehicle charging station",
+        "Family rooms"
+    ],
+    "services": {
+        "breakfast": true,
+        "parking": "free"
+    },
+    "languages": [
+        "Hindi",
+        "English"
+    ],
+    "rules": {
+        "checkInFrom": "12:00",
+        "checkInUntil": "12:00",
+        "checkOutFrom": "00:00",
+        "checkOutUntil": "10:00",
+        "allowChildren": true,
+        "allowPets": true
+    },
+    "photos": [
+        {
+            "name": "Screenshot 2025-02-10 125529.png",
+            "url": "blob:http://localhost:3000/6ad5860f-d891-44ed-b552-7ec822d43448",
+            "size": 439491,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot 2025-03-01 144710.png",
+            "url": "blob:http://localhost:3000/540a3372-ee1b-4106-af08-2d9e1f4d9e04",
+            "size": 87328,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot 2025-02-20 183929.png",
+            "url": "blob:http://localhost:3000/a5d6e7cd-1586-4eaf-a097-5e8795415fee",
+            "size": 56495,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot 2025-02-20 184655.png",
+            "url": "blob:http://localhost:3000/f43e2f34-86b2-4e0d-96be-9e7cbbee02f5",
+            "size": 54439,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot 2025-02-20 185141.png",
+            "url": "blob:http://localhost:3000/9c01524c-8c82-4587-be4c-d5ae1e0ad789",
+            "size": 75413,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot 2025-02-27 155044.png",
+            "url": "blob:http://localhost:3000/d703feba-3756-446f-919a-f814738f8932",
+            "size": 323627,
+            "type": "image/png"
+        }
+    ],
+    "rooms": [
+        {
+            "roomType": "Double",
+            "roomCount": 1,
+            "beds": {
+                "singleBed": 0,
+                "doubleBed": 1,
+                "largeBed": 0,
+                "extraLargeBed": 0
+            },
+            "guestCount": 2,
+            "roomSize": "",
+            "roomSizeUnit": "square metres",
+            "smokingAllowed": false,
+            "bathroom": {
+                "isPrivate": true,
+                "amenities": [
+                    "Toilet paper",
+                    "Toilet",
+                    "Bath"
+                ]
+            },
+            "name": "Double Room",
+            "price": {
+                "amount": "2000",
+                "currency": "INR"
+            }
+        }
+    ],
+    "finalDetails": {
+        "invoicing": {},
+        "licenseNumber": "csdfcsfsdf",
+        "partnerVerification": {},
+        "taxDetails": {}
+    }
+}
