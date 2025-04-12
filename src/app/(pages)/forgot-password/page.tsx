@@ -1,6 +1,6 @@
 "use client";
-import Navbar from "@/custom_components/listProperty/navbar";
 import React from "react";
+import Navbar from "@/custom_components/navbar";
 import EmailForm from "./emailForm";
 import PhoneForm from "./phoneForm";
 import OtpPageForm from "./otpPageForm";

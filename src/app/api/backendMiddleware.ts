@@ -1,6 +1,7 @@
 import { ApiError } from "@/services/apiResponse";
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify, JWTPayload } from "jose";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import USER from "@/utils/models/user.model";
 
 export default async function middlewareForBackendApi(req: NextRequest) {
   try {
@@ -11,15 +12,19 @@ export default async function middlewareForBackendApi(req: NextRequest) {
     }
 
     // Verify the JWT token
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode(process.env.JWT_SECRET as string) // Encoding secret key
-    );
+    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+
+    // Type guard: Ensure decoded is of type JwtPayload
+    if (typeof decoded !== "object" || decoded === null || !("userID" in decoded)) {
+      return ApiError("Unauthorized: Invalid token payload", 401);
+    }
+
+    const payload = decoded as JwtPayload;
 
     // Attach user data from the token to the request
-    (req as any).user = payload; // Storing user data in the request object
+    (req as any).user = payload;
+    const user = await USER.findById(payload.userID as string);
 
-    // If verification is successful, return true (meaning request is authorized)
     return true;
   } catch (error) {
     console.error("Error in middleware:", error);

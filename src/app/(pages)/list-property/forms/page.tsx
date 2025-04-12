@@ -2,7 +2,7 @@
 
 "use client"
 import React, { useState } from 'react'
-import Navbar from '@/custom_components/listProperty/navbar'
+import Navbar from '@/custom_components/navbar'
 import LoginForm from './loginForm'
 import RegisterForm from './registerForm'
 
@@ -27,11 +27,11 @@ const Page = () => {
             {showLogin ? (
               <div>
                 {/* this page is of no use but we have to keep it for now for check  */}
-                <LoginForm onRegisterClick={toggleForm} />
+                {/* <LoginForm onRegisterClick={toggleForm} /> */}
               </div>
             ) : (
               <div>
-                <RegisterForm onLoginClick={toggleForm} />
+                {/* <RegisterForm onLoginClick={toggleForm} /> */}
               </div>
             )}
           </div>

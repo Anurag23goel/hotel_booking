@@ -1,209 +1,181 @@
 "use client"
 
-import { useState } from "react"
-import AddRoomFlow from "../add-room-flow"
+import { Check, ChevronLeft, Edit, Plus } from "lucide-react"
 
 interface PropertySummaryFormProps {
   setCurrentForm: (form: string) => void
   formData: any
+  onAddRoom: () => void
+  onAddFinalDetails: () => void
 }
 
-export default function PropertySummaryForm({ setCurrentForm, formData }: PropertySummaryFormProps) {
-  const [showAddRoomFlow, setShowAddRoomFlow] = useState(false)
-  const [rooms, setRooms] = useState<any[]>([])
-  const [currentRoomData, setCurrentRoomData] = useState<any>({})
-  const [currentRoomForm, setCurrentRoomForm] = useState("roomDetails")
-
+export default function PropertySummaryForm({
+  setCurrentForm,
+  formData,
+  onAddRoom,
+  onAddFinalDetails,
+}: PropertySummaryFormProps) {
   const handleBack = () => {
     setCurrentForm("propertyRules")
   }
 
   const handleSubmit = () => {
     // In a real app, this would submit the data to the server
-    console.log("Submitting property data:", { ...formData, rooms })
+    console.log("Submitting property data:", formData)
     alert("Property listing submitted successfully!")
     // Reset to first form or redirect to dashboard
     setCurrentForm("propertyType")
   }
 
-  const handleAddRoom = () => {
-    setShowAddRoomFlow(true)
-    setCurrentRoomForm("roomDetails")
-    setCurrentRoomData({})
+  const handleAddPhotos = () => {
+    setCurrentForm("propertyPhotos")
   }
-
-  const handleUpdateRoomData = (data: any) => {
-    setCurrentRoomData((prev: any) => ({ ...prev, ...data }))
-  }
-
-  const handleFinishAddingRoom = () => {
-    setRooms((prev) => [...prev, currentRoomData])
-    setShowAddRoomFlow(false)
-  }
+  
+  // Check if each section is complete
+  const isPropertyDetailsComplete = formData.propertyDetails && formData.propertyDetails.name
+  const isRoomsComplete = formData.rooms && formData.rooms.length > 0
+  const isPhotosComplete = formData.photos && formData.photos.length > 0
+  const isFinalDetailsComplete = formData.finalDetails && formData.finalDetails.taxDetails
+  
+  // Check if all required sections are complete to enable submission
+  const isReadyToSubmit = isPropertyDetailsComplete && isRoomsComplete && 
+                          (isPhotosComplete || formData.skipPhotos) && 
+                          isFinalDetailsComplete
 
   return (
-    <>
-      {showAddRoomFlow ? (
-        <AddRoomFlow
-          currentForm={currentRoomForm}
-          setCurrentForm={setCurrentRoomForm}
-          roomData={currentRoomData}
-          updateRoomData={handleUpdateRoomData}
-          onFinish={handleFinishAddingRoom}
-          onCancel={() => setShowAddRoomFlow(false)}
-        />
-      ) : (
-        <div className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 md:py-12">
-          <h1 className="text-2xl md:text-3xl font-bold mb-6">Final steps</h1>
+    <div className="flex-1 max-w-3xl mx-auto w-full px-4 py-6">
+      <h1 className="text-xl md:text-2xl font-bold mb-6">Complete Your Property Listing</h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white rounded-md border border-gray-200 p-4 hover:shadow-md transition-shadow">
-              <h2 className="font-semibold text-lg mb-2">Property details</h2>
-              <p className="text-sm text-gray-600 mb-3">Basic information about your property</p>
-              <div className="text-xs text-gray-500">
-                <p>Type: {formData.propertyType}</p>
-                <p>Name: {formData.propertyDetails.name || "Not set"}</p>
-                <p>Star rating: {formData.propertyDetails.starRating}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow transition-shadow relative overflow-hidden">
+          {isPropertyDetailsComplete && (
+            <div className="absolute top-0 right-0">
+              <div className="bg-green-500 p-2 rounded-bl-lg">
+                <Check className="h-4 w-4 text-white" />
               </div>
-              <button
-                onClick={() => setCurrentForm("propertyDetails")}
-                className="mt-4 text-[#0071c2] text-sm font-medium hover:underline"
-              >
-                Edit
-              </button>
             </div>
-
-            <div className="bg-white rounded-md border border-gray-200 p-4 hover:shadow-md transition-shadow">
-              <h2 className="font-semibold text-lg mb-2">Rooms</h2>
-              <p className="text-sm text-gray-600 mb-3">Add rooms and set pricing</p>
-              <div className="text-xs text-gray-500">
-                {rooms.length > 0 ? (
-                  <ul className="list-disc pl-4 space-y-1">
-                    {rooms.map((room, index) => (
-                      <li key={index}>
-                        {room.name} - {room.price?.currency} {room.price?.amount}/night
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>No rooms added yet</p>
-                )}
-              </div>
-              <button onClick={handleAddRoom} className="mt-4 text-[#0071c2] text-sm font-medium hover:underline">
-                Add rooms
-              </button>
-            </div>
-
-            <div className="bg-white rounded-md border border-gray-200 p-4 hover:shadow-md transition-shadow">
-              <h2 className="font-semibold text-lg mb-2">Photos</h2>
-              <p className="text-sm text-gray-600 mb-3">Add photos of your property</p>
-              <div className="text-xs text-gray-500">
-                <p>No photos added yet</p>
-              </div>
-              <button className="mt-4 text-[#0071c2] text-sm font-medium hover:underline">Add photos</button>
-            </div>
-
-            <div className="bg-white rounded-md border border-gray-200 p-4 hover:shadow-md transition-shadow">
-              <h2 className="font-semibold text-lg mb-2">Final steps</h2>
-              <p className="text-sm text-gray-600 mb-3">Complete your registration</p>
-              <div className="text-xs text-gray-500">
-                <p>Review and submit your listing</p>
-              </div>
-              <button className="mt-4 text-[#0071c2] text-sm font-medium hover:underline">Complete</button>
-            </div>
+          )}
+          <h2 className="font-semibold text-lg mb-2">Property Details</h2>
+          <p className="text-sm text-gray-600 mb-3">Basic information about your property</p>
+          <div className="text-xs text-gray-500 space-y-1">
+            <p>Type: <span className="font-medium">{formData.propertyType || "Not set"}</span></p>
+            <p>Name: <span className="font-medium">{formData.propertyDetails?.name || "Not set"}</span></p>
+            <p>Star rating: <span className="font-medium">{formData.propertyDetails?.starRating || "Not set"}</span></p>
           </div>
-
-          <div className="bg-white rounded-md border border-gray-200 p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-4">Property summary</h2>
-
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium">Location</h3>
-                <p className="text-gray-600">
-                  {formData.address.street}, {formData.address.apartment && formData.address.apartment + ","}{" "}
-                  {formData.address.city}, {formData.address.postalCode}, {formData.address.country}
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-medium">Property type</h3>
-                <p className="text-gray-600">{formData.propertyType}</p>
-              </div>
-
-              <div>
-                <h3 className="font-medium">Amenities</h3>
-                <p className="text-gray-600">
-                  {formData.amenities.length > 0 ? formData.amenities.join(", ") : "None selected"}
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-medium">Services</h3>
-                <p className="text-gray-600">
-                  Breakfast: {formData.services.breakfast ? "Yes" : "No"}
-                  <br />
-                  Parking:{" "}
-                  {formData.services.parking === "free"
-                    ? "Free"
-                    : formData.services.parking === "paid"
-                      ? "Paid"
-                      : "Not available"}
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-medium">Languages</h3>
-                <p className="text-gray-600">
-                  {formData.languages.length > 0 ? formData.languages.join(", ") : "None selected"}
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-medium">House rules</h3>
-                <p className="text-gray-600">
-                  Check-in: {formData.rules.checkInFrom} - {formData.rules.checkInUntil}
-                  <br />
-                  Check-out: {formData.rules.checkOutFrom} - {formData.rules.checkOutUntil}
-                  <br />
-                  Children allowed: {formData.rules.allowChildren ? "Yes" : "No"}
-                  <br />
-                  Pets allowed:{" "}
-                  {formData.rules.allowPets === true
-                    ? "Yes"
-                    : formData.rules.allowPets === "request"
-                      ? "Upon request"
-                      : "No"}
-                </p>
-              </div>
-
-              {rooms.length > 0 && (
-                <div>
-                  <h3 className="font-medium">Rooms</h3>
-                  <ul className="list-disc pl-5 text-gray-600">
-                    {rooms.map((room, index) => (
-                      <li key={index}>
-                        {room.name} - {room.price?.currency} {room.price?.amount}/night
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <button className="px-8 py-2 h-12 border border-gray-300 rounded-md hover:bg-gray-50" onClick={handleBack}>
-              <span className="text-[#0071c2]">←</span>
-            </button>
-            <button
-              className="flex-1 md:flex-none md:min-w-[200px] bg-[#0071c2] hover:bg-[#00487a] text-white h-12 rounded-md"
-              onClick={handleSubmit}
-            >
-              Submit Property
-            </button>
-          </div>
+          <button
+            onClick={() => setCurrentForm("propertyDetails")}
+            className="mt-4 text-blue-600 text-sm font-medium flex items-center hover:text-blue-800"
+          >
+            <Edit className="h-3 w-3 mr-1" /> Edit details
+          </button>
         </div>
+
+        <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow transition-shadow relative overflow-hidden">
+          {isRoomsComplete && (
+            <div className="absolute top-0 right-0">
+              <div className="bg-green-500 p-2 rounded-bl-lg">
+                <Check className="h-4 w-4 text-white" />
+              </div>
+            </div>
+          )}
+          <h2 className="font-semibold text-lg mb-2">Rooms</h2>
+          <p className="text-sm text-gray-600 mb-3">Add rooms and set pricing</p>
+          <div className="text-xs text-gray-500">
+            {formData.rooms?.length > 0 ? (
+              <ul className="space-y-1">
+                {formData.rooms.map((room: any, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                    {room.name} - {room.price?.currency} {room.price?.amount}/night
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No rooms added yet</p>
+            )}
+          </div>
+          <button onClick={onAddRoom} className="mt-4 text-blue-600 text-sm font-medium flex items-center hover:text-blue-800">
+            <Plus className="h-3 w-3 mr-1" /> Add rooms
+          </button>
+        </div>
+
+        <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow transition-shadow relative overflow-hidden">
+          {isPhotosComplete && (
+            <div className="absolute top-0 right-0">
+              <div className="bg-green-500 p-2 rounded-bl-lg">
+                <Check className="h-4 w-4 text-white" />
+              </div>
+            </div>
+          )}
+          <h2 className="font-semibold text-lg mb-2">Photos</h2>
+          <p className="text-sm text-gray-600 mb-3">Add photos of your property</p>
+          <div className="text-xs text-gray-500">
+            {formData.photos && formData.photos.length > 0 ? (
+              <div className="flex items-center">
+                <div className="w-4 h-4 bg-green-100 text-green-700 rounded-full flex items-center justify-center mr-2 text-xs">
+                  {formData.photos.length}
+                </div>
+                <span>photos added</span>
+              </div>
+            ) : (
+              <p>No photos added yet</p>
+            )}
+          </div>
+          <button onClick={handleAddPhotos} className="mt-4 text-blue-600 text-sm font-medium flex items-center hover:text-blue-800">
+            <Plus className="h-3 w-3 mr-1" /> Add photos
+          </button>
+        </div>
+
+        <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow transition-shadow relative overflow-hidden">
+          {isFinalDetailsComplete && (
+            <div className="absolute top-0 right-0">
+              <div className="bg-green-500 p-2 rounded-bl-lg">
+                <Check className="h-4 w-4 text-white" />
+              </div>
+            </div>
+          )}
+          <h2 className="font-semibold text-lg mb-2">Final Details</h2>
+          <p className="text-sm text-gray-600 mb-3">Complete your registration</p>
+          <div className="text-xs text-gray-500">
+            {isFinalDetailsComplete ? (
+              <p className="flex items-center">
+                <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                All business details completed
+              </p>
+            ) : (
+              <p>Add your business details</p>
+            )}
+          </div>
+          <button onClick={onAddFinalDetails} className="mt-4 text-blue-600 text-sm font-medium flex items-center hover:text-blue-800">
+            <Plus className="h-3 w-3 mr-1" /> Add final details
+          </button>
+        </div>
+      </div>
+
+      <div className="flex gap-3 mt-6">
+        <button 
+          className="p-2 h-10 w-10 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center justify-center" 
+          onClick={handleBack}
+        >
+          <ChevronLeft className="h-5 w-5 text-blue-600" />
+        </button>
+        <button
+          className={`flex-1 md:flex-none md:min-w-[200px] h-10 rounded-md text-white font-medium 
+            ${isReadyToSubmit 
+              ? "bg-blue-600 hover:bg-blue-700" 
+              : "bg-blue-300 cursor-not-allowed"}`}
+          onClick={handleSubmit}
+          disabled={!isReadyToSubmit}
+        >
+          Submit Property 
+        </button>
+      </div>
+      
+      {!isReadyToSubmit && (
+        <p className="text-sm text-gray-500 mt-3">
+          Please complete all required sections before submitting
+        </p>
       )}
-    </>
+    </div>
   )
 }

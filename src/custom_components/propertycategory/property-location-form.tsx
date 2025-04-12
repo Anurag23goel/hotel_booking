@@ -164,14 +164,14 @@ export default function PropertyLocationForm({ setCurrentForm, updateFormData, f
         </motion.div>
       </div>
 
-      <motion.div 
+      {/* <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
         className="flex-1 relative min-h-[400px] md:min-h-[500px] m-6 rounded-xl overflow-hidden shadow-lg"
       >
         <MapComponent />
-      </motion.div>
+      </motion.div> */}
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
