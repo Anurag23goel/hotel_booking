@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { Label } from "@/custom_components/loginPage/label";
 import { Input } from "@/custom_components/loginPage/input";
 import { IconBrandGoogle, IconBrandApple } from "@tabler/icons-react";
+import Image from "next/image";
 
 interface RegisterData {
   name: string;
@@ -80,9 +81,11 @@ export default function RegisterPage() {
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}
             >
-              <img
+              <Image
                 src={image.url}
                 alt={image.title}
+                width={800}
+                height={600}
                 className="object-cover w-full h-full"
               />
               <div className="absolute bottom-16 left-8 text-white drop-shadow-lg">

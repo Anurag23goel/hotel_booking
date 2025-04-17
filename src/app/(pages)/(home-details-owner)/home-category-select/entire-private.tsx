@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Home, CheckCircle2 } from "lucide-react";
-import MainCategorySelect from "./main-category-select";
+import MainCategorySelect from "./property-homeType-selection";
 
 interface BookingOption {
   id: string;

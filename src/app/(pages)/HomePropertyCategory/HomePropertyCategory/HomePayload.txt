@@ -1,0 +1,189 @@
+{
+    1.propertyDetails : { 
+        "propertyType": "homeStay",
+        "quantity": "multiple",
+        "address": {
+        "street": "Sector MU1",
+        "apartment": "dadda",
+        "country": "India",
+        "city": "Greater Noida",
+        "postalCode": "201310"
+        },
+        "channelManager": false,
+        "propertyDetails": {
+        "name": "avyaa chamar niwas",
+        "starRating": "3",
+        "isManagementCompany": true
+    },
+    "amenities": [
+        "Air Conditioning",
+        "Air Conditioning - Centralized",
+        "Air Conditioning - Room controlled",
+        "Bellboy Service",
+        "Caretaker",
+        "Lounge",
+        "Reception"
+    ],
+    "services": {
+        "breakfast": false,
+        "parking": "none",
+        "Breakfast & Dining": {
+            "Breakfast Options": "paid"
+        },
+        "Guest Facilities": {
+            "Guest Services": [
+                "Daily Housekeeping",
+                "Laundry Service"
+            ]
+        },
+        "Additional Services": {
+            "Special Services": [
+                "Tour Guide",
+                "Currency Exchange"
+            ]
+        }
+    },
+    "languages": [],
+    "rules": {
+         "12:00",
+        "checkOutFrom": "00:00",
+        "checkOutUntil": "10:00",
+        "allowChildren"checkInFrom": "12:00",  // check this out ERROR in check in 
+        "checkInUntil":": true,
+        "allowPets": true
+    },
+    },
+
+    "photos": [
+        {
+            "name": "Screenshot (31).png",
+            "url": "blob:http://localhost:3000/62b59840-1872-41fb-9eba-dafa66b05065",
+            "size": 978085,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot (34).png",
+            "url": "blob:http://localhost:3000/8498c303-e886-43a1-ba92-1566217ee90e",
+            "size": 280266,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot (35).png",
+            "url": "blob:http://localhost:3000/7cb4ee92-711f-4f6f-830f-b21a8a38b92a",
+            "size": 327542,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot (41).png",
+            "url": "blob:http://localhost:3000/68a603d5-7e85-4d49-b8c3-03c34419a4fd",
+            "size": 291743,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot (42).png",
+            "url": "blob:http://localhost:3000/d53fcb19-e2c7-4509-8e09-f14a49ffaec9",
+            "size": 480971,
+            "type": "image/png"
+        },
+        {
+            "name": "Screenshot (43).png",
+            "url": "blob:http://localhost:3000/19ecd2f7-0ab0-4d85-a5d2-c7055b28a552",
+            "size": 436251,
+            "type": "image/png"
+        }
+    ],
+    "rooms": [
+        {
+            "roomType": "Twin",
+            "roomCount": 1,
+            "beds": {
+                "singleBed": 1,
+                "doubleBed": 1,
+                "largeBed": 1,
+                "extraLargeBed": 1
+            },
+            "guestCount": 3,
+            "roomSize": "",
+            "roomSizeUnit": "square metres",
+            "smokingAllowed": true,
+            "hasAttachedBathroom": true,
+            "bathroomType": "private",
+            "hasAttachedBalcony": true,
+            "balconyFurniture": true,
+            "amenities": {
+                "recommended": {
+                    "roomFeatures": [],
+                    "kitchenAppliances": [
+                        "Dishwasher",
+                        "Rice cooker",
+                        "Microwave oven"
+                    ],
+                    "cookingBasics": [
+                        "Pots",
+                        "Pans"
+                    ]
+                },
+                "allAmenities": {
+                    "basicFacilities": {
+                        "smokeDetector": []
+                    },
+                    "generalServices": {
+                        "butlerServices": []
+                    },
+                    "roomFeatures": [],
+                    "foodAndDrinks": [],
+                    "kitchenAppliances": [],
+                    "security": []
+                }
+            },
+            "hasKitchen": true,
+            "kitchenAccess": {
+                "guestsCanCook": true,
+                "accessType": "shared",
+                "allowNonVegMeals": false
+            },
+            "cookInformation": {
+                "hasCook": true,
+                "meals": [
+                    "Dinner",
+                    "Lunch",
+                    "Breakfast",
+                    "Evening snacks"
+                ],
+                "canPrepareNonVeg": false,
+                "cuisines": [
+                    "Local",
+                    "Continental"
+                ],
+                "charges": {
+                    "type": "free",
+                    "amount": ""
+                }
+            },
+            "staffServices": {
+                "dishwashing": {
+                    "enabled": true,
+                    "chargeType": "free",
+                    "charges": ""
+                },
+                "groceryShopping": true
+            },
+            "name": "Double Room with Balcony",
+            "price": {
+                "amount": "40000",
+                "currency": "INR"
+            }
+        }
+    ],
+
+    {
+
+    }
+    "finalDetails": {
+        "invoicing": {},
+        "licenseNumber": {},
+        "partnerVerification": {},
+        "taxDetails": {}
+    },
+    "accommodationType": "private"
+}

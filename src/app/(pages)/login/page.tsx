@@ -12,6 +12,7 @@ import { Label } from "@/custom_components/loginPage/label";
 import { Input } from "@/custom_components/loginPage/input";
 import { IconBrandGoogle, IconBrandApple } from "@tabler/icons-react";
 import Navbar from "@/custom_components/navbar";
+import Image from "next/image";
 
 interface LoginData {
   email: string;
@@ -87,9 +88,11 @@ export default function LoginPage() {
                   index === currentImageIndex ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <img
+                <Image
                   src={image.url}
                   alt={image.title}
+                  width={800}
+                  height={600}
                   className="object-cover w-full h-full"
                 />
                 <div className="absolute bottom-20 left-10 text-white drop-shadow-lg">
@@ -101,7 +104,9 @@ export default function LoginPage() {
                     <div
                       key={dotIndex}
                       className={`w-2 h-2 rounded-full ${
-                        dotIndex === currentImageIndex ? "bg-white" : "bg-white/50"
+                        dotIndex === currentImageIndex
+                          ? "bg-white"
+                          : "bg-white/50"
                       }`}
                     />
                   ))}
@@ -120,7 +125,10 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit(handleLoginSubmit)} className="space-y-5">
+              <form
+                onSubmit={handleSubmit(handleLoginSubmit)}
+                className="space-y-5"
+              >
                 <div>
                   <Label htmlFor="email" className="text-gray-300">
                     Email
@@ -139,7 +147,9 @@ export default function LoginPage() {
                     placeholder="Enter your email"
                   />
                   {errors.email && (
-                    <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
 
@@ -218,8 +228,11 @@ export default function LoginPage() {
               </div>
 
               <p className="text-center text-gray-400">
-                Don't have an account?{" "}
-                <Link href="/register" className="text-purple-400 hover:text-purple-300">
+                Don&apos;t have an account?{" "}
+                <Link
+                  href="/register"
+                  className="text-purple-400 hover:text-purple-300"
+                >
                   Sign up
                 </Link>
               </p>
